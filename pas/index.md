@@ -28,19 +28,19 @@ modified: 2018-08-05
 Saturn, the second largest planet in the solar system and the sixth in line from our host star, is a gas giant planet which is famously known for its stunning bright rings around it. Saturn is most flattened planet in the solar system. Also, Saturn is only planet in the solar system that is less dense than water. Saturn is also the second fastest spinning planet in the solar system.
 Saturn is little bit oblate spheroid or ellipsoid in shape. Spheroid shape means that Saturn is somewhat flat on poles and bulges at equator.
 
-## Our Guiding Principles
+### Name and Etymology
 
-### 1. Elevate digital literacy and understanding
+Planet Saturn is named after Roman mythological god of wealth, agriculture, liberation and even god of generation - Saturnus. Saturn consort was his own sister Ops or Opis (God of Earth and God of fertility). Saturn was father to Jupiter, Juno, Pluto, Neptune, Ceres and Vesta.
 
-We aim to unpack complexity and make it possible for a wide audience to confidently understand digital.
+### Composition
 
-### 2. Bring a human focus to digital
+Saturn is predominantly composed of Hydrogen and Helium, just like Jupiter. Alike gas giants, It lacks definite terrestrial surface but might possesses a solid core.
 
-We cannot talk about technology without talking about the people who create it, and the people it affects.
+### Physical Characteristics
 
-### 3. Don’t fear the problems
-
-We believe talking about challenges and unsolved problems is as important as talking about proven solutions.
+Saturn is little bit oblate spheroid or ellipsoid in shape. Spheroid shape means that Saturn is somewhat flat on poles and bulges at equator.
+**Equatorial Radius**: 60,260 KM
+**Polar Radius**: 54,360 KM
 
 ### 4. Make collaboration easy
 
