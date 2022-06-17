@@ -89,3 +89,7 @@ We are a cross-functional team of writers, editors, strategists, technologists, 
 - **Curator:** Aakash Gautam
 - **Originally written:** May 2017
 - **Last Updated:** May 2022
+
+<div class="pageCategory"> Category
+   <a> Solar System Main Planets </a>
+</div>
