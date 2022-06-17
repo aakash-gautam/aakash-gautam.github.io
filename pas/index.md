@@ -42,9 +42,17 @@ Saturn is little bit oblate spheroid or ellipsoid in shape. Spheroid shape means
 **Equatorial Radius**: 60,260 KM
 **Polar Radius**: 54,360 KM
 
-### 4. Make collaboration easy
+### Bizarre Rotation
 
-Open collaboration across government is critical to a secure, digital future. It’s Digital.gov’s job to enable collaboration and make it easier.
+Basically, Different parts of Saturn rotate at different apparent speeds depending on their latitude. Scientists use three different system to define rotation rate of Saturn, labelled as Saturn I, Saturn II, Saturn III.
+
+**Saturn I**: Saturn I that encompasses Equatorial zone (South Equatorial Zone and North Equatorial Zone) has a rotation period of ~ 10 Hours 14 Min. Polar Regions of Saturn are believed to have same rotation speeds as Saturn I.
+
+**Saturn II**: All other regions of the Saturn, excluding polar regions, are considered as Saturn II. Saturn II as rotation period of ~ 10 Hours 38 Min.
+
+**Saturn III**: Saturn III is considered Saturn’s non-apparent internal region. Saturn III has a rotation period of ~ 10 Hours 39 Min. The accurate value of the rotation period of Saturn III is difficult to find.
+
+The latest estimate of Saturn’s rotation period as a whole is 10 Hours 32 Min, compiled from the data collected from Cassini, Voyagers, and Pioneer 11 probe.
 
 ### 5. Listen
 
