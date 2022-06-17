@@ -12,6 +12,9 @@ img{
   display: block;
   width: 75%;
   height: overflow auto;
+  webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 div.breadcrumb{
