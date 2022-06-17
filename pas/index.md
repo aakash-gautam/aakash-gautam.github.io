@@ -1,7 +1,7 @@
 ---
-title: "Welcome to Dictioanry"
+title: "Saturn | Planet Aakash School"
 summary: 'Welcome to Digital.gov. Learn more about what we&#39;re working on'
-description: 'This guide will show you how to deploy a scalable and development-driven NoSQL database with Apache Cassandra on a Linode running Ubuntu 18.04 or CentOS 7.'
+description: ''
 author:
    name: Aakash Gautam
 keywords: ["saturn", "ring planet", "ringed planet"]
