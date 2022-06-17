@@ -14,26 +14,10 @@ html{
   color: #2e2e2e;
 }
 
-h2{
+h1{
   font-size: 25px;
   color: blue;
-  font-family: Roboto;
-}
-
-div.container{
-  padding:  4vh 4vw 0.3vw 4vw;
-}
-
-div.breadcrumb{
-  display: inline-grid;
-  border-radius: 3px;
-  width: 100%;
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-div.breadcrumb a{
-  color: blue;
+  font-family: Rubik;
 }
 
 #myInput {
