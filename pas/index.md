@@ -1,5 +1,5 @@
 ---
-title: "Saturn | Planet Aakash School"
+title: "Saturn"
 summary: 'Welcome to Digital.gov. Learn more about what we&#39;re working on'
 description: ''
 author:
