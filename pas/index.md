@@ -17,11 +17,11 @@ modified: 2018-08-05
 </head>
 
 <div class="breadcrumb">
-      <p>
-        <a href="#">Star Sun</a> >
-        <a href="#">Star Sun</a> >
-        <a href="#">Star Sun</a>
-      </p>
+   <p>
+      <a href="#">Star Sun</a> >
+      <a href="#">Star Sun</a> >
+      <a href="#">Star Sun</a>
+    </p>
 </div>
 
 # Saturn
@@ -39,8 +39,8 @@ Saturn is predominantly composed of Hydrogen and Helium, just like Jupiter. Alik
 ### Physical Characteristics
 
 Saturn is little bit oblate spheroid or ellipsoid in shape. Spheroid shape means that Saturn is somewhat flat on poles and bulges at equator.
-**Equatorial Radius**: 60,260 KM
-**Polar Radius**: 54,360 KM
+- **Equatorial Radius**: 60,260 KM
+- **Polar Radius**: 54,360 KM
 
 ### Bizarre Rotation
 
