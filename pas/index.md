@@ -54,9 +54,13 @@ Basically, Different parts of Saturn rotate at different apparent speeds dependi
 
 The latest estimate of Saturn’s rotation period as a whole is 10 Hours 32 Min, compiled from the data collected from Cassini, Voyagers, and Pioneer 11 probe.
 
-### 5. Listen
+### Ancient Observations
 
-Everything we do is informed by what our audience needs. We apply multiple methods for measuring, listening, and understanding to our products.
+Saturn was known to ancient societies as well. Babylonian astronomers formally recorded and observed Saturn. In ancient Greek, Saturn was called Phainon, and by Romans it was called Saturn’s Star. Roman god Saturnus is equivalent to Greek god Cronus. Hence, the planet Saturn is also sometimes unofficially called Cronus or Kronus.
+
+In Hebrew astronomy, Saturn is called Shabbathai.
+
+In Hindu astronomy, Saturn is called Shani or Shanichara / Sanischara. According to Hindu astrology, Saturn is one of nine heavenly objects known as Navagraha. In Hindu mythology and religion, Shani is considered God of Justice who punishment / depending upon their work and deeds.
 
 ### 6. Work in the open
 
