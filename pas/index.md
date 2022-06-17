@@ -4,7 +4,7 @@ summary: 'Welcome to Digital.gov. Learn more about what we&#39;re working on'
 description: 'This guide will show you how to deploy a scalable and development-driven NoSQL database with Apache Cassandra on a Linode running Ubuntu 18.04 or CentOS 7.'
 author:
    name: Aakash Gautam
-keywords: ["cassandra", "apache cassandra", "centos 7", "ubuntu 18.04", "database", "nosql"]
+keywords: ["saturn", "ring planet", "ringed planet"]
 license: //
 published: 2017-06-12
 modified: 2018-08-05
