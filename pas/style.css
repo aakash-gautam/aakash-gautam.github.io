@@ -1,0 +1,7 @@
+div.breadcrumb{
+  display: inline-grid;
+  border-radius: 3px;
+  width: 100%;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
