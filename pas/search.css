@@ -1,0 +1,79 @@
+*{
+  box-sizing: border-box;
+  text-decoration: none;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+html{
+  font-family: Rubik;
+  scroll-behavior: smooth;
+  line-height: 1.6;
+  background-color: white;
+  font-size: 16px;
+  color: #2e2e2e;
+}
+
+h2{
+  font-size: 25px;
+  color: blue;
+  font-family: Roboto;
+}
+
+div.container{
+  padding:  4vh 4vw 0.3vw 4vw;
+}
+
+div.breadcrumb{
+  display: inline-grid;
+  border-radius: 3px;
+  width: 100%;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+div.breadcrumb a{
+  color: blue;
+}
+
+#myInput {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 15px;
+  border: 1px solid #002244;
+  border-radius: 5px;
+  margin: 12px 0 12px 0;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li {
+  margin-bottom: 8px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 18px;
+  display: block;
+  cursor: pointer;
+}
+
+#myUL li:hover:not(.header), li:active {
+  background-color: #E1E1FC;
+}
+
+#myUL li a {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
+
+#myUL li p {
+  text-decoration: none;
+  font-size: 15px;
+  color: #8a8a8a  ;
+}
