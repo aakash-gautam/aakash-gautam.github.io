@@ -62,20 +62,28 @@ In Hebrew astronomy, Saturn is called Shabbathai.
 
 In Hindu astronomy, Saturn is called Shani or Shanichara / Sanischara. According to Hindu astrology, Saturn is one of nine heavenly objects known as Navagraha. In Hindu mythology and religion, Shani is considered God of Justice who punishment / depending upon their work and deeds.
 
-### 6. Work in the open
+### Facts About Saturn
 
-We do all of our work in the open and strive to organize our work in ways that allow others to participate.
+- Saturn is the flattest planet in the solar system. It is because of its fast rotation speed and less density.
 
-**What our readers need:**
+- Saturn is the fluffiest planet in the solar system that is Saturn’s density is so low that it would float on water, if placed in gigantic planet-sized water tub.
 
-- Tools and Resources
-- Examples of problems being solved in government
-- Collaboration
+- In North Pole, Saturn has a hexagon shaped vortex system or pattern of clouds.
 
-## Our Team
+- In South Pole, Saturn also has a vortex that resembles a tropical hurricane storm.
 
+- Saturnian ring system very thin relative to its extent. It extends more than 120,500 KM from the planet but on average is about only 20 meters thick.
+
+- Saturn could have hundreds of natural satellite as many small and micro moons disguise themselves in the beautiful ring system.
+
+- Saturn’s largest moon and Solar System’s second largest moon – Titan enjoys a nitrogen-rich atmosphere, lakes full of liquid methane, landscapes composed of water ice and frozen nitrogen. Studying and analyzing data from the space missions, Titan is believed to support and harbour life – either as we know it or as we don’t know it.
+
+## References
 We are a cross-functional team of writers, editors, strategists, technologists, and designers who all work at the Technology Transformation Services (TTS) at the General Services Administration (GSA).
 
-**Digital:** Tonny Gabbar <br>
-**Communities:** Russell Prime <br>
-**Video and Events:** Gabrielle Santiago, Octavia Blake <br>
+## Extra Information
+We are a cross-functional team of writers, editors, strategists, technologists, and designers who all work at the Technology Transformation Services (TTS) at the General Services Administration (GSA).
+
+- **Curator:** Aakash Gautam
+- **Originally written:** May 2017
+- **Last Updated:** May 2022
