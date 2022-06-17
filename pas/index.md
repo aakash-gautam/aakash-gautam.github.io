@@ -91,5 +91,5 @@ We are a cross-functional team of writers, editors, strategists, technologists, 
 - **Last Updated:** May 2022
 
 <div class="pageCategory">
-   Category: <a> Solar System's Main Planets </a>
+   Category: <a href=""> Solar System's Main Planets </a>
 </div>
