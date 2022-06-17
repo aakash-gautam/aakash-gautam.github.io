@@ -42,6 +42,8 @@ Saturn is little bit oblate spheroid or ellipsoid in shape. Spheroid shape means
 - **Equatorial Radius**: 60,260 KM
 - **Polar Radius**: 54,360 KM
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/PIA17218_%E2%80%93_A_Farewell_to_Saturn%2C_Brightened_Version.jpg/2560px-PIA17218_%E2%80%93_A_Farewell_to_Saturn%2C_Brightened_Version.jpg">
+
 ### Bizarre Rotation
 
 Basically, Different parts of Saturn rotate at different apparent speeds depending on their latitude. Scientists use three different system to define rotation rate of Saturn, labelled as Saturn I, Saturn II, Saturn III.
