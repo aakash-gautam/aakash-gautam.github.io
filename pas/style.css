@@ -5,3 +5,7 @@ div.breadcrumb{
   font-size: 13px;
   margin-bottom: 10px;
 }
+
+div.breadcrumb a{
+  color: blue;
+}
