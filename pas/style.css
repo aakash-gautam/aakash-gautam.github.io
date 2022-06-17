@@ -31,12 +31,12 @@ div.breadcrumb a{
 div.pageCategory{
   background-color: #f2f2f2;
   font-family: Rubik;
-  display: inline;
-  padding: 3px;
+  display: inline-grid;
+  padding: 4px;
   border: 2px solid #ffffff;
   border-radius: 3px;
   width: 100%;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 div.pageCategory a{
