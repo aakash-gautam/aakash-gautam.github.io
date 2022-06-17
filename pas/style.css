@@ -7,6 +7,10 @@ h1{
 img{
   border-radius: 4px;
   border: 1px solid blue;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 75%;
   height: overflow auto;
 }
 
