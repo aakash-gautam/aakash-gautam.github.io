@@ -25,7 +25,7 @@ modified: 2018-08-05
 </div>
 
 <h1> Saturn </h1>
-Saturn, the second largest planet in the solar system and the sixth in line from our host star, is a gas giant planet which is famously known for its stunning bright rings around it. Saturn is most flattened planet in the solar system. Also, Saturn is only planet in the solar system that is less dense than water. Saturn is also the second fastest spinning planet in the solar system.
+**Saturn**, the second largest planet in the solar system and the sixth in line from our host star, is a gas giant planet which is famously known for its stunning bright rings around it. Saturn is most flattened planet in the solar system. Also, Saturn is only planet in the solar system that is less dense than water. Saturn is also the second fastest spinning planet in the solar system.
 Saturn is little bit oblate spheroid or ellipsoid in shape. Spheroid shape means that Saturn is somewhat flat on poles and bulges at equator.
 
 ### Name and Etymology
