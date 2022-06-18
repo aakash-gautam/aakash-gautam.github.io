@@ -19,6 +19,13 @@ img{
   user-select: none;
 }
 
+img p{
+  color: #CACACA;
+  text-align: center;
+  font-style: italic;
+  font-size: 12px;
+}
+
 div.breadcrumb{
   font-family: Rubik;
   display: inline-grid;
