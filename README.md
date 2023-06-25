@@ -1,5 +1,7 @@
 # Aakash Gautam
 
+![](/assets/profile-pic_(12).png "Aakash Gautam")
+
 Hi 🥳. Welcome to my online home 🏡.
 <br> Find my CV at [here](https://aakash-gautam.github.io/cv.pdf).
 
