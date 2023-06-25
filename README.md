@@ -13,5 +13,5 @@ Hi 🥳. Welcome to my online home 🏡.
 Recreational programming, recreational maths, computer science education, philosophy of computer science and AI, graph theory.
 
 ### Contact
- - **Email**: emailaakashgautam@gmail.com
+ - **Email**: <emailaakashgautam@gmail.com>
  - **Website**: [aakash-gautam.github.io](https://aakash-gautam.github.io)
