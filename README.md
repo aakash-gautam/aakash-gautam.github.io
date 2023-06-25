@@ -1,4 +1,4 @@
-# Aakash Gautam
+# Aakash R. Gautam
 
 <img src="/assets/ag2.png" alt="Aakash Gautam" width="300" height=auto>
 
