@@ -1,6 +1,6 @@
 # Aakash Gautam
 
-<img src="/assets/ag2.png" alt="Aakash Gautam" width="500" height="500">
+<img src="/assets/ag2.png" alt="Aakash Gautam" width="500" height=auto>
 
 Hi 🥳. Welcome to my online home 🏡.
 <br> Find my CV at [here](https://aakash-gautam.github.io/cv.pdf).
