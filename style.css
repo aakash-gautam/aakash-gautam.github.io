@@ -1,11 +1,16 @@
 <style>
-h1 {
-    font-weight:700;
-    font-size: 35px;
-    font-family:"Serif";
+
+*{
+  font-family: 'EB Garamond';
 }
+
+h1 {
+    font-weight:400;
+    font-size: 38px;
+}
+
 h2 {
-    font-weight:700;
+    font-weight:400;
     font-size: 30px;
 }
 </style>
