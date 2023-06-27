@@ -1,4 +1,9 @@
-# Aakash R. Gautam
+<head>
+   <link href='https://fonts.googleapis.com/css?family=Roboto: 400' rel='stylesheet'>
+   <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+# Aakash 'Ash' Gautam
 
 <img src="/assets/ag2.png" alt="Aakash Gautam" width="300" height=auto>
 
