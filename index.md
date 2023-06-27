@@ -5,6 +5,8 @@
 
 # Aakash 'Ash' Gautam
 
+<h1> Aakash Gautam </h1>
+
 <img src="/assets/ag2.png" alt="Aakash Gautam" width="300" height=auto>
 
 Hi 🥳. Welcome to my online home 🏡.
