@@ -1,7 +1,12 @@
-<head>
-   <link href='https://fonts.googleapis.com/css?family=EB+Garamond: 400' rel='stylesheet'>
-   <link rel="stylesheet" type="text/css" href="style.css">
-</head>
+---
+title: "Aakash Gautam"
+summary: ''
+description: ''
+author:
+   name: Aakash Gautam
+keywords: ["Aakash Gautam", "Ash Gautam", "Aakash Ash Gautam"]
+permalink: ''
+---
 
 # Aakash 'Ash' Gautam
 
