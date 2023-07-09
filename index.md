@@ -1,11 +1,8 @@
 ---
 title: "Aakash Gautam"
-summary: ''
-description: ''
 author:
    name: Aakash Gautam
 keywords: ["Aakash Gautam", "Ash Gautam", "Aakash Ash Gautam"]
-permalink: ''
 ---
 
 # Aakash 'Ash' Gautam
