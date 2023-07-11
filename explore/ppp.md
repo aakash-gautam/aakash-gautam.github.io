@@ -1,0 +1,40 @@
+# Programming Practice Problems 101
+- User Input/Output.
+- WAP to add numbers entered by user.
+- WAP to subtract, multiply and divide two numbers added by user.
+- WAP to find the square and cube of an integer number.
+- WAP to swap two numbers using third variable.
+- WAP to check whether number is even or odd.
+- WAP to check whether number is positive or negative.
+- WAP to find the largest number   among the two numbers.
+- WAP to find the largest number among the  three numbers.
+- WAP to calculate the Sum of N natural numbers.
+- WAP to print all the prime number from 1 to 100.
+- WAP to find the number is palindrome or not.
+- WAP to check entered number is Armstrong number.
+- WAP to find the factorial of a number.
+- WAP to enter two numbers and find their sum.
+- WAP to enter length and breadth of a rectangle and find its area.
+- WAP to enter length and breadth of rectangle and find its perimeter.
+- WAP to enter base and height of a triangle and find its area.
+- WAP to check whether a character is vowel or consonant.
+- WAP to check leap year.
+- WAP to print the multiplication table of the number entered by the user..
+- WAP to display Fibonacci sequence.
+- WAP to find the ASCII value of character.
+- WAP to check whether a character is alphabet or not.
+- WAP to count the  number of digit in an  integer.
+- Input two numbers. WAP to find the value of one number raised to the power of another.
+- WAP to find the average of numbers.
+- WAP to print lower case and uppercase alphabets.
+- WAP to display characters from A to Z.
+- WAP to  display factors of a number.
+- WAP to generate all combination of any three user entered numbers.
+- WAP to find the sum of digits of 4-digit number.
+- WAP to enter number till the user want .At the end it should      display  the count of positive, negative and zero entered.
+- WAP to find whether the entered number is prime or not .
+- WAP to find the reverse of 4 digit number
+- WAP to find the reverse of 4digit number and compare it to the original number.
+- If the age of A, B and C are input through the keyboard ,write a program  to determine the youngest of three.
+- WAP to swap two variables without using third variable.
+- WAP program to enter radius of circle and find its area.
