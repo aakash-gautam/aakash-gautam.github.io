@@ -15,8 +15,8 @@
 
 ## Education
 - **Doctor of Philosophy - Computer Science** *(dropped-out)*
-  <br> Department of Computer Science, HPU
-- **Master in Sociology** *(pursuing)*
+  <br> Department of Computer Science, HPU.
+- **Master in Sociology (MA Sociology)** *(pursuing)*
   <br> Indira Gandhi National Open University.
 - **2x UGC-NET in Computer Science & Applications**
   <br> University Grant Commission & National Testing Agency; Dec'21 - Jun'22 cycle, Dec'23 cycle.
@@ -30,10 +30,10 @@
   <br> DAV Sr. Sec. Public School, Lakkar Bazar, Shimla, HP. Exemplary Distinction; Percentage: *92.60%*.
 
 ## Work Experience
-- **Junior Technical Assistant* *(February'25 - present)*
+- **Junior Technical Assistant** *(February'25 - present)*
   <br> Indian Institute of Technology Mandi (IIT Mandi) at Kamand, Mandi.
   <br> 💼: Technical Support & Management.
-- **Junior Office Assistant (IT)* *(September'24 - February'24)*
+- **Junior Office Assistant (IT)** *(September'24 - February'24)*
   <br> ITDP Kinnaur at R/Peo, Tribal Development Department, GoHP.
   <br> 💼: Administrative Work; Tribal Welfare & Tribal Affairs.
 - **Assistant Programmer** *(March'24 - present)*
