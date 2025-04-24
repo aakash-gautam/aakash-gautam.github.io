@@ -30,7 +30,7 @@
 ## Work Experience
 - **JLA (Tech)** *(February'25 - present)*
   <br> Indian Institute of Technology Mandi (IIT Mandi) at Kamand, Mandi.
-  <br> 💼: Technical Administration; IT Infra Management and Oversight; Media & Studio Management.
+  <br> 💼: Technical Administration · IT Infra Management and Oversight · Media & Studio Management.
 - **Junior Office Assistant (IT)** *(September'24 - February'24)*
   <br> ITDP Kinnaur at R/Peo, Tribal Development Department, GoHP.
   <br> 💼: Administrative Work; Tribal Welfare & Tribal Affairs.
