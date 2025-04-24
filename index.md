@@ -14,25 +14,23 @@
 **Profile**: A performance-focused, self-motivated, and versatile technologist and educator with proficiency in applied computer science and educational technology, with a deep interest in philosophy. I have diverse work experience of ≈3 years in the IT industry, Technocracy, Governance, and Academia. With an excellent academic record throughout and a passion for inspiring and educating the upcoming generation of tech innovators and pioneers, I strive to work creatively and innovatively to solve real-world problems.
 
 ## Education
-- **Doctor of Philosophy - Computer Science** *(dropped-out)*
-  <br> Department of Computer Science, HPU.
 - **Master in Sociology (MA Sociology)** *(pursuing)*
   <br> Indira Gandhi National Open University.
 - **2x UGC-NET in Computer Science & Applications**
   <br> University Grant Commission & National Testing Agency; Dec'21 - Jun'22 cycle, Dec'23 cycle.
 - **HPSET in Computer Science & Applications**
-  <br> Himachal Pradesh Public Service Commission; 2023 cycle.
+  <br> Himachal Pradesh Public Service Commission (HPPSC); 2023 cycle.
 - **Master of Computer Applications (MCA)**
-  <br> Department of Computer Science, HPU. First Class - Distinction; Percentage: *80.04%*.
+  <br> Himachal Pradesh University. First Class - Distinction; Percentage: *80.04%*.
 - **Bachelor of Computer Applications (BCA)**
-  <br> Department of Computer Science, HPU. First Class - Distinction; Percentage: *81.40%*.
+  <br> UCBS Avalodge, Himachal Pradesh University. First Class - Distinction; Percentage: *81.40%*.
 - **12th Class/ Senior Secondary School Certificate**
   <br> DAV Sr. Sec. Public School, Lakkar Bazar, Shimla, HP. Exemplary Distinction; Percentage: *92.60%*.
 
 ## Work Experience
-- **Junior Technical Assistant** *(February'25 - present)*
+- **JLA (Tech)** *(February'25 - present)*
   <br> Indian Institute of Technology Mandi (IIT Mandi) at Kamand, Mandi.
-  <br> 💼: Technical Support & Management.
+  <br> 💼: Technical Administration; IT Infra Management and Oversight; Media & Studio Management.
 - **Junior Office Assistant (IT)** *(September'24 - February'24)*
   <br> ITDP Kinnaur at R/Peo, Tribal Development Department, GoHP.
   <br> 💼: Administrative Work; Tribal Welfare & Tribal Affairs.
