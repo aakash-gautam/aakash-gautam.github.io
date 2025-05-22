@@ -13,7 +13,7 @@
 
 **Profile**: A performance-focused, self-motivated, and versatile technologist and educator with proficiency in applied computer science and educational technology, with a deep interest in philosophy. I have diverse work experience of ≈3 years in the IT industry, Technocracy, Governance, and Academia. With an excellent academic record throughout and a passion for inspiring and educating the upcoming generation of tech innovators and pioneers, I strive to work creatively and innovatively to solve real-world problems.
 
-- Freethinker (Freethought Philosophy), Agnostic, Teetoaler.
+- Freethinker, Agnostic, Teetotaler.
 
 ## Education
 - **Master in Sociology (MA Sociology)** *(pursuing)*
