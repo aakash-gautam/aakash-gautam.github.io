@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCE, IIT Mandi | Centre for Continuing Education</title>
+
+  <link rel="stylesheet" href="topbanner.css"/>
+  <link rel="stylesheet" href="floatingmenubar.css"/>
+  <script src="slideshow.js"></script>
+
+  <style>
+    /* Base Reset and Typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background-color: #0c4a6e;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .menu {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .menu a:hover {
+      text-decoration: underline;
+      padding: 0.1rem;
+      border-radius: 10%;
+      background-color:aquamarine;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+  position: relative;
+  text-align: center;
+  color: white;
+  padding: 16rem 1rem;
+  background: url('img2.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(12, 58, 98, 0.6); /* Navy blue with 60% opacity */
+  z-index: 1;
+}
+
+.hero * {
+  position: relative;
+  z-index: 2;
+}
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    /* Section Styling */
+    .activities,
+    .info-section,
+    .about {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .activities h2,
+    .carousel-section h2,
+    .info-section h2,
+    .about h2 {
+      font-size: 2rem;
+      color: #0369a1;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background: #e2e8f0;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 500px;
+      border-radius: 0.5rem;
+      display: grid;
+    }
+
+    /* Link and Footer Styling */
+    a {
+      text-decoration: none;
+    }
+
+    .footer a {
+      text-decoration: none;
+      color: #b7c9E2;
+    }
+
+    .info-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background-color: #f1f5f9;
+    }
+
+    .info-section div {
+      max-width: 400px;
+      margin: 1rem;
+    }
+
+    /* About Section */
+    .about-section {
+      background-color: #f8fafc;
+      padding: 4rem 2rem;
+    }
+
+    .about-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1300px;
+      margin: 0 auto;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-text h2 {
+      color: #0e7490;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #1e293b;
+    }
+
+    .about-image {
+      flex-shrink: 0;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Responsive Navigation and About Section */
+    @media (max-width: 768px) {
+      .about-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-image {
+        margin-top: 2rem;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #0c4a6e;
+        position: absolute;
+        right: 1rem;
+        top: 60px;
+        padding: 1rem;
+        border-radius: 0.5rem;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #0c4a6e;
+      color: white;
+      padding: 10rem 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement-banner">
+  <p>
+    <strong>GeneriCon 2023</strong> &nbsp;·&nbsp; 
+    Join us in Denver from June 7 – 9 to see what’s coming next 
+    <span class="arrow">→</span>
+  </p>
+</div>
+
+  <!-- Floating Menu -->
+<header class="floating-navbar">
+  <div class="navbar-content">
+    <div class="navbar-left">
+      <img src="images/logo1.png" alt="Logo 1" class="logo">
+      <img src="images/logo2.png" alt="Logo 2" class="logo">
+      <span class="brand-text">CCE, IIT Mandi</span>
+    </div>
+
+    <nav class="navbar-links" id="navbarLinks">
+      <a href="#">Activities</a>
+      <a href="#">MOUs</a>
+      <a href="#">Facilities</a>
+      <a href="#">Tinkering Lab</a>
+      <a href="#">People</a>
+      <a href="#">Downloads</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle">
+      ☰
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu Panel -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeMenu">×</button>
+  <a href="#">Activities</a>
+  <a href="#">MOUs</a>
+  <a href="#">Facilities</a>
+  <a href="#">Tinkering Lab</a>
+  <a href="#">People</a>
+  <a href="#">Downloads</a>
+</div>
+
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Centre for Continuing Education</h1>
+    <p>Indian Institute of Technology, Mandi</p>
+  </section>
+
+  <!-- Activities Section -->
+  <section class="activities">
+    <h2>Current Activities</h2>
+    <div class="card">
+      A Five-day GIAN course on Data-Based Systems and Control at IIT Mandi
+      <span>
+        <a href="#">Website</a> |
+        <a href="#">Brochure</a>
+      </span>
+    </div>
+    <div class="card">
+      GIAN course on Wetting, Capillarity, and Phase Transitions
+      <span>
+        <a href="#">Website</a> |
+        <a href="#">Brochure</a>
+      </span>
+    </div>
+    <div class="card">
+      Workshop on Composites Design and Manufacturing
+      <span>
+        <a href="#">Website</a> |
+        <a href="#">Brochure</a>
+      </span>
+    </div>
+    <div class="card">
+      One Month Program on AI & Robotics (PRAYAS 3.0)
+      <span>
+        <a href="#">Website</a> |
+        <a href="#">Brochure</a>
+      </span>
+    </div>
+  </section>
+
+
+  <!-- Vision and Mission -->
+  <section class="info-section">
+    <div>
+      <h2>Vision</h2>
+      <p>A self-sustainable centre to build a workforce for nation capacity building in STEM and management-related fields.</p>
+    </div>
+    <div>
+      <h2>Mission</h2>
+      <p>Provide learners with a platform to study and gain exposure at IIT Mandi through outreach programmes.</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-container">
+      <div class="about-text">
+        <h2>About CCE, IIT Mandi</h2>
+        <p>
+          The Centre for Continuing Education (CCE) was established in early 2022 at IIT Mandi to dedicatedly cater for the national requirement for skilling, up-skilling, and re-skilling of individuals from various Govt./Semi Govt. organizations, public and private undertakings, research institutions and industries. A variety of continuing education programmes have been organized fulfilling the needs for nation-building at all levels starting from elementary schools to dropouts to working professionals from diverse backgrounds so that learners around the globe can get opportunities to gain knowledge and/or develop professional growth skill sets. CCE also provides necessary logistics, and administrative support to run such programs. All institute academic outreach activities like Conferences, Workshops, Symposia, Short-term courses, Training programs, and other similar activities are executed under the umbrella of the CCE.
+        </p>
+      </div>
+      <div class="about-image">
+        <img src="img2.jpg" alt="IIT Mandi campus" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      <h3>Centre for Continuing Education, IIT Mandi</h3>
+      Email: <a href="mailto:cceoffice@iitmandi.ac.in">cceoffice@iitmandi.ac.in</a><br>
+      Phone: 01905-267742, 267788
+    </p>
+    <br>
+    <p>&copy; 2022-2025 CCE, IIT Mandi. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript to Toggle Mobile Menu -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('menu');
+
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+  </script>
+
+  
+</body>
+</html>
