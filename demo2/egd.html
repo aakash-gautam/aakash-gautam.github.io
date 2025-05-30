@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCE, IIT Mandi | Centre for Continuing Education</title>
+
+  <link rel="stylesheet" href="topbanner.css"/>
+  <link rel="stylesheet" href="floatbar.css"/>
+  <link rel="stylesheet" href="egdcss.css"/>
+  <script src="slideshow.js"></script>
+  <script src="floatbar.css"></script>
+
+  <style>
+    /* Base Reset and Typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(12, 58, 98, 0.75); /* translucent navy blue */
+      backdrop-filter: blur(10px);
+    }
+
+    .menu {
+      display: flex;
+      gap: 2.5rem;
+      max-width: 1200px;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .menu a:hover {
+      text-decoration: none;
+      color:aquamarine;
+      transition-delay:100ms;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+  position: relative;
+  text-align: center;
+  color: white;
+  padding: 16rem 1rem;
+  background: url('img2.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(12, 58, 98, 0.6); /* Navy blue with 60% opacity */
+  z-index: 1;
+}
+
+.hero * {
+  position: relative;
+  z-index: 2;
+}
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    /* Section Styling */
+    .activities,
+    .info-section,
+    .about {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .activities h2,
+    .carousel-section h2,
+    .info-section h2,
+    .about h2 {
+      font-size: 2rem;
+      color: #0369a1;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background: #e2e8f0;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 500px;
+      border-radius: 0.5rem;
+      display: grid;
+    }
+
+    /* Link and Footer Styling */
+    a {
+      text-decoration: none;
+    }
+
+    .logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 0.5px;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: white;
+}
+
+
+    
+
+    .info-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background-color: #f1f5f9;
+    }
+
+    .info-section div {
+      max-width: 400px;
+      margin: 1rem;
+    }
+
+    /* About Section */
+    .about-section {
+      background-color: #f8fafc;
+      padding: 4rem 2rem;
+    }
+
+    .about-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1300px;
+      margin: 0 auto;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-text h2 {
+      color: #0e7490;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #1e293b;
+    }
+
+    .about-image {
+      flex-shrink: 0;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Responsive Navigation and About Section */
+    @media (max-width: 768px) {
+      .about-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-image {
+        margin-top: 2rem;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #0c4a6e;
+        position: absolute;
+        right: 1rem;
+        top: 60px;
+        padding: 1rem;
+        border-radius: 0.5rem;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #0c4a6e;
+      color: white;
+      padding: 8rem 1rem;
+      text-align: center;
+    }
+
+    .footer a {
+      text-decoration: none;
+      color: #b7c9E2;
+    }
+
+
+.announcement-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #5b3dfd; /* Bright blue */
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  z-index: 9999;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap;
+}
+
+.announcement-banner p {
+  margin: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.close-banner {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Ensure text wraps on smaller screens */
+@media (max-width: 600px) {
+  .announcement-banner {
+    font-size: 0.9rem;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .announcement-banner p {
+    margin-bottom: 0.5rem;
+  }
+
+  .close-banner {
+    align-self: flex-end;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="floating-navbar">
+  <div class="navbar-content">
+    <div class="navbar-left">
+      <a href="/index.html">
+        <img src="iitmdlogo.png" alt="IIT Mandi" class="nav-logo">
+        <img src="ccelogo.png" alt="CCE" class="nav-logo">
+      </a>
+      <span class="brand-text">CCE, IIT Mandi</span>
+    </div>
+    <nav class="navbar-links" id="menu">
+      <a href="#">Activities</a>
+      <a href="mous.html">MOUs</a>
+      <a href="facilities.html">Facilities</a>
+      <a href="#">Tinkering Lab</a>
+      <a href="people.html">People</a>
+      <a href="#">Downloads</a>
+    </nav>
+    <div class="menu-toggle" id="menuToggle">&#9776;</div>
+  </div>
+</header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Exposure Gateway Day (EGD)</h1>
+    <p>CCE, Indian Institute of Technology, Mandi</p>
+  </section>
+
+  <!-- Activities Section -->
+  <section class="info-text-section">
+  <div class="info-container">
+    <p><strong>The Exposure Gateway Days programme at IIT Mandi</strong> is a unique opportunity for students, faculty/staff of educational institutions to experience the world-class campus, cutting-edge research, and innovation happening at one of India's premier technological institutes. We invite schools/colleges/universities from across the region and beyond to visit IIT Mandi and engage in an enriching experience.</p>
+
+    <p><strong>Interest Form (Google Form) :</strong> <a href="https://forms.gle/4Ec7iDkXmEVti5BS9" target="_blank">Link</a></p>
+
+    <h4>Note:</h4>
+    <ol>
+      <li>Happens twice a month only, usually on 1st and 3rd Mondays of every month.</li>
+      <li>All requests are entertained through Google Form only; unsolicited Email requests for visits are not accepted/entertained.</li>
+      <li>Your request for visit on a specific day may be rejected or postponed, based on the slots availability or for administrative reasons.</li>
+      <li>It is a non-commercial social initiative by CCE, IIT Mandi. Neither the CCE nor the IIT Mandi hold any responsibility regarding the campus visit.</li>
+      <li>The school bears all the responsibility and cost regarding and related to the school visit.</li>
+    </ol>
+
+    <h4>Who Can Participate?</h4>
+    <ul>
+      <li><strong>Schools:</strong> Students from 6th to 12th classes.</li>
+      <li><strong>Colleges/Universities:</strong> Undergraduate & Postgraduate students.</li>
+    </ul>
+
+    <h4>Contact Information</h4>
+    <ul>
+      <li><strong>Email:</strong> <a href="mailto:cceoffice@iitmandi.ac.in">cceoffice@iitmandi.ac.in</a></li>
+      <li><strong>Address:</strong> CCE Office, IIT Mandi, Mandi, Himachal Pradesh, India - 175075</li>
+    </ul>
+  </div>
+</section>
+
+
+
+  
+
+  <!-- Announcement Banner -->
+  <div class="announcement-banner" id="announcementBanner">
+  <p>
+    <strong>GeneriCon 2023</strong> &nbsp;·&nbsp; 
+    Join us in Denver from June 7 – 9 to see what’s coming next →
+  </p>
+  <button class="close-banner" id="closeBanner">×</button>
+</div>
+
+  <!-- Footer -->
+  <footer class="footer">
+  <div class="footer-content">
+    <h3>Centre for Continuing Education, IIT Mandi</h3>
+    <p>
+      North Campus, IIT Mandi,<br>
+      Kamand, Mandi, Himachal Pradesh - 175075<br>
+      Email: <a href="mailto:cceoffice@iitmandi.ac.in">cceoffice@iitmandi.ac.in</a><br>
+      Phone: 01905-267742, 267788
+    </p>
+  </div>
+  <br>
+  &copy; 2025, CCE, IIT Mandi. All rights reserved.
+</footer>
+
+  <!-- JavaScript to Toggle Mobile Menu -->
+  <script>
+  const menuToggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('menu');
+
+  // Toggle menu on icon click
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent bubbling
+    menu.classList.toggle('active');
+  });
+
+  // Close menu when clicking anywhere else
+  document.addEventListener('click', (event) => {
+    const isClickInsideMenu = menu.contains(event.target);
+    const isClickOnToggle = menuToggle.contains(event.target);
+
+    if (!isClickInsideMenu && !isClickOnToggle) {
+      menu.classList.remove('active');
+    }
+  });
+</script>
+
+
+  <script>
+  document.getElementById("closeBanner").addEventListener("click", function () {
+    document.getElementById("announcementBanner").style.display = "none";
+  });
+</script>
+
+
+  
+</body>
+</html>
