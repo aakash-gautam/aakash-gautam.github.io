@@ -1,0 +1,40 @@
+.carousel-section {
+  text-align: center;
+  background-color: #f8fafc;
+  padding: 2rem;
+}
+
+.carousel {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+}
+
+.caption {
+  margin-top: 0.75rem;
+  font-weight: 500;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

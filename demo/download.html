@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCE, IIT Mandi | Centre for Continuing Education</title>
+
+  <link rel="stylesheet" href="floatbar.css"/>
+  <link rel="stylesheet" href="table.css"/>
+  <link rel="stylesheet" href="modal.css"/>
+  <script src="slideshow.js"></script>
+  <script src="floatbar.css"></script>
+
+  <style>
+    /* Base Reset and Typography */
+html{
+  scroll-behavior: smooth;
+}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(12, 58, 98, 0.75); /* translucent navy blue */
+      backdrop-filter: blur(10px);
+    }
+
+    .menu {
+      display: flex;
+      gap: 2.5rem;
+      max-width: 1200px;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .menu a:hover {
+      text-decoration: none;
+      color:aquamarine;
+      transition-delay:100ms;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+  position: relative;
+  text-align: center;
+  color: white;
+  padding: 16rem 1rem;
+  background: url('img2.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(12, 58, 98, 0.6); /* Navy blue with 60% opacity */
+  z-index: 1;
+}
+
+.hero * {
+  position: relative;
+  z-index: 2;
+}
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    /* Section Styling */
+    .activities,
+    .info-section,
+    .about {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .activities h2,
+    .carousel-section h2,
+    .info-section h2,
+    .about h2 {
+      font-size: 2rem;
+      color: #0369a1;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background: #e2e8f0;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 500px;
+      border-radius: 0.5rem;
+      display: grid;
+    }
+
+    /* Link and Footer Styling */
+    a {
+      text-decoration: none;
+    }
+
+    .logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 0.5px;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: white;
+}
+
+
+    
+
+    .info-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background-color: #f1f5f9;
+    }
+
+    .info-section div {
+      max-width: 400px;
+      margin: 1rem;
+    }
+
+    /* About Section */
+    .about-section {
+      background-color: #f8fafc;
+      padding: 4rem 2rem;
+    }
+
+    .about-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1300px;
+      margin: 0 auto;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-text h2 {
+      color: #0e7490;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #1e293b;
+    }
+
+    .about-image {
+      flex-shrink: 0;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Responsive Navigation and About Section */
+    @media (max-width: 768px) {
+      .about-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-image {
+        margin-top: 2rem;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #0c4a6e;
+        position: absolute;
+        right: 1rem;
+        top: 60px;
+        /* padding: 1rem; */
+        border-radius: 0.5rem;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Footer */
+    .footer {
+      background-color: rgba(12, 58, 98); 
+      color: white;
+      padding: 5rem 1rem;
+      text-align: center;
+
+    }
+
+    .footer a {
+      text-decoration: none;
+      color: #b7c9E2;
+    }
+
+
+.announcement-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #5b3dfd; /* Bright blue */
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  z-index: 9999;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap;
+}
+
+.announcement-banner p {
+  margin: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.close-banner {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Ensure text wraps on smaller screens */
+@media (max-width: 600px) {
+  .announcement-banner {
+    font-size: 0.9rem;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .announcement-banner p {
+    margin-bottom: 0.5rem;
+  }
+
+  .close-banner {
+    align-self: flex-end;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="floating-navbar">
+  <div class="navbar-content">
+    <div class="navbar-left">
+      <a href="index.html">
+        <img src="iitmdlogo.png" alt="IIT Mandi" class="nav-logo">
+        <img src="ccelogo.png" alt="CCE" class="nav-logo">
+      </a>
+      <span class="brand-text">CCE, IIT Mandi</span>
+    </div>
+    <nav class="navbar-links" id="menu">
+      <a href="#">Activities</a>
+      <a href="mous.html">MOUs</a>
+      <a href="facilities.html">Facilities</a>
+      <a href="#">Tinkering Lab</a>
+      <a href="people.html">People</a>
+      <a href="#">Downloads</a>
+    </nav>
+    <div class="menu-toggle" id="menuToggle">&#9776;</div>
+  </div>
+</header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Downloads</h1>
+    <p>Centre for Continuing Education, IIT Mandi</p>
+  </section>
+
+<div class="table-wrapper">
+  <div class="responsive-table">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Documents</th>
+          <th>MS Word Document</th>
+          <th>PDF Document</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Honorarium Form</td>
+          <td>-</td>
+          <td><a href="honorarium.pdf" target="_blank">PDF</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Proposal for Conference, Workshop, Short-term courses, Symposia, Seminar</td>
+          <td>-</td>
+          <td><a href="proposal.pdf" target="_blank">PDF</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<!-- ACK Modal -->
+
+
+
+
+  <!-- Footer -->
+  <footer class="footer">
+  <div class="footer-content">
+    <h3>Centre for Continuing Education, IIT Mandi</h3>
+    <p>
+      North Campus, IIT Mandi,<br>
+      Kamand, Mandi, Himachal Pradesh - 175075<br>
+      Email: <a href="mailto:cceoffice@iitmandi.ac.in">cceoffice@iitmandi.ac.in</a><br>
+      Phone: 01905-267742, 267788 <br>
+
+      <a><span id="openModal" class="modal-trigger">Webmaster</span></a>
+
+<div id="simpleModal" class="modal">
+  <div class="modal-content">
+    <p>Aakash Gautam. <a href="#">More details</a></p>
+  </div>
+</div>
+
+
+
+
+      
+
+     
+    </p>
+  </div>
+  <br>
+  &copy; 2025, CCE, IIT Mandi. All rights reserved.
+</footer>
+
+
+<script>
+  const modal = document.getElementById("simpleModal");
+  const openBtn = document.getElementById("openModal");
+
+  openBtn.onclick = () => modal.style.display = "flex";
+
+  window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  };
+</script>
+
+  <!-- JavaScript to Toggle Mobile Menu -->
+  <script>
+  const menuToggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('menu');
+
+  // Toggle menu on icon click
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent bubbling
+    menu.classList.toggle('active');
+  });
+
+  // Close menu when clicking anywhere else
+  document.addEventListener('click', (event) => {
+    const isClickInsideMenu = menu.contains(event.target);
+    const isClickOnToggle = menuToggle.contains(event.target);
+
+    if (!isClickInsideMenu && !isClickOnToggle) {
+      menu.classList.remove('active');
+    }
+  });
+</script>
+
+
+  <script>
+  document.getElementById("closeBanner").addEventListener("click", function () {
+    document.getElementById("announcementBanner").style.display = "none";
+  });
+</script>
+
+
+  
+</body>
+</html>
