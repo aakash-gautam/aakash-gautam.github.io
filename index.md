@@ -33,7 +33,7 @@
 - **JLA (Tech)** *(February'25 - present)*
   <br> Indian Institute of Technology Mandi (IIT Mandi) at Kamand, Mandi.
   <br> 💼: Technical Administration · IT Infra Management and Oversight · Media & Studio Management.
-- **Junior Office Assistant (IT)** *(September'24 - February'24)*
+- **Junior Office Assistant (IT)** *(September'24 - February'25)*
   <br> ITDP Kinnaur at R/Peo, Tribal Development Department, GoHP.
   <br> 💼: Administrative Work; Tribal Welfare & Tribal Affairs
 - **Assistant Programmer** *(March'24 - September'24)*
@@ -46,7 +46,7 @@
   <br> Ministry of Social Justice and Empowerment, GoHP.
   <br> 💼: Technocracy · State-wide Project Management, Implementation and Monitoring · Consultancy
 - **Programmer/Developer** *(April'19 - March'21)*
-  <br> Tata Consultancy Services (Noida, UP and Thiruvananthapuram, KR).
+  <br> TCS - Tata Consultancy Services (Noida, UP and Thiruvananthapuram, KR).
   <br> 💼: Software Development and Testing · Cloud Data Management
 
 ## Interests
