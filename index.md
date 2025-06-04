@@ -29,25 +29,25 @@
 - **12th Class/ Senior Secondary School Certificate**
   <br> DAV Sr. Sec. Public School, Lakkar Bazar, Shimla, HP. Exemplary Distinction; Percentage: *92.60%*.
 
-## Work Experience
+## Work Experience (~ 4 Yrs)
 - **JLA (Tech)** *(February'25 - present)*
   <br> Indian Institute of Technology Mandi (IIT Mandi) at Kamand, Mandi.
   <br> 💼: Technical Administration · IT Infra Management and Oversight · Media & Studio Management.
 - **Junior Office Assistant (IT)** *(September'24 - February'24)*
   <br> ITDP Kinnaur at R/Peo, Tribal Development Department, GoHP.
-  <br> 💼: Administrative Work; Tribal Welfare & Tribal Affairs.
-- **Assistant Programmer** *(March'24 - present)*
+  <br> 💼: Administrative Work; Tribal Welfare & Tribal Affairs
+- **Assistant Programmer** *(March'24 - September'24)*
   <br> High Court of Himachal Pradesh, Shimla.
-  <br> 💼: Software Development; IT Infrastructure Management.
+  <br> 💼: Software Development; IT Infrastructure Management
 - **Assistant Professor, IT** *(March'23 - June'23)*
   <br> University Grant Commission & National Testing Agency.
-  <br> 💼: Teaching · Grading · Evaluation & Assessment.
+  <br> 💼: Teaching · Grading · Evaluation & Assessment
 - **State Coordinator (UDID Project) to Govt of HP** *(July'22 - February'23)*
   <br> Ministry of Social Justice and Empowerment, GoHP.
-  <br> 💼: Technocracy · State-wide Project Management, Implementation and Monitoring · Consultancy.
+  <br> 💼: Technocracy · State-wide Project Management, Implementation and Monitoring · Consultancy
 - **Programmer/Developer** *(April'19 - March'21)*
-  <br> Tata Consultancy Services (Noida, UP/Thiruvananthapuram, KR).
-  <br> 💼: Software Development and Testing · Cloud Data Management.
+  <br> Tata Consultancy Services (Noida, UP and Thiruvananthapuram, KR).
+  <br> 💼: Software Development and Testing · Cloud Data Management
 
 ## Interests
 Educational Technology, Computing Education, Philosophy of AI/CS, Recreational Maths, digital pedagogy, cyberculture, and cyberpsychology.
