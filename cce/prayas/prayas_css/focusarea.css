@@ -44,7 +44,6 @@
   width: 80px;
   height: 80px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(19%) sepia(86%) saturate(582%) hue-rotate(203deg) brightness(94%) contrast(92%);
 }
 
 .focus-card p {
