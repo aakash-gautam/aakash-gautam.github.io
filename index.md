@@ -33,7 +33,7 @@
 - **JLA (Tech)** *(February'25 - present)*
   <br> Indian Institute of Technology Mandi (IIT Mandi) at Kamand, Mandi.
   <br> 💼: Technical Administration · IT Infra Management and Oversight · Media & Studio Management.
-- **Junior Office Assistant (IT)** *(September'24 - February'25)*
+- **Assistant (IT)** *(September'24 - February'25)*
   <br> ITDP Kinnaur at R/Peo, Tribal Development Department, GoHP.
   <br> 💼: Administrative Work; Tribal Welfare & Tribal Affairs
 - **Assistant Programmer** *(March'24 - September'24)*
