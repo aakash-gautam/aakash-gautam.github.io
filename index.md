@@ -53,7 +53,7 @@
 Educational Technology, Computing Education, Philosophy of AI/CS, Recreational Maths, digital pedagogy, cyberculture, and cyberpsychology.
 
 ## Teaching
-I have extensive teaching experience in lecture-style and demonstration-style formats to promote active and experiential learning. I frequently integrate various teaching styles, tailoring my approach to the specific goals and objectives of the course, rather than adhering to a single pedagogical method.
+I have teaching experience in lecture-style and demonstration-style formats to promote active and experiential learning. I frequently integrate various teaching styles, tailoring my approach to the specific goals and objectives of the course, rather than adhering to a single pedagogical method.
 - **Gian Jyoti Institute of Management & Technology** *(affiliated to IGKPTU)*
   <br> &nbsp; - PGCA1937 Cloud Computing; MCA; Credits: 4; ≈30 students;	Summer 2023.
   <br> &nbsp; - PGCA1938 Cloud Computing Lab; MCA; Credits: 2; ≈30 students;	Summer 2023.
@@ -65,7 +65,6 @@ I have extensive teaching experience in lecture-style and demonstration-style fo
 - **Hobbies:** Philately, Recreational Maths, Astronomy Communication.
 - **Bronze Medallist in the PUNPEX 2016**, Punjab’s State-level Philatelic Exhibition.
 - **Bronze Medallist in the HIMPEX 2014**, Himachal Pradesh’s State-level Philatelic Exhibition.
-- **Freelancing:** Graphic/Visual Designing services.
 
 ---
 **[Home](https://aakash-gautam.github.io/) · [Contact](https://aakash-gautam.github.io/) · [Aakash+](https://aakash-gautam.github.io/)**
