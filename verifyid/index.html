@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ID Verification | IIT Mandi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  <link rel="stylesheet" type="text/css" href="css.css">
+
+  <script src="verify.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="box">
+
+    <a href="iitmandi.ac.in"><img src="iitmdlogo.png" alt="Logo" class="logo non"></a>
+    <div class="admin-text non">IIT Mandi's Administration</div>
+
+    <h2>ID Verification System</h2>
+
+    <input type="text" id="empId" placeholder="Enter Employee ID">
+    <button class="btn-primary" onclick="verify()">Verify ID</button>
+    <button class="btn-grey" onclick="startScan()">Scan ID's QR Code</button>
+
+    <p class="querytext"><strong>Queries: </strong><a href="mailto:adminoffice@iitmandi.ac.in">adminoffice@iitmandi.ac.in</a></p>
+
+    <div id="loader"></div>
+    <div id="reader"></div>
+  </div>
+
+  <div class="footer-line non">
+    Design and Developed by Aakash Gautam, IIT Mandi
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal non" id="successModal" onclick="closeModalOnOutsideClick(event, 'successModal')">
+  <div class="modal-content">
+    <div class="icon-circle">
+      <img src="verified.png" alt="Verified" class="status-icon">
+    </div>
+    <h3 class="verified-text">VERIFIED</h3>
+    <img id="photo" class="emp-photo" src="">
+    <p><strong id="name" class="verified-name"></strong></p>
+    <p id="designation" class="verified-designation"></p>
+    <p><span id="empID" class="verified-id"></span></p>
+  </div>
+</div>
+
+
+<!-- Error Modal -->
+<div class="modal non" id="errorModal" onclick="closeModalOnOutsideClick(event, 'errorModal')">
+  <div class="modal-content">
+    <div class="icon-circle">
+      <img src="non-verified.png" alt="Not Verified" class="status-icon">
+    </div>
+    <h3 class="not-verified-text">NOT VERIFIED</h3>
+    <p>Employee ID not found.</p>
+  </div>
+</div>
+
+
+
+
+</body>
+
+</html>
