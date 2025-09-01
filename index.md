@@ -40,7 +40,7 @@
   <br> High Court of Himachal Pradesh, Shimla.
   <br> 💼: Software Development; IT Infrastructure Management
 - **Assistant Professor, IT** *(March'23 - June'23)*
-  <br> University Grant Commission & National Testing Agency.
+  <br> Gian Jypti Institute of Management & Technology (affiliated of IKGPTU Jalandhar)
   <br> 💼: Teaching · Grading · Evaluation & Assessment
 - **State Coordinator (UDID Project) to Govt of HP** *(July'22 - February'23)*
   <br> Ministry of Social Justice and Empowerment, GoHP.
