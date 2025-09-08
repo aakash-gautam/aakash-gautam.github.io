@@ -13,7 +13,7 @@
 
 **Profile**: A performance-focused, self-motivated, and versatile technologist and educator with proficiency in applied computer science and educational technology, with a deep interest in philosophy. I have diverse work experience of ≈3 years in the IT industry, Technocracy, Governance, and Academia. With an excellent academic record throughout and a passion for inspiring and educating the upcoming generation of tech innovators and pioneers, I strive to work creatively and innovatively to solve real-world problems.
 
-- Freethinker, Agnostic, Teetotaler.
+- Creative Designer, Freethinker, Agnostic, Teetotaler.
 
 ## Education
 - **Master in Sociology (MA Sociology)** *(pursuing)*
@@ -40,7 +40,7 @@
   <br> High Court of Himachal Pradesh, Shimla.
   <br> 💼: Software Development; IT Infrastructure Management
 - **Assistant Professor, IT** *(March'23 - June'23)*
-  <br> Gian Jypti Institute of Management & Technology (affiliated of IKGPTU Jalandhar)
+  <br> Gian Jyoti Institute of Management & Technology (affiliated of IKGPTU Jalandhar)
   <br> 💼: Teaching · Grading · Evaluation & Assessment
 - **State Coordinator (UDID Project) to Govt of HP** *(July'22 - February'23)*
   <br> Ministry of Social Justice and Empowerment, GoHP.
@@ -65,6 +65,7 @@ I have teaching experience in lecture-style and demonstration-style formats to p
 - **Hobbies:** Philately, Recreational Maths, Astronomy Communication.
 - **Bronze Medallist in the PUNPEX 2016**, Punjab’s State-level Philatelic Exhibition.
 - **Bronze Medallist in the HIMPEX 2014**, Himachal Pradesh’s State-level Philatelic Exhibition.
+- Creative Designer
 
 ---
 **[Home](https://aakash-gautam.github.io/) · [Contact](https://aakash-gautam.github.io/) · [Aakash+](https://aakash-gautam.github.io/)**
