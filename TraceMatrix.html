@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TraceMatrix | AG</title>
+
+<style>
+  :root {
+    --bg: #f4f7fb;
+    --primary: #3f51b5;
+    --good: #4caf50;
+    --bad: #f44336;
+    --missed: #ff9800;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    color: var(--primary);
+    margin-bottom: 5px;
+  }
+
+  p.subtitle {
+    margin: 8px auto 12px auto; /* auto centers the block */
+    color: #555;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .controls {
+    margin: 15px 0;
+  }
+
+  select, button {
+    padding: 8px 12px;
+    margin: 6px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+
+  #info {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  /* TIMER */
+  #timerContainer {
+    width: 80%;
+    max-width: 400px;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    margin: 10px auto;
+    overflow: hidden;
+    display: none;
+  }
+
+  #timerBar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #4caf50, #ff9800, #f44336);
+    transition: width 0.1s linear;
+  }
+
+  #grid {
+    display: grid;
+    gap: 6px;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 95vw;
+  }
+
+  .cell {
+    background: #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+  }
+
+  .cell:hover {
+    transform: scale(1.05);
+  }
+
+  .cell.active {
+    background: var(--primary);
+  }
+
+  .cell.correct {
+    background: var(--good);
+  }
+
+  .cell.wrong {
+    background: var(--bad);
+  }
+
+  .cell.missed {
+    background: var(--missed);
+  }
+
+  .disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  #submitBtn {
+    display: none;
+    margin-top: 10px;
+  }
+
+  #result {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>🧠 TraceMatrix</h1>
+<p class="subtitle"><b>Train your spatial intelligence — Focus, Remember, Recreate!</b> <br><br>
+TraceMatrix is a simple yet engaging memory challenge designed to strengthen spatial intelligence, visual recall, and focused attention. Observe patterns carefully, trust your memory, and recreate what you saw. Regular play can improve concentration, mental mapping, and cognitive flexibility in a fun, intuitive way. </p>
+
+<div class="controls">
+  Grid:
+  <select id="gridSize">
+    <option value="4">4 × 4</option>
+    <option value="5">5 × 5</option>
+    <option value="6">6 × 6</option>
+    <option value="7">7 × 7</option>
+    <option value="8">8 × 8</option>
+    <option value="9">9 × 9</option>
+    <option value="10">10 × 10</option>
+  </select>
+
+  Difficulty:
+  <select id="difficulty">
+    <option value="veryeasy">Very Easy 😌 (30s)</option>
+    <option value="easy">Easy 🙂 (15s)</option>
+    <option value="medium" selected>Medium 😐 (10s)</option>
+    <option value="hard">Hard 🔥 (5s)</option>
+  </select>
+
+  <button onclick="startGame()">Start Game</button>
+</div>
+
+<div id="info"></div>
+
+<!-- TIMER -->
+<div id="timerContainer">
+  <div id="timerBar"></div>
+</div>
+
+<div id="grid"></div>
+
+<button id="submitBtn" onclick="submitAnswer()">Submit My Pattern</button>
+
+<div id="result"></div>
+
+<script>
+let size, highlightCount, timeLimit;
+let highlighted = new Set();
+let selected = new Set();
+let round = 0;
+let totalScore = 0;
+const maxRounds = 5;
+let inputLocked = false;
+
+/* TIMER */
+let timerInterval;
+
+function startTimer(duration) {
+  const bar = document.getElementById("timerBar");
+  const container = document.getElementById("timerContainer");
+
+  container.style.display = "block";
+  let start = Date.now();
+
+  timerInterval = setInterval(() => {
+    let elapsed = Date.now() - start;
+    let remaining = Math.max(0, duration - elapsed);
+    let percent = (remaining / duration) * 100;
+    bar.style.width = percent + "%";
+
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      container.style.display = "none";
+    }
+  }, 100);
+}
+
+function startGame() {
+  round = 0;
+  totalScore = 0;
+  nextRound();
+}
+
+function nextRound() {
+  round++;
+  if (round > maxRounds) {
+    showFinalResult();
+    return;
+  }
+
+  inputLocked = true;
+  document.getElementById("result").innerHTML = "";
+
+  size = parseInt(document.getElementById("gridSize").value);
+  const difficulty = document.getElementById("difficulty").value;
+
+  timeLimit =
+        difficulty === "veryeasy" ? 30000 :
+        difficulty === "easy" ? 15000 :
+        difficulty === "medium" ? 10000 :
+        5000;
+
+  highlightCount = size * 2;
+
+  createGrid();
+  highlightCells();
+  startTimer(timeLimit);
+
+  document.getElementById("info").innerText =
+    `Round ${round}/${maxRounds} — Memorize the pattern 🧠`;
+
+  setTimeout(hideCells, timeLimit);
+}
+
+function getCellSize() {
+  const minSide = Math.min(window.innerWidth, window.innerHeight);
+  return Math.floor(minSide / (size + 4));
+}
+
+function createGrid() {
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  highlighted.clear();
+  selected.clear();
+
+  const cellSize = getCellSize();
+  grid.style.gridTemplateColumns = `repeat(${size}, ${cellSize}px)`;
+
+  for (let i = 0; i < size * size; i++) {
+    const cell = document.createElement("div");
+    cell.className = "cell disabled";
+    cell.style.width = cell.style.height = cellSize + "px";
+    cell.dataset.index = i;
+    cell.onclick = () => toggleSelect(cell);
+    grid.appendChild(cell);
+  }
+}
+
+function highlightCells() {
+  while (highlighted.size < highlightCount) {
+    highlighted.add(Math.floor(Math.random() * size * size));
+  }
+
+  highlighted.forEach(i => {
+    document.querySelectorAll(".cell")[i].classList.add("active");
+  });
+}
+
+function hideCells() {
+  clearInterval(timerInterval);
+  document.getElementById("timerContainer").style.display = "none";
+
+  document.querySelectorAll(".cell").forEach(cell => {
+    cell.classList.remove("active");
+    cell.classList.remove("disabled");
+  });
+
+  inputLocked = false;
+
+  document.getElementById("info").innerText =
+    `Select ${highlightCount} tiles to recreate the pattern 🎯`;
+}
+
+function toggleSelect(cell) {
+  if (inputLocked) return;
+
+  const index = parseInt(cell.dataset.index);
+
+  if (selected.has(index)) {
+    selected.delete(index);
+    cell.style.background = "#ddd";
+    return;
+  }
+
+  if (selected.size >= highlightCount) return;
+
+  selected.add(index);
+  cell.style.background = "#90caf9";
+
+  if (selected.size === highlightCount) {
+    inputLocked = true;
+    setTimeout(submitAnswer, 300);
+  }
+}
+
+function getCognitiveFeedback(score) {
+  if (score >= 9) return "🧠 Excellent spatial recall";
+  if (score >= 7) return "👍 Good pattern recognition";
+  if (score >= 5) return "🙂 Moderate recall — stay focused";
+  return "⚠️ Pattern confusion observed";
+}
+
+function submitAnswer() {
+  document.querySelectorAll(".cell").forEach((cell, i) => {
+    if (highlighted.has(i) && selected.has(i)) {
+      cell.className = "cell correct";
+    } else if (!highlighted.has(i) && selected.has(i)) {
+      cell.className = "cell wrong";
+    } else if (highlighted.has(i) && !selected.has(i)) {
+      cell.className = "cell missed";
+    }
+  });
+
+  let mistakes =
+    [...selected].filter(i => !highlighted.has(i)).length +
+    [...highlighted].filter(i => !selected.has(i)).length;
+
+  let score = Math.max(0, 10 - mistakes);
+  totalScore += score;
+
+  document.getElementById("result").innerHTML =
+    `Round ${round} Score: ${score}/10<br>
+     <em>${getCognitiveFeedback(score)}</em>`;
+
+  setTimeout(nextRound, 2500);
+}
+
+function showFinalResult() {
+  const accuracy = ((totalScore / (maxRounds * 10)) * 100).toFixed(1);
+  document.getElementById("info").innerText = "Session Complete 🎉";
+  document.getElementById("result").innerHTML =
+    `Total Score: ${totalScore}/50<br>
+     Accuracy: ${accuracy}%<br>
+     <strong>Spatial Intelligence Indicator</strong>`;
+}
+</script>
+
+</body>
+</html>
