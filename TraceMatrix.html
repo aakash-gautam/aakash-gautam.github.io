@@ -110,11 +110,11 @@
   }
 
   .cell.correct {
-    background: var(--good);
+    background: #2e7d32; /* deep green */
   }
 
   .cell.wrong {
-    background: var(--bad);
+    background: #8e0000; /* dark red */
   }
 
   .cell.missed {
@@ -136,6 +136,47 @@
     font-size: 16px;
     font-weight: bold;
   }
+
+
+  /* SPATIAL INTELLIGENCE OVERLAY */
+#siOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#siPopup {
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+#siPopup h2 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+#siPopup p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+
+#siPopup button {
+  margin-top: 15px;
+  padding: 8px 16px;
+}
+
 </style>
 </head>
 
@@ -185,6 +226,17 @@
 
 <div id="result"></div>
 
+
+<!-- OVERLAY POPUP -->
+<div id="siOverlay" style="display:none;">
+  <div id="siPopup">
+    <h2>SPATIAL INTELLIGENCE INDICATOR</h2>
+    <p id="siScore"></p>
+    <p id="siAccuracy"></p>
+    <button onclick="closeSIOverlay()">Close</button>
+  </div>
+</div>
+
 <script>
 let size, highlightCount, timeLimit;
 let highlighted = new Set();
@@ -199,6 +251,8 @@ let gameInProgress = false;
 let timerInterval;
 
 function startTimer(duration) {
+  clearInterval(timerInterval);
+  
   const bar = document.getElementById("timerBar");
   const container = document.getElementById("timerContainer");
 
@@ -336,12 +390,15 @@ function getCognitiveFeedback(score) {
 
 function submitAnswer() {
   document.querySelectorAll(".cell").forEach((cell, i) => {
-    if (highlighted.has(i) && selected.has(i)) {
+
+    // 🔴 IMPORTANT: remove inline background first
+    cell.style.background = "";
+
+    if (highlighted.has(i)) {
       cell.className = "cell correct";
-    } else if (!highlighted.has(i) && selected.has(i)) {
+    }
+    else if (selected.has(i)) {
       cell.className = "cell wrong";
-    } else if (highlighted.has(i) && !selected.has(i)) {
-      cell.className = "cell missed";
     }
   });
 
@@ -352,21 +409,38 @@ function submitAnswer() {
   let score = Math.max(0, 10 - mistakes);
   totalScore += score;
 
-  document.getElementById("result").innerHTML =
-    `Round ${round} Score: ${score}/10<br>
-     <em>${getCognitiveFeedback(score)}</em>`;
+  //document.getElementById("result").innerHTML =
+    //`Round ${round} Score: ${score}/10<br>
+     //<em>${getCognitiveFeedback(score)}</em>`;
 
   setTimeout(nextRound, 2500);
 }
 
+
+function showSIOverlay(totalScore, accuracy) {
+  document.getElementById("siScore").innerText =
+    `Total Score: ${totalScore} / ${maxRounds * 10}`;
+  document.getElementById("siAccuracy").innerText =
+    `Accuracy: ${accuracy}%`;
+
+  document.getElementById("siOverlay").style.display = "flex";
+}
+
+function closeSIOverlay() {
+  document.getElementById("siOverlay").style.display = "none";
+}
+
+
+
 function showFinalResult() {
   const accuracy = ((totalScore / (maxRounds * 10)) * 100).toFixed(1);
+
   document.getElementById("info").innerText = "Session Complete 🎉";
-  document.getElementById("result").innerHTML =
-    `Total Score: ${totalScore}/50<br>
-     Accuracy: ${accuracy}%<br>
-     <strong>Spatial Intelligence Indicator</strong>`;
+  document.getElementById("result").innerHTML = "";
+
+  showSIOverlay(totalScore, accuracy);
 }
+
 
 function haltGameDueToSettingsChange() {
   if (!gameInProgress) return;
