@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+
 <title>TraceMatrix | AG</title>
 
 <style>
@@ -16,7 +18,7 @@
 
   body {
     margin: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
+    font-family: "Oswald", Arial;
     background: var(--bg);
     text-align: center;
     padding: 20px;
@@ -25,13 +27,16 @@
   h1 {
     color: var(--primary);
     margin-bottom: 5px;
+    font-size: 3rem;
   }
 
   p.subtitle {
-    margin: 8px auto 12px auto; /* auto centers the block */
+    margin: 8px auto 12px auto;
     color: #555;
-    max-width: 600px;
+    max-width: 750px;
     text-align: center;
+    font-family: "Roboto", Arial;
+    font-size: 1.1rem;
   }
 
   .controls {
@@ -59,7 +64,7 @@
 
   #info {
     margin-top: 10px;
-    font-weight: bold;
+    font-weight: 600;
   }
 
   /* TIMER */
@@ -136,9 +141,9 @@
 
 <body>
 
-<h1>🧠 TraceMatrix</h1>
-<p class="subtitle"><b>Train your spatial intelligence — Focus, Remember, Recreate!</b> <br><br>
-TraceMatrix is a simple yet engaging memory challenge designed to strengthen spatial intelligence, visual recall, and concentration. Observe patterns carefully, trust your memory, and recreate what you saw. Improve your mental mapping and cognitive flexibility in a fun & intuitive way. </p>
+<h1>🧠TraceMatrix</h1>
+<p class="subtitle"><b>Focus, Remember, Recreate!</b> <br><br>
+<b>TraceMatrix</b> is a simple yet engaging memory challenge designed to strengthen spatial intelligence, visual recall, and concentration. Observe patterns carefully, trust your memory, and recreate what you saw. Improve your mental mapping and cognitive flexibility in a fun & intuitive way. </p>
 
 <div class="controls">
   Grid:
@@ -188,6 +193,7 @@ let round = 0;
 let totalScore = 0;
 const maxRounds = 5;
 let inputLocked = false;
+let gameInProgress = false;
 
 /* TIMER */
 let timerInterval;
@@ -213,6 +219,7 @@ function startTimer(duration) {
 }
 
 function startGame() {
+  gameInProgress = true;
   round = 0;
   totalScore = 0;
   nextRound();
@@ -360,7 +367,34 @@ function showFinalResult() {
      Accuracy: ${accuracy}%<br>
      <strong>Spatial Intelligence Indicator</strong>`;
 }
+
+function haltGameDueToSettingsChange() {
+  if (!gameInProgress) return;
+
+  // Stop timer + lock input
+  clearInterval(timerInterval);
+  inputLocked = true;
+
+  // Reset game state
+  gameInProgress = false;
+  round = 0;
+  totalScore = 0;
+  highlighted.clear();
+  selected.clear();
+
+  // Clear UI and show message
+  document.getElementById("timerContainer").style.display = "none";
+  document.getElementById("grid").innerHTML = "";
+  document.getElementById("result").innerHTML = "";
+  document.getElementById("info").innerText = "⚠️ Settings changed. Game halted. Press START GAME to begin again.";
+}
+
+document.getElementById("gridSize").addEventListener("change", haltGameDueToSettingsChange);
+document.getElementById("difficulty").addEventListener("change", haltGameDueToSettingsChange);
+
 </script>
+
+
 
 </body>
 </html>
