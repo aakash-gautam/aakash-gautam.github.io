@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TwinFlip – Memory Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --primary:#0f5132;
+  --accent:#198754;
+  --bg:#f7faf8;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:#1f2937;
+  display:flex;
+  justify-content:center;
+  min-height:100vh;
+}
+
+.container{
+  width:100%;
+  max-width:900px;
+  padding:24px 20px 40px;
+  text-align:center;
+}
+
+/* HEADER */
+.header{
+  margin-bottom:24px;
+}
+
+.title{
+  font-size:2.2rem;
+  font-weight:700;
+  color:var(--primary);
+}
+
+.subtitle{
+  font-weight:600;
+  margin-top:4px;
+}
+
+.subtitle::after{
+  content:"";
+  display:block;
+  width:80px;
+  height:3px;
+  background:var(--primary);
+  margin:8px auto 0;
+  border-radius:3px;
+}
+
+.description{
+  max-width:500px;
+  margin:16px auto 0;
+  font-size:0.95rem;
+  line-height:1.45;
+  color:#555;
+}
+
+/* CONTROLS */
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+  margin-bottom:24px;
+}
+
+select,button{
+  padding:10px 16px;
+  font-size:1rem;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+button{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+
+button:hover{background:var(--accent)}
+
+.hidden{display:none}
+
+/* GAME */
+.progress-wrap{
+  margin-bottom:14px;
+}
+
+.progress{
+  width:100%;
+  max-width:500px;
+  margin:0 auto;
+  height:10px;
+  background:#ddd;
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:100%;
+  background:linear-gradient(90deg,#6fbf73,#f59e0b,#ef4444);
+  transition:width 0.1s linear;
+}
+
+.stats{
+  margin:14px 0;
+  font-size:0.95rem;
+}
+
+.board{
+  display:grid;
+  gap:14px;
+  margin-top:10px;
+}
+
+.card{
+  aspect-ratio:1/1;
+  background:#e5e7eb;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:3rem; /* ENLARGED SYMBOLS */
+  cursor:pointer;
+  transition:transform 0.2s,background 0.2s;
+}
+
+.card.show{background:#fff}
+.card.matched{
+  background:#c7f3d2;
+  cursor:default;
+}
+
+.card:hover{transform:scale(1.05)}
+
+.restart{
+  margin-top:25px;
+}
+
+@media(max-width:500px){
+  .card{font-size:2.4rem}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div id="header" class="header">
+    <div class="title">🧠 TwinFlip</div>
+    <div class="description">
+      A fast-paced memory challenge to boost visual recall and pattern recognition.
+      Train your brain to focus, remember, and respond with precision.
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div id="controls" class="controls">
+    <select id="cardCount">
+      <option value="8">8 Cards</option>
+      <option value="12">12 Cards</option>
+      <option value="16" selected>16 Cards</option>
+      <option value="20">20 Cards</option>
+      <option value="24">24 Cards</option>
+      <option value="30">30 Cards</option>
+    </select>
+
+    <select id="difficulty">
+      <option value="30000">Very Easy (30s)</option>
+      <option value="15000">Easy (15s)</option>
+      <option value="10000" selected>Medium (10s)</option>
+      <option value="5000">Hard (5s)</option>
+    </select>
+
+    <button onclick="startGame()">START GAME</button>
+  </div>
+
+  <!-- GAME UI -->
+  <div id="gameUI" class="hidden">
+    <div class="progress-wrap">
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      Moves: <span id="moves">0</span> |
+      Minimum Moves: <span id="minMoves">0</span>
+    </div>
+
+    <div class="board" id="board"></div>
+
+    <div id="restart" class="restart hidden">
+      <button onclick="restartGame()">RESTART GAME</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const baseSymbols=["★","✿","◆","☂","☀","☾","✦","❖","♠","♣","♥","♦","⬟","⬢","⬣"];
+let first=null,second=null,lock=false,moves=0,matchedPairs=0,timer;
+const board=document.getElementById("board");
+
+function startGame(){
+  document.getElementById("header").classList.add("hidden");
+  document.getElementById("controls").classList.add("hidden");
+  document.getElementById("gameUI").classList.remove("hidden");
+
+  moves=0; matchedPairs=0;
+  document.getElementById("moves").textContent=moves;
+  board.innerHTML="";
+  document.getElementById("restart").classList.add("hidden");
+
+  first=second=null; lock=false;
+
+  const count=+document.getElementById("cardCount").value;
+  const pairs=count/2;
+  document.getElementById("minMoves").textContent=pairs;
+
+  const symbols=baseSymbols.slice(0,pairs);
+  let cards=[...symbols,...symbols].sort(()=>Math.random()-0.5);
+
+  const cols=Math.ceil(Math.sqrt(count));
+  board.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+
+  cards.forEach(sym=>{
+    const c=document.createElement("div");
+    c.className="card show";
+    c.textContent=sym;
+    c.dataset.sym=sym;
+    c.onclick=()=>flip(c);
+    board.appendChild(c);
+  });
+
+  startTimer();
+}
+
+function startTimer(){
+  const duration=+document.getElementById("difficulty").value;
+  const bar=document.getElementById("progressBar");
+  let timeLeft=duration;
+  bar.style.width="100%";
+
+  clearInterval(timer);
+  timer=setInterval(()=>{
+    timeLeft-=100;
+    bar.style.width=(timeLeft/duration*100)+"%";
+    if(timeLeft<=0){
+      clearInterval(timer);
+      hideAll();
+    }
+  },100);
+}
+
+function hideAll(){
+  document.querySelectorAll(".card").forEach(c=>{
+    c.classList.remove("show");
+    c.textContent="";
+  });
+}
+
+function flip(card){
+  if(lock||card.classList.contains("matched")||card===first) return;
+
+  card.classList.add("show");
+  card.textContent=card.dataset.sym;
+
+  if(!first){first=card;return;}
+
+  second=card;
+  moves++;
+  document.getElementById("moves").textContent=moves;
+
+  if(first.dataset.sym===second.dataset.sym){
+    first.classList.add("matched");
+    second.classList.add("matched");
+    matchedPairs++;
+    reset();
+    checkEnd();
+  }else{
+    lock=true;
+    setTimeout(()=>{
+      first.classList.remove("show");
+      second.classList.remove("show");
+      first.textContent="";
+      second.textContent="";
+      reset();
+    },700);
+  }
+}
+
+function reset(){
+  first=second=null;
+  lock=false;
+}
+
+function checkEnd(){
+  const totalPairs=document.getElementById("minMoves").textContent;
+  if(matchedPairs==totalPairs){
+    clearInterval(timer);
+    document.getElementById("restart").classList.remove("hidden");
+  }
+}
+
+function restartGame(){
+  document.getElementById("header").classList.remove("hidden");
+  document.getElementById("controls").classList.remove("hidden");
+  document.getElementById("gameUI").classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
