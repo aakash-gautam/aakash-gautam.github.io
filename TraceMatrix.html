@@ -138,12 +138,12 @@
   }
 
 
-  /* SPATIAL INTELLIGENCE OVERLAY */
+/* SPATIAL INTELLIGENCE OVERLAY */
 #siOverlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 400px;
+  width: 100vw;
   height: 100vh;
   background: rgba(0,0,0,0.6);
   display: flex;
@@ -156,8 +156,8 @@
   background: #fff;
   padding: 30px 25px;
   border-radius: 10px;
-  width: 90%;
-  max-width: 420px;
+  width: 100%;
+  max-width: 300px;
   text-align: center;
   box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
@@ -177,6 +177,13 @@
   padding: 8px 16px;
 }
 
+.si-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
 </style>
 </head>
 
@@ -184,8 +191,8 @@
 
 <h1>🧠TraceMatrix</h1>
 <p class="subtitle"><b>Focus, Remember, Recreate!</b> <br><br>
-<b>TraceMatrix</b> is a simple yet engaging memory game designed to strengthen spatial intelligence, visual recall, and concentration. Improve your mental mapping and cognitive flexibility in a fun & intuitive way. </p>
-<p class="subtitle"> Created by Aakash G. </p>
+<b>TraceMatrix</b> is a simple yet engaging memory challenge designed to strengthen spatial intelligence, visual recall, and concentration. Observe patterns carefully, trust your memory, and recreate what you saw. Improve your mental mapping and cognitive flexibility in a fun & intuitive way. </p>
+
 <div class="controls">
   Grid:
   <select id="gridSize">
@@ -231,9 +238,15 @@
 <div id="siOverlay" style="display:none;">
   <div id="siPopup">
     <h2>SPATIAL INTELLIGENCE INDICATOR</h2>
-    <span><p id="siGrid"></p> · <p id="siMode"></p></span>
-    <p id="siScore"></p>
-    <p id="siAccuracy"></p>
+
+    <div class="si-row">
+      <span id="siGrid"></span> · <span id="siMode"></span>
+    </div>
+
+    <div class="si-row">
+      <span id="siScore"></span> · <span id="siAccuracy"></span>
+    </div>
+
     <button onclick="closeSIOverlay()">Close</button>
   </div>
 </div>
@@ -247,6 +260,7 @@ let totalScore = 0;
 const maxRounds = 5;
 let inputLocked = false;
 let gameInProgress = false;
+let hideTimeout;
 
 /* TIMER */
 let timerInterval;
@@ -281,6 +295,8 @@ function startGame() {
 }
 
 function nextRound() {
+  clearTimeout(hideTimeout);
+  clearInterval(timerInterval);
   round++;
   if (round > maxRounds) {
     showFinalResult();
@@ -308,7 +324,7 @@ function nextRound() {
   document.getElementById("info").innerText =
     `Round ${round}/${maxRounds} — Memorize the pattern 🧠`;
 
-  setTimeout(hideCells, timeLimit);
+  hideTimeout = setTimeout(hideCells, timeLimit);
 }
 
 function getCellSize() {
