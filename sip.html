@@ -17,7 +17,7 @@
     }
 
     .container {
-      max-width: 950px;
+      max-width: 900px;
       background: #fff;
       margin: auto;
       padding: 30px;
@@ -25,7 +25,7 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
-    h1, h2, h3 {
+    h1, h2 {
       text-align: center;
       color: #333;
     }
@@ -35,14 +35,20 @@
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
+      margin-bottom: 15px;
     }
 
-    input {
+    input, select, textarea {
       padding: 10px;
       flex: 1;
-      min-width: 120px;
+      min-width: 150px;
       border: 1px solid #ccc;
       border-radius: 5px;
+    }
+
+    textarea {
+      resize: none;
+      height: 45px;
     }
 
     button {
@@ -58,10 +64,6 @@
       background: #005ec2;
     }
 
-    #sipList {
-      margin-top: 20px;
-    }
-
     .sip-item {
       border: 1px solid #e0e0e0;
       padding: 15px;
@@ -71,23 +73,7 @@
     }
 
     .sip-item h3 {
-      margin: 0 0 10px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    th, td {
-      text-align: center;
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-
-    th {
-      background: #f0f0f0;
+      margin: 0 0 8px;
     }
 
     #portfolioSummary {
@@ -98,7 +84,7 @@
     }
 
     @media (max-width: 600px) {
-      input {
+      input, select, textarea {
         min-width: 100%;
       }
       .form-group {
@@ -110,13 +96,28 @@
 <body>
   <div class="container">
     <h1>📈 SIP Portfolio Tracker & Calculator</h1>
+    
+    <!-- Global duration selector -->
+    <div class="form-group">
+      <label><strong>Select Investment Duration (Years):</strong></label>
+      <select id="globalYears">
+        <option value="5">5 Years</option>
+        <option value="10">10 Years</option>
+        <option value="15">15 Years</option>
+        <option value="20">20 Years</option>
+        <option value="25">25 Years</option>
+        <option value="30">30 Years</option>
+        <option value="35">35 Years</option>
+        <option value="40">40 Years</option>
+      </select>
+    </div>
+
     <form id="sipForm">
       <div class="form-group">
         <input type="text" id="sipName" placeholder="SIP Name" required />
         <input type="number" id="sipAmount" placeholder="Monthly Amount (₹)" required />
         <input type="number" id="sipRate" placeholder="Expected Annual Return (%)" required />
-        <input type="number" id="sipStepup" placeholder="Annual Step-up (%)" value="0" />
-        <input type="number" id="sipYears" placeholder="Duration (Years)" required />
+        <textarea id="sipStepup" placeholder="Enter annual step-up % if any (default 0%)">0</textarea>
         <button type="submit">Add SIP</button>
       </div>
     </form>
@@ -132,6 +133,7 @@
     const sipForm = document.getElementById('sipForm');
     const sipList = document.getElementById('sipList');
     const portfolioSummary = document.getElementById('portfolioSummary');
+    const globalYears = document.getElementById('globalYears');
     let sips = [];
 
     sipForm.addEventListener('submit', (e) => {
@@ -140,56 +142,46 @@
         name: document.getElementById('sipName').value.trim(),
         amount: parseFloat(document.getElementById('sipAmount').value),
         rate: parseFloat(document.getElementById('sipRate').value),
-        stepup: parseFloat(document.getElementById('sipStepup').value),
-        years: parseInt(document.getElementById('sipYears').value),
+        stepup: parseFloat(document.getElementById('sipStepup').value || 0),
       };
       sips.push(sip);
       sipForm.reset();
+      document.getElementById('sipStepup').value = "0"; // reset to default
       renderSIPs();
     });
 
+    globalYears.addEventListener('change', renderSIPs);
+
     function renderSIPs() {
       sipList.innerHTML = '';
-      let portfolioTotals = {5: 0, 10: 0, 20: 0, 25: 0, 30: 0};
+      let totalInvested = 0;
+      let totalFutureValue = 0;
+      const years = parseInt(globalYears.value);
 
       sips.forEach((sip) => {
-        const durations = [5, 10, 20, 25, 30];
-        const tableRows = durations.map((year) => {
-          if (year > sip.years) return '';
-          const fv = calculateSIPFutureValue(sip.amount, sip.rate, year, sip.stepup);
-          portfolioTotals[year] += fv;
-          return `<tr><td>${year} yrs</td><td>₹${fv.toLocaleString()}</td></tr>`;
-        }).join('');
+        const fv = calculateSIPFutureValue(sip.amount, sip.rate, years, sip.stepup);
+        const invested = sip.amount * 12 * years;
+        totalInvested += invested;
+        totalFutureValue += fv;
 
         sipList.innerHTML += `
           <div class="sip-item">
             <h3>${sip.name}</h3>
-            <p><strong>Amount:</strong> ₹${sip.amount}/month | 
+            <p><strong>Monthly:</strong> ₹${sip.amount} | 
                <strong>Return:</strong> ${sip.rate}% | 
-               <strong>Step-up:</strong> ${sip.stepup}% | 
-               <strong>Years:</strong> ${sip.years}</p>
-            <table>
-              <tr><th>Duration</th><th>Future Value</th></tr>
-              ${tableRows}
-            </table>
+               <strong>Step-up:</strong> ${sip.stepup}%</p>
+            <p><strong>Total Invested:</strong> ₹${invested.toLocaleString()} | 
+               <strong>Value After ${years} yrs:</strong> ₹${fv.toLocaleString()}</p>
           </div>
         `;
       });
 
-      // Consolidated Portfolio Summary
-      let summaryTable = `
-        <table>
-          <tr><th>Year</th><th>Total Portfolio Value</th></tr>
-          ${Object.entries(portfolioTotals)
-            .map(([year, total]) => total > 0 ? `<tr><td>${year} yrs</td><td>₹${total.toLocaleString()}</td></tr>` : '')
-            .join('')}
-        </table>
-      `;
-
-      portfolioSummary.innerHTML = `
-        <h3>Consolidated Portfolio Value Over Time</h3>
-        ${sips.length ? summaryTable : '<p>No SIPs added yet.</p>'}
-      `;
+      portfolioSummary.innerHTML = sips.length ? `
+        <h3>Overall Portfolio Summary (${years} years)</h3>
+        <p><strong>Total Invested:</strong> ₹${totalInvested.toLocaleString()}</p>
+        <p><strong>Projected Value:</strong> ₹${totalFutureValue.toLocaleString()}</p>
+        <p><strong>Total Gain:</strong> ₹${(totalFutureValue - totalInvested).toLocaleString()}</p>
+      ` : '<p>No SIPs added yet.</p>';
     }
 
     // SIP Future Value Formula (with optional annual step-up)
