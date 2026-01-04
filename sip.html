@@ -17,7 +17,7 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 950px;
       background: #fff;
       margin: auto;
       padding: 30px;
@@ -25,7 +25,7 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
-    h1, h2 {
+    h1, h2, h3 {
       text-align: center;
       color: #333;
     }
@@ -91,7 +91,7 @@
     }
 
     #portfolioSummary {
-      margin-top: 20px;
+      margin-top: 25px;
       padding: 15px;
       background: #eef9ff;
       border-radius: 8px;
@@ -137,7 +137,7 @@
     sipForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const sip = {
-        name: document.getElementById('sipName').value,
+        name: document.getElementById('sipName').value.trim(),
         amount: parseFloat(document.getElementById('sipAmount').value),
         rate: parseFloat(document.getElementById('sipRate').value),
         stepup: parseFloat(document.getElementById('sipStepup').value),
@@ -150,16 +150,16 @@
 
     function renderSIPs() {
       sipList.innerHTML = '';
-      let totalFV = 0;
+      let portfolioTotals = {5: 0, 10: 0, 20: 0, 25: 0, 30: 0};
+
       sips.forEach((sip) => {
-        const tableRows = [2, 5, 10, 15, 20, 25, 40].map((year) => {
+        const durations = [5, 10, 20, 25, 30];
+        const tableRows = durations.map((year) => {
           if (year > sip.years) return '';
           const fv = calculateSIPFutureValue(sip.amount, sip.rate, year, sip.stepup);
+          portfolioTotals[year] += fv;
           return `<tr><td>${year} yrs</td><td>₹${fv.toLocaleString()}</td></tr>`;
         }).join('');
-
-        const sipTotal = calculateSIPFutureValue(sip.amount, sip.rate, sip.years, sip.stepup);
-        totalFV += sipTotal;
 
         sipList.innerHTML += `
           <div class="sip-item">
@@ -176,9 +176,19 @@
         `;
       });
 
+      // Consolidated Portfolio Summary
+      let summaryTable = `
+        <table>
+          <tr><th>Year</th><th>Total Portfolio Value</th></tr>
+          ${Object.entries(portfolioTotals)
+            .map(([year, total]) => total > 0 ? `<tr><td>${year} yrs</td><td>₹${total.toLocaleString()}</td></tr>` : '')
+            .join('')}
+        </table>
+      `;
+
       portfolioSummary.innerHTML = `
-        <h3>Total Future Value of Portfolio:</h3>
-        <p><strong>₹${totalFV.toLocaleString()}</strong> (based on total individual SIPs)</p>
+        <h3>Consolidated Portfolio Value Over Time</h3>
+        ${sips.length ? summaryTable : '<p>No SIPs added yet.</p>'}
       `;
     }
 
