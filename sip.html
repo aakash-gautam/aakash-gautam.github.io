@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIP Portfolio Tracker & Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      background: #fff;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    input {
+      padding: 10px;
+      flex: 1;
+      min-width: 120px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #0078ff;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005ec2;
+    }
+
+    #sipList {
+      margin-top: 20px;
+    }
+
+    .sip-item {
+      border: 1px solid #e0e0e0;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+    }
+
+    .sip-item h3 {
+      margin: 0 0 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    th {
+      background: #f0f0f0;
+    }
+
+    #portfolioSummary {
+      margin-top: 20px;
+      padding: 15px;
+      background: #eef9ff;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 600px) {
+      input {
+        min-width: 100%;
+      }
+      .form-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📈 SIP Portfolio Tracker & Calculator</h1>
+    <form id="sipForm">
+      <div class="form-group">
+        <input type="text" id="sipName" placeholder="SIP Name" required />
+        <input type="number" id="sipAmount" placeholder="Monthly Amount (₹)" required />
+        <input type="number" id="sipRate" placeholder="Expected Annual Return (%)" required />
+        <input type="number" id="sipStepup" placeholder="Annual Step-up (%)" value="0" />
+        <input type="number" id="sipYears" placeholder="Duration (Years)" required />
+        <button type="submit">Add SIP</button>
+      </div>
+    </form>
+
+    <h2>My SIPs</h2>
+    <div id="sipList"></div>
+
+    <h2>Portfolio Summary</h2>
+    <div id="portfolioSummary"></div>
+  </div>
+
+  <script>
+    const sipForm = document.getElementById('sipForm');
+    const sipList = document.getElementById('sipList');
+    const portfolioSummary = document.getElementById('portfolioSummary');
+    let sips = [];
+
+    sipForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const sip = {
+        name: document.getElementById('sipName').value,
+        amount: parseFloat(document.getElementById('sipAmount').value),
+        rate: parseFloat(document.getElementById('sipRate').value),
+        stepup: parseFloat(document.getElementById('sipStepup').value),
+        years: parseInt(document.getElementById('sipYears').value),
+      };
+      sips.push(sip);
+      sipForm.reset();
+      renderSIPs();
+    });
+
+    function renderSIPs() {
+      sipList.innerHTML = '';
+      let totalFV = 0;
+      sips.forEach((sip) => {
+        const tableRows = [2, 5, 10, 15, 20, 25, 40].map((year) => {
+          if (year > sip.years) return '';
+          const fv = calculateSIPFutureValue(sip.amount, sip.rate, year, sip.stepup);
+          return `<tr><td>${year} yrs</td><td>₹${fv.toLocaleString()}</td></tr>`;
+        }).join('');
+
+        const sipTotal = calculateSIPFutureValue(sip.amount, sip.rate, sip.years, sip.stepup);
+        totalFV += sipTotal;
+
+        sipList.innerHTML += `
+          <div class="sip-item">
+            <h3>${sip.name}</h3>
+            <p><strong>Amount:</strong> ₹${sip.amount}/month | 
+               <strong>Return:</strong> ${sip.rate}% | 
+               <strong>Step-up:</strong> ${sip.stepup}% | 
+               <strong>Years:</strong> ${sip.years}</p>
+            <table>
+              <tr><th>Duration</th><th>Future Value</th></tr>
+              ${tableRows}
+            </table>
+          </div>
+        `;
+      });
+
+      portfolioSummary.innerHTML = `
+        <h3>Total Future Value of Portfolio:</h3>
+        <p><strong>₹${totalFV.toLocaleString()}</strong> (based on total individual SIPs)</p>
+      `;
+    }
+
+    // SIP Future Value Formula (with optional annual step-up)
+    function calculateSIPFutureValue(monthly, rate, years, stepup = 0) {
+      const months = years * 12;
+      let fv = 0;
+      let currentMonthly = monthly;
+      const monthlyRate = rate / 12 / 100;
+
+      for (let m = 1; m <= months; m++) {
+        fv = (fv + currentMonthly) * (1 + monthlyRate);
+        if (m % 12 === 0) currentMonthly *= (1 + stepup / 100);
+      }
+      return Math.round(fv);
+    }
+  </script>
+</body>
+</html>
