@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIP Portfolio Tracker & Calculator</title>
+  <title>SIP Portfolio Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -11,23 +13,62 @@
     }
 
     body {
-      background: #f4f7fb;
+      background: #f5f7fb;
       margin: 0;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 900px;
-      background: #fff;
-      margin: auto;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    h1, h2 {
-      text-align: center;
+      padding: 0;
       color: #333;
+    }
+
+    .dashboard {
+      max-width: 1100px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    header {
+      background: #0078ff;
+      color: white;
+      padding: 20px 30px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid #ddd;
+      background: #f8f9fb;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      cursor: pointer;
+      font-weight: 500;
+      color: #555;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .tab.active {
+      color: #0078ff;
+      border-color: #0078ff;
+      background: #eef6ff;
+    }
+
+    .content {
+      padding: 25px 35px;
+      display: none;
+    }
+
+    .content.active {
+      display: block;
     }
 
     .form-group {
@@ -40,15 +81,15 @@
 
     input, select, textarea {
       padding: 10px;
-      flex: 1;
-      min-width: 150px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      min-width: 160px;
+      flex: 1;
     }
 
     textarea {
       resize: none;
-      height: 45px;
+      height: 42px;
     }
 
     button {
@@ -58,75 +99,131 @@
       padding: 10px 16px;
       border-radius: 5px;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     button:hover {
       background: #005ec2;
     }
 
-    .sip-item {
+    .sip-card {
+      background: #f9fbff;
       border: 1px solid #e0e0e0;
       padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      background: #f9f9f9;
+      border-radius: 10px;
+      margin-bottom: 12px;
     }
 
-    .sip-item h3 {
-      margin: 0 0 8px;
+    .sip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .sip-header h3 {
+      margin: 0;
+      color: #222;
+    }
+
+    .collapse-content {
+      display: none;
+      margin-top: 10px;
+      padding-left: 10px;
+      border-left: 2px solid #0078ff;
+    }
+
+    .collapse-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    #chartContainer {
+      text-align: center;
+      margin-top: 30px;
     }
 
     #portfolioSummary {
-      margin-top: 25px;
-      padding: 15px;
-      background: #eef9ff;
-      border-radius: 8px;
+      text-align: center;
+      margin-top: 20px;
     }
 
-    @media (max-width: 600px) {
-      input, select, textarea {
-        min-width: 100%;
-      }
-      .form-group {
-        flex-direction: column;
-      }
+    #portfolioSummary h2 {
+      font-size: 1.8rem;
+      color: #222;
+    }
+
+    .summary-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #f5f9ff;
+      border: 1px solid #d9e4ff;
+      padding: 15px 25px;
+      border-radius: 8px;
+      min-width: 200px;
+    }
+
+    @media (max-width: 700px) {
+      .form-group { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>📈 SIP Portfolio Tracker & Calculator</h1>
-    
-    <!-- Global duration selector -->
-    <div class="form-group">
-      <label><strong>Select Investment Duration (Years):</strong></label>
-      <select id="globalYears">
-        <option value="5">5 Years</option>
-        <option value="10">10 Years</option>
-        <option value="15">15 Years</option>
-        <option value="20">20 Years</option>
-        <option value="25">25 Years</option>
-        <option value="30">30 Years</option>
-        <option value="35">35 Years</option>
-        <option value="40">40 Years</option>
-      </select>
+  <div class="dashboard">
+    <header>
+      <h1>💹 SIP Portfolio Dashboard</h1>
+    </header>
+
+    <div class="tabs">
+      <div class="tab active" id="tabSIPs">My SIPs</div>
+      <div class="tab" id="tabSummary">Summary</div>
     </div>
 
-    <form id="sipForm">
+    <!-- SIP Input and List -->
+    <div class="content active" id="contentSIPs">
       <div class="form-group">
-        <input type="text" id="sipName" placeholder="SIP Name" required />
-        <input type="number" id="sipAmount" placeholder="Monthly Amount (₹)" required />
-        <input type="number" id="sipRate" placeholder="Expected Annual Return (%)" required />
-        <textarea id="sipStepup" placeholder="Enter annual step-up % if any (default 0%)">0</textarea>
-        <button type="submit">Add SIP</button>
+        <label><strong>Investment Duration:</strong></label>
+        <select id="globalYears">
+          <option value="5">5 Years</option>
+          <option value="10">10 Years</option>
+          <option value="15">15 Years</option>
+          <option value="20">20 Years</option>
+          <option value="25">25 Years</option>
+          <option value="30">30 Years</option>
+        </select>
       </div>
-    </form>
 
-    <h2>My SIPs</h2>
-    <div id="sipList"></div>
+      <form id="sipForm">
+        <div class="form-group">
+          <input type="text" id="sipName" placeholder="SIP Name" required />
+          <input type="number" id="sipAmount" placeholder="Monthly Amount (₹)" required />
+          <input type="number" id="sipRate" placeholder="Expected Annual Return (%)" required />
+          <textarea id="sipStepup" placeholder="Enter annual step-up % (default 0%)">0</textarea>
+          <button type="submit">Add SIP</button>
+        </div>
+      </form>
 
-    <h2>Portfolio Summary</h2>
-    <div id="portfolioSummary"></div>
+      <div id="sipList"></div>
+    </div>
+
+    <!-- Summary -->
+    <div class="content" id="contentSummary">
+      <div id="portfolioSummary"></div>
+      <div id="chartContainer">
+        <canvas id="sipChart" width="250" height="250"></canvas>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -134,7 +231,20 @@
     const sipList = document.getElementById('sipList');
     const portfolioSummary = document.getElementById('portfolioSummary');
     const globalYears = document.getElementById('globalYears');
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.content');
     let sips = [];
+    let chart;
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        contents[index].classList.add('active');
+        if (tab.id === "tabSummary") updateSummary();
+      });
+    });
 
     sipForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -146,7 +256,7 @@
       };
       sips.push(sip);
       sipForm.reset();
-      document.getElementById('sipStepup').value = "0"; // reset to default
+      document.getElementById('sipStepup').value = "0";
       renderSIPs();
     });
 
@@ -154,37 +264,83 @@
 
     function renderSIPs() {
       sipList.innerHTML = '';
-      let totalInvested = 0;
-      let totalFutureValue = 0;
       const years = parseInt(globalYears.value);
 
-      sips.forEach((sip) => {
-        const fv = calculateSIPFutureValue(sip.amount, sip.rate, years, sip.stepup);
+      sips.forEach((sip, i) => {
         const invested = sip.amount * 12 * years;
-        totalInvested += invested;
-        totalFutureValue += fv;
+        const fv = calculateSIPFutureValue(sip.amount, sip.rate, years, sip.stepup);
+
+        const yearlyBreakdown = generateYearlyBreakdown(sip.amount, sip.rate, years, sip.stepup);
+
+        const yearlyHTML = yearlyBreakdown.map(y => 
+          `<p><strong>Year ${y.year}:</strong> ₹${y.value.toLocaleString()}</p>`
+        ).join('');
 
         sipList.innerHTML += `
-          <div class="sip-item">
-            <h3>${sip.name}</h3>
-            <p><strong>Monthly:</strong> ₹${sip.amount} | 
-               <strong>Return:</strong> ${sip.rate}% | 
-               <strong>Step-up:</strong> ${sip.stepup}%</p>
-            <p><strong>Total Invested:</strong> ₹${invested.toLocaleString()} | 
-               <strong>Value After ${years} yrs:</strong> ₹${fv.toLocaleString()}</p>
+          <div class="sip-card">
+            <div class="sip-header" onclick="toggleCollapse(${i})">
+              <h3>${sip.name}</h3>
+              <span>▼</span>
+            </div>
+            <p><strong>Monthly:</strong> ₹${sip.amount} | <strong>Rate:</strong> ${sip.rate}% | <strong>Step-up:</strong> ${sip.stepup}%</p>
+            <p><strong>Total Invested:</strong> ₹${invested.toLocaleString()}</p>
+            <p><strong>Value after ${years} yrs:</strong> ₹${fv.toLocaleString()}</p>
+            <div id="collapse-${i}" class="collapse-content">${yearlyHTML}</div>
           </div>
         `;
       });
-
-      portfolioSummary.innerHTML = sips.length ? `
-        <h3>Overall Portfolio Summary (${years} years)</h3>
-        <p><strong>Total Invested:</strong> ₹${totalInvested.toLocaleString()}</p>
-        <p><strong>Projected Value:</strong> ₹${totalFutureValue.toLocaleString()}</p>
-        <p><strong>Total Gain:</strong> ₹${(totalFutureValue - totalInvested).toLocaleString()}</p>
-      ` : '<p>No SIPs added yet.</p>';
     }
 
-    // SIP Future Value Formula (with optional annual step-up)
+    function toggleCollapse(index) {
+      const el = document.getElementById(`collapse-${index}`);
+      el.classList.toggle('active');
+    }
+
+    function updateSummary() {
+      const years = parseInt(globalYears.value);
+      let totalInvested = 0;
+      let totalFutureValue = 0;
+
+      sips.forEach(sip => {
+        totalInvested += sip.amount * 12 * years;
+        totalFutureValue += calculateSIPFutureValue(sip.amount, sip.rate, years, sip.stepup);
+      });
+
+      const returns = totalFutureValue - totalInvested;
+
+      portfolioSummary.innerHTML = `
+        <h2>You will have accumulated</h2>
+        <h1>₹${totalFutureValue.toLocaleString()}</h1>
+        <p>by the time you complete ${years} years</p>
+        <div class="summary-cards">
+          <div class="card"><strong>Invested amount:</strong><br>₹${totalInvested.toLocaleString()}</div>
+          <div class="card"><strong>Est. returns:</strong><br>₹${returns.toLocaleString()}</div>
+          <div class="card"><strong>Total value:</strong><br>₹${totalFutureValue.toLocaleString()}</div>
+        </div>
+      `;
+
+      renderChart(totalInvested, returns);
+    }
+
+    function renderChart(invested, returns) {
+      const ctx = document.getElementById('sipChart').getContext('2d');
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Invested amount', 'Est. returns'],
+          datasets: [{
+            data: [invested, returns],
+            backgroundColor: ['#cce0ff', '#0078ff'],
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+    }
+
     function calculateSIPFutureValue(monthly, rate, years, stepup = 0) {
       const months = years * 12;
       let fv = 0;
@@ -196,6 +352,18 @@
         if (m % 12 === 0) currentMonthly *= (1 + stepup / 100);
       }
       return Math.round(fv);
+    }
+
+    function generateYearlyBreakdown(monthly, rate, years, stepup = 0) {
+      let values = [];
+      const monthlyRate = rate / 12 / 100;
+      let fv = 0, currentMonthly = monthly;
+      for (let y = 1; y <= years; y++) {
+        for (let m = 1; m <= 12; m++) fv = (fv + currentMonthly) * (1 + monthlyRate);
+        values.push({ year: y, value: Math.round(fv) });
+        currentMonthly *= (1 + stepup / 100);
+      }
+      return values;
     }
   </script>
 </body>
