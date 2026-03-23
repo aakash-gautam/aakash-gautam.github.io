@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubh – Sacred Digital Invitations for Hindu Weddings</title>
+<meta name="description" content="Premium digital wedding invitations for Indian Hindu weddings. RSVP tracking, multilingual, WhatsApp-ready. One payment. Zero subscriptions. Starting ₹999.">
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Shubh Digital Wedding Invitations",
+  "description": "Premium digital wedding invitations for Indian Hindu weddings",
+  "offers": [
+    {"@type": "Offer", "price": "999", "priceCurrency": "INR", "name": "Basic"},
+    {"@type": "Offer", "price": "1999", "priceCurrency": "INR", "name": "Premium"},
+    {"@type": "Offer", "price": "3999", "priceCurrency": "INR", "name": "Luxury"}
+  ],
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "10000"}
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Great+Vibes&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─── DESIGN TOKENS ─── */
+:root {
+  --rosewater: #FCECDC;
+  --crimson: #9E122C;
+  --gold: #FBCB77;
+  --tangerine: #EE6A43;
+  --coral: #F9B09D;
+  --maroon: #7A0E22;
+  --cream: #FFF8F0;
+  --ink: #1A0508;
+  --ink-soft: #4A1020;
+  --gold-dark: #D4A030;
+  --gold-light: #FEE3A0;
+  --white: #FFFFFF;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-body: 'Manrope', sans-serif;
+
+  --shadow-warm: 0 8px 40px rgba(158,18,44,0.15);
+  --shadow-gold: 0 8px 40px rgba(251,203,119,0.3);
+  --shadow-deep: 0 20px 80px rgba(26,5,8,0.2);
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-pill: 100px;
+}
+
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--rosewater); }
+::-webkit-scrollbar-thumb { background: var(--crimson); border-radius: 3px; }
+
+/* ─── SCROLL PROGRESS ─── */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; z-index: 999;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--crimson), var(--gold), var(--tangerine));
+  transition: width 0.1s linear;
+}
+
+/* ─── FLOATING PETALS ─── */
+#petal-canvas {
+  position: fixed; inset: 0; pointer-events: none;
+  z-index: 1; opacity: 0.55;
+}
+
+/* ─── NAV ─── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: clamp(0.75rem, 2vw, 1.1rem) clamp(1.2rem, 5vw, 4rem);
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s ease;
+}
+#nav.scrolled {
+  background: rgba(252,236,220,0.94);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: 0 2px 24px rgba(158,18,44,0.08);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--crimson);
+  letter-spacing: 0.02em;
+}
+.nav-logo-devanagari {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--gold-dark);
+  font-weight: 400;
+}
+.nav-links {
+  display: flex; gap: clamp(1.2rem, 3vw, 2.5rem);
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 1.5px; background: var(--tangerine);
+  transform: scaleX(0); transition: transform 0.25s ease;
+  transform-origin: left;
+}
+.nav-links a:hover { color: var(--crimson); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta-pill {
+  background: var(--crimson); color: var(--white);
+  padding: 0.55rem 1.5rem; border-radius: var(--radius-pill);
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(158,18,44,0.3);
+}
+.nav-cta-pill:hover {
+  background: var(--maroon);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(158,18,44,0.4);
+}
+.hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--crimson); border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  padding: 0 clamp(1rem, 5vw, 4rem);
+}
+
+/* Multi-layer gradient background */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 20%, rgba(251,203,119,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 10% 80%, rgba(249,176,157,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 80% at 50% 50%, rgba(252,236,220,1) 0%, #f8dfc8 100%);
+}
+
+/* Mandala SVG decorations */
+.mandala-top-right {
+  position: absolute; top: -80px; right: -80px; z-index: 1;
+  width: clamp(280px, 35vw, 520px);
+  opacity: 0.12;
+  animation: mandala-spin 60s linear infinite;
+}
+.mandala-bottom-left {
+  position: absolute; bottom: -60px; left: -60px; z-index: 1;
+  width: clamp(200px, 25vw, 380px);
+  opacity: 0.1;
+  animation: mandala-spin 80s linear infinite reverse;
+}
+@keyframes mandala-spin { to { transform: rotate(360deg); } }
+
+/* Diya decorations */
+.diya-scatter {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+}
+.diya {
+  position: absolute;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  animation: diya-float 4s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(238,106,67,0.4));
+}
+@keyframes diya-float {
+  0%,100% { transform: translateY(0) rotate(-8deg) scale(1); }
+  50% { transform: translateY(-16px) rotate(8deg) scale(1.08); }
+}
+
+/* Marigold garland top */
+.garland-line {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gold) 0px, var(--tangerine) 40px, var(--gold) 80px
+  );
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  text-align: center;
+  max-width: 820px;
+  padding-top: 5rem;
+}
+
+.hero-script-top {
+  font-family: var(--font-script);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--tangerine);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 1s 0.2s ease forwards;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(158,18,44,0.07);
+  border: 1px solid rgba(158,18,44,0.18);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 1.1rem;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--crimson);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeSlideUp 1s 0.4s ease forwards;
+}
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-weight: 700; line-height: 1.06;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeSlideUp 1s 0.6s ease forwards;
+}
+.hero-h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--crimson), var(--tangerine));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-h1 .line-gold {
+  display: block;
+  font-style: italic;
+  color: var(--gold-dark);
+  -webkit-text-fill-color: var(--gold-dark);
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  font-weight: 300; line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 560px; margin: 0 auto 2.2rem;
+  opacity: 0;
+  animation: fadeSlideUp 1s 0.8s ease forwards;
+}
+
+.hero-btns {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 1s 1s ease forwards;
+}
+
+.btn-hero-primary {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: linear-gradient(135deg, var(--crimson) 0%, var(--maroon) 100%);
+  color: var(--white);
+  padding: 1rem 2.6rem; border-radius: var(--radius-pill);
+  font-size: 1rem; font-weight: 700; letter-spacing: 0.03em;
+  box-shadow: 0 8px 32px rgba(158,18,44,0.4), 0 2px 8px rgba(158,18,44,0.2);
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.btn-hero-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.btn-hero-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 48px rgba(158,18,44,0.5), 0 4px 16px rgba(158,18,44,0.3);
+}
+.btn-hero-primary:hover::before { opacity: 1; }
+
+.btn-hero-secondary {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  border: 2px solid var(--gold);
+  color: var(--ink);
+  padding: 1rem 2.2rem; border-radius: var(--radius-pill);
+  font-size: 1rem; font-weight: 600;
+  transition: all 0.3s ease;
+  background: rgba(251,203,119,0.08);
+}
+.btn-hero-secondary:hover {
+  background: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(251,203,119,0.4);
+}
+
+.trust-row {
+  display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
+  opacity: 0;
+  animation: fadeSlideUp 1s 1.2s ease forwards;
+}
+.trust-chip {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(158,18,44,0.12);
+  border-radius: var(--radius-pill);
+  padding: 0.38rem 0.9rem;
+  font-size: 0.76rem; font-weight: 600;
+  color: var(--ink-soft);
+  backdrop-filter: blur(8px);
+}
+.trust-chip .tick { color: var(--tangerine); font-weight: 800; }
+
+/* Hero ornament lines */
+.ornament-line {
+  display: flex; align-items: center; gap: 1rem; margin: 1.5rem auto;
+  max-width: 300px;
+}
+.ornament-line::before, .ornament-line::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.ornament-diamond { color: var(--gold); font-size: 0.7rem; }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── SECTION LAYOUT ─── */
+.section-wrap {
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.2rem, 5vw, 4rem);
+}
+.container { max-width: 1140px; margin: 0 auto; }
+
+.section-eyebrow {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--tangerine); margin-bottom: 0.5rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 700; line-height: 1.12;
+  color: var(--ink); margin-bottom: 0.8rem;
+}
+.section-title em { font-style: italic; color: var(--crimson); }
+.section-sub {
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  color: var(--ink-soft); font-weight: 300; line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ─── SECTION: COMPARE ─── */
+#compare { background: var(--white); }
+
+.compare-header { text-align: center; margin-bottom: 3.5rem; }
+.compare-header .section-sub { margin: 0 auto; }
+
+.compare-table-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.compare-card {
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 4vw, 3rem);
+  position: relative; overflow: hidden;
+}
+.compare-card.old {
+  background: #fdf6f0;
+  border: 1.5px solid rgba(158,18,44,0.08);
+}
+.compare-card.new {
+  background: linear-gradient(150deg, var(--maroon) 0%, var(--crimson) 55%, #c42040 100%);
+  box-shadow: var(--shadow-warm), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.compare-card.new::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FBCB77' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.compare-card-header {
+  display: flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.compare-card-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem; font-weight: 700;
+}
+.compare-card.old .compare-card-title { color: var(--ink-soft); }
+.compare-card.new .compare-card-title { color: var(--gold); }
+.compare-icon-badge {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.compare-card.old .compare-icon-badge { background: rgba(158,18,44,0.08); }
+.compare-card.new .compare-icon-badge { background: rgba(251,203,119,0.2); }
+
+.compare-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+.compare-item {
+  display: flex; gap: 0.8rem; align-items: flex-start;
+  font-size: 0.92rem; line-height: 1.5;
+}
+.compare-card.old .compare-item { color: #7a5060; }
+.compare-card.new .compare-item { color: rgba(255,255,255,0.9); }
+.ci-mark { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+
+/* ─── SECTION: HOW IT WORKS ─── */
+#how { background: var(--rosewater); position: relative; overflow: hidden; }
+#how::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(251,203,119,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.how-header { text-align: center; margin-bottom: 4rem; }
+
+.steps-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.steps-row::after {
+  content: '';
+  position: absolute;
+  top: 52px; left: calc(12.5% + 26px); right: calc(12.5% + 26px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--tangerine) 0%, var(--gold) 50%, var(--tangerine) 100%);
+  z-index: 0;
+}
+
+.step-item {
+  text-align: center; padding: 0 clamp(0.6rem, 2vw, 1.5rem);
+  position: relative; z-index: 1;
+}
+.step-orb {
+  width: 104px; height: 104px; border-radius: 50%;
+  margin: 0 auto 1.6rem;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  box-shadow: 0 8px 32px rgba(251,203,119,0.4), 0 0 0 8px rgba(251,203,119,0.1);
+}
+.step-orb-inner {
+  font-size: 2.4rem;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+}
+.step-num-badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--crimson); color: white;
+  font-size: 0.72rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(158,18,44,0.4);
+}
+
+.step-label {
+  font-size: 0.62rem; font-weight: 800; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--tangerine); margin-bottom: 0.3rem;
+}
+.step-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem;
+}
+.step-desc { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.65; }
+
+/* ─── SECTION: FEATURES ─── */
+#features { background: var(--white); }
+.features-header { margin-bottom: 3rem; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: linear-gradient(145deg, var(--rosewater) 0%, #fde5d2 100%);
+  border: 1px solid rgba(249,176,157,0.6);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.8rem, 3vw, 2.5rem);
+  position: relative; overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+  cursor: default;
+}
+.feature-card::after {
+  content: ''; position: absolute;
+  width: 150px; height: 150px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(251,203,119,0.25), transparent);
+  top: -60px; right: -50px;
+  transition: transform 0.4s ease;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(238,106,67,0.18);
+  border-color: var(--coral);
+}
+.feature-card:hover::after { transform: scale(1.3); }
+
+.feature-icon-wrap {
+  width: 60px; height: 60px; border-radius: var(--radius-sm);
+  background: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem; margin-bottom: 1.3rem;
+  box-shadow: 0 4px 20px rgba(158,18,44,0.1);
+  transition: transform 0.3s ease;
+}
+.feature-card:hover .feature-icon-wrap { transform: scale(1.12) rotate(5deg); }
+
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem;
+}
+.feature-desc { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.7; }
+
+/* ─── SECTION: PRICING ─── */
+#pricing {
+  background: var(--rosewater);
+  position: relative; overflow: hidden;
+}
+#pricing::before {
+  content: '';
+  position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(158,18,44,0.04), transparent 70%);
+  pointer-events: none;
+}
+
+.pricing-header { text-align: center; margin-bottom: 3.5rem; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.pricing-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 3.5vw, 2.8rem) clamp(1.5rem, 3vw, 2.2rem);
+  border: 2px solid rgba(158,18,44,0.07);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex; flex-direction: column;
+}
+.pricing-card:hover { transform: translateY(-6px); }
+
+.pricing-card.featured {
+  background: linear-gradient(170deg, #fff 0%, #fff8f5 100%);
+  border-color: var(--crimson);
+  box-shadow: 0 24px 80px rgba(158,18,44,0.2), 0 0 0 1px var(--crimson);
+  transform: scale(1.03);
+  z-index: 2;
+}
+.pricing-card.featured:hover { transform: scale(1.03) translateY(-6px); }
+
+.pricing-card.luxury {
+  background: linear-gradient(160deg, var(--ink) 0%, #2d0a14 100%);
+  border-color: var(--gold);
+}
+
+/* Shimmer effect on featured */
+.pricing-card.featured::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: var(--radius-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(251,203,119,0) 0%,
+    rgba(251,203,119,0.06) 40%,
+    rgba(251,203,119,0) 80%
+  );
+  animation: shimmer 3s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.pricing-badge {
+  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--tangerine));
+  color: white;
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 1.2rem; border-radius: var(--radius-pill);
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(238,106,67,0.4);
+}
+
+.pricing-tier {
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em;
+  text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.pricing-card:not(.luxury) .pricing-tier { color: var(--tangerine); }
+.pricing-card.luxury .pricing-tier { color: var(--gold); }
+
+.pricing-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.pricing-card:not(.luxury) .pricing-name { color: var(--ink); }
+.pricing-card.luxury .pricing-name { color: var(--white); }
+
+.pricing-price {
+  font-family: var(--font-display);
+  font-size: 3.4rem; font-weight: 700; line-height: 1;
+  margin-bottom: 0.3rem;
+  display: flex; align-items: flex-start; gap: 0.2rem;
+}
+.pricing-card:not(.luxury) .pricing-price { color: var(--ink); }
+.pricing-card.luxury .pricing-price { color: var(--gold); }
+.pricing-price-sym { font-size: 1.6rem; margin-top: 0.5rem; }
+.pricing-price-note { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 1.8rem; font-weight: 400; }
+.pricing-card.luxury .pricing-price-note { color: rgba(255,255,255,0.5); }
+
+.pricing-features {
+  list-style: none; flex: 1;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.pricing-features li {
+  display: flex; gap: 0.65rem; align-items: flex-start;
+  font-size: 0.86rem; line-height: 1.4;
+}
+.pricing-card:not(.luxury) .pricing-features li { color: var(--ink-soft); }
+.pricing-card.luxury .pricing-features li { color: rgba(255,255,255,0.8); }
+.pricing-features li::before {
+  content: '✦'; flex-shrink: 0; font-size: 0.65rem; margin-top: 3px;
+}
+.pricing-card:not(.luxury) .pricing-features li::before { color: var(--tangerine); }
+.pricing-card.luxury .pricing-features li::before { color: var(--gold); }
+
+.btn-pricing {
+  display: block; width: 100%; text-align: center;
+  padding: 0.9rem 1.5rem; border-radius: var(--radius-pill);
+  font-size: 0.9rem; font-weight: 700; letter-spacing: 0.04em;
+  transition: all 0.25s ease; margin-top: auto;
+}
+.btn-pricing.outline {
+  border: 2px solid var(--crimson); color: var(--crimson);
+}
+.btn-pricing.outline:hover {
+  background: var(--crimson); color: white;
+  box-shadow: 0 6px 24px rgba(158,18,44,0.3);
+}
+.btn-pricing.filled-crimson {
+  background: linear-gradient(135deg, var(--crimson), var(--maroon));
+  color: white;
+  box-shadow: 0 6px 28px rgba(158,18,44,0.35);
+}
+.btn-pricing.filled-crimson:hover {
+  box-shadow: 0 10px 40px rgba(158,18,44,0.5);
+  transform: translateY(-2px);
+}
+.btn-pricing.filled-gold {
+  background: linear-gradient(135deg, var(--gold), #e8a820);
+  color: var(--ink);
+  box-shadow: 0 6px 28px rgba(251,203,119,0.4);
+}
+.btn-pricing.filled-gold:hover {
+  box-shadow: 0 10px 40px rgba(251,203,119,0.6);
+  transform: translateY(-2px);
+}
+
+/* ─── SECTION: TESTIMONIALS ─── */
+#testimonials { background: var(--white); }
+.testi-header { margin-bottom: 3.5rem; }
+
+.testi-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-bottom: 3rem;
+}
+
+.testi-card {
+  background: var(--rosewater);
+  border: 1px solid rgba(158,18,44,0.09);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.8rem, 3vw, 2.4rem);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testi-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-warm);
+}
+.testi-card::before {
+  content: '\201C';
+  position: absolute; top: 1rem; left: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 5rem; color: rgba(158,18,44,0.08);
+  line-height: 1; pointer-events: none;
+}
+
+.testi-stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+.testi-quote {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-style: italic; line-height: 1.7;
+  color: var(--ink); margin-bottom: 1.3rem;
+}
+.testi-author { font-weight: 700; font-size: 0.88rem; color: var(--crimson); }
+.testi-location {
+  font-size: 0.78rem; color: var(--ink-soft);
+  display: flex; align-items: center; gap: 0.3rem; margin-top: 0.2rem;
+}
+
+.stats-ribbon {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: linear-gradient(135deg, var(--crimson) 0%, var(--maroon) 100%);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-warm);
+}
+.stat-block {
+  text-align: center;
+  padding: clamp(1.5rem, 3vw, 2.2rem) 1rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  color: white;
+}
+.stat-block:last-child { border-right: none; }
+.stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700; color: var(--gold); line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat-label { font-size: 0.76rem; color: rgba(255,255,255,0.65); letter-spacing: 0.04em; }
+
+/* ─── SECTION: FINAL CTA ─── */
+#cta {
+  background: linear-gradient(135deg, var(--maroon) 0%, var(--crimson) 40%, #b0182f 100%);
+  padding: clamp(4rem, 10vw, 8rem) clamp(1.2rem, 5vw, 4rem);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+
+/* Mandala pattern overlay */
+#cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='rgba(251,203,119,0.06)' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='rgba(251,203,119,0.05)' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='rgba(251,203,119,0.07)' stroke-width='1'/%3E%3Cpath d='M100 10 L110 90 L100 100 L90 90 Z' fill='rgba(251,203,119,0.04)'/%3E%3Cpath d='M100 190 L110 110 L100 100 L90 110 Z' fill='rgba(251,203,119,0.04)'/%3E%3Cpath d='M10 100 L90 110 L100 100 L90 90 Z' fill='rgba(251,203,119,0.04)'/%3E%3Cpath d='M190 100 L110 110 L100 100 L110 90 Z' fill='rgba(251,203,119,0.04)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  opacity: 1;
+}
+
+.cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+
+.cta-script {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.cta-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 700; color: white; line-height: 1.08;
+  margin-bottom: 1rem;
+}
+.cta-sub {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: rgba(252,236,220,0.85); font-weight: 300; margin-bottom: 2.5rem;
+}
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+.btn-cta-main {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: linear-gradient(135deg, var(--gold), #e8a820);
+  color: var(--ink); padding: 1.2rem 3rem;
+  border-radius: var(--radius-pill);
+  font-size: 1.05rem; font-weight: 800; letter-spacing: 0.03em;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 4px 16px rgba(251,203,119,0.4);
+  transition: all 0.3s ease;
+}
+.btn-cta-main:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 60px rgba(0,0,0,0.4), 0 8px 30px rgba(251,203,119,0.5);
+}
+
+.btn-cta-ghost {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  border: 2px solid rgba(255,255,255,0.4); color: white;
+  padding: 1.2rem 2.4rem; border-radius: var(--radius-pill);
+  font-size: 1rem; font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-cta-ghost:hover {
+  border-color: white; background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+}
+
+.cta-urgency {
+  font-size: 0.78rem; color: rgba(252,236,220,0.6);
+  letter-spacing: 0.06em;
+}
+.cta-urgency span { margin: 0 0.5rem; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--maroon);
+  padding: clamp(3rem, 6vw, 4.5rem) clamp(1.2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 2rem);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  max-width: 1140px; margin: 0 auto;
+  padding-bottom: 2rem; margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand-logo {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 700; color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.footer-brand-tagline {
+  font-size: 0.84rem; color: rgba(255,255,255,0.45);
+  line-height: 1.7; margin-bottom: 1.2rem; max-width: 280px;
+}
+.footer-whatsapp {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #25D366; color: white;
+  padding: 0.55rem 1.2rem; border-radius: var(--radius-pill);
+  font-size: 0.8rem; font-weight: 700;
+  transition: all 0.2s ease;
+}
+.footer-whatsapp:hover {
+  background: #1db954; transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+}
+.footer-col-title {
+  font-size: 0.65rem; font-weight: 800; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 1.2rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-links a {
+  font-size: 0.86rem; color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+.footer-bottom {
+  max-width: 1140px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+.payment-chips { display: flex; gap: 0.5rem; }
+.payment-chip {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.68rem; font-weight: 700;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.06em;
+}
+
+/* ─── CONFETTI ─── */
+#confetti-canvas {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  display: none;
+}
+
+/* ─── BACK TO TOP ─── */
+#back-top {
+  position: fixed; bottom: 2rem; right: 1.5rem; z-index: 300;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--crimson); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 20px rgba(158,18,44,0.4);
+  transition: all 0.3s ease;
+  opacity: 0; pointer-events: none;
+  cursor: pointer;
+}
+#back-top.visible { opacity: 1; pointer-events: all; }
+#back-top:hover { transform: translateY(-4px); background: var(--maroon); }
+
+/* ─── MOBILE MENU ─── */
+.mobile-menu {
+  display: none;
+  position: fixed; inset: 0; z-index: 199;
+  background: rgba(252,236,220,0.97);
+  backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 2.2rem; font-weight: 700; color: var(--ink);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--crimson); }
+.mobile-menu-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  font-size: 2rem; color: var(--crimson); cursor: pointer;
+  line-height: 1;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta-pill { display: none; }
+  .hamburger { display: flex; }
+  .compare-table-wrap { grid-template-columns: 1fr; }
+  .steps-row { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .steps-row::after { display: none; }
+  .features-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-card.featured { transform: none; }
+  .pricing-card.featured:hover { transform: translateY(-6px); }
+  .testi-grid { grid-template-columns: 1fr; }
+  .stats-ribbon { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .steps-row { grid-template-columns: 1fr; }
+  .stats-ribbon { grid-template-columns: 1fr 1fr; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .cta-btns { flex-direction: column; align-items: center; }
+}
+
+/* ─── FOCUS STYLES (WCAG) ─── */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--tangerine);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress" aria-hidden="true"></div>
+
+<!-- FLOATING PETAL CANVAS -->
+<canvas id="petal-canvas" aria-hidden="true"></canvas>
+
+<!-- CONFETTI -->
+<canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+<!-- BACK TO TOP -->
+<button id="back-top" aria-label="Back to top">↑</button>
+
+<!-- MOBILE MENU -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <span class="mobile-menu-close" id="menuClose" aria-label="Close menu">✕</span>
+  <a href="#compare" onclick="closeMobileMenu()">Compare</a>
+  <a href="#how" onclick="closeMobileMenu()">How It Works</a>
+  <a href="#features" onclick="closeMobileMenu()">Features</a>
+  <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
+  <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+  <a href="#pricing" onclick="closeMobileMenu()" style="color:var(--crimson);">Get Started →</a>
+</nav>
+
+<!-- NAV -->
+<header>
+  <nav id="nav" aria-label="Main navigation">
+    <div class="nav-logo">
+      <div>
+        <div class="nav-logo-text">Shubh</div>
+        <div class="nav-logo-devanagari">शुभ</div>
+      </div>
+    </div>
+    <ul class="nav-links" role="list">
+      <li><a href="#compare">Compare</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+    <a href="#pricing" class="nav-cta-pill" aria-label="Get started with Shubh">Get Started</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero" aria-label="Hero">
+  <div class="garland-line" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
+
+  <!-- Mandala SVGs -->
+  <svg class="mandala-top-right" aria-hidden="true" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="190" stroke="#9E122C" stroke-width="1"/>
+    <circle cx="200" cy="200" r="160" stroke="#9E122C" stroke-width="0.8"/>
+    <circle cx="200" cy="200" r="130" stroke="#FBCB77" stroke-width="1.2"/>
+    <circle cx="200" cy="200" r="100" stroke="#9E122C" stroke-width="0.6"/>
+    <circle cx="200" cy="200" r="70" stroke="#FBCB77" stroke-width="1"/>
+    <circle cx="200" cy="200" r="40" stroke="#9E122C" stroke-width="0.8"/>
+    <!-- Petals -->
+    <g transform="translate(200,200)">
+      <ellipse rx="15" ry="90" fill="#9E122C" opacity="0.15" transform="rotate(0)"/>
+      <ellipse rx="15" ry="90" fill="#9E122C" opacity="0.15" transform="rotate(22.5)"/>
+      <ellipse rx="15" ry="90" fill="#9E122C" opacity="0.15" transform="rotate(45)"/>
+      <ellipse rx="15" ry="90" fill="#9E122C" opacity="0.15" transform="rotate(67.5)"/>
+      <ellipse rx="15" ry="90" fill="#9E122C" opacity="0.15" transform="rotate(90)"/>
+      <ellipse rx="15" ry="90" fill="#9E122C" opacity="0.15" transform="rotate(112.5)"/>
+      <ellipse rx="15" ry="90" fill="#9E122C" opacity="0.15" transform="rotate(135)"/>
+      <ellipse rx="15" ry="90" fill="#9E122C" opacity="0.15" transform="rotate(157.5)"/>
+      <ellipse rx="8" ry="50" fill="#FBCB77" opacity="0.2" transform="rotate(11.25)"/>
+      <ellipse rx="8" ry="50" fill="#FBCB77" opacity="0.2" transform="rotate(33.75)"/>
+      <ellipse rx="8" ry="50" fill="#FBCB77" opacity="0.2" transform="rotate(56.25)"/>
+      <ellipse rx="8" ry="50" fill="#FBCB77" opacity="0.2" transform="rotate(78.75)"/>
+      <ellipse rx="8" ry="50" fill="#FBCB77" opacity="0.2" transform="rotate(101.25)"/>
+      <ellipse rx="8" ry="50" fill="#FBCB77" opacity="0.2" transform="rotate(123.75)"/>
+      <ellipse rx="8" ry="50" fill="#FBCB77" opacity="0.2" transform="rotate(146.25)"/>
+      <ellipse rx="8" ry="50" fill="#FBCB77" opacity="0.2" transform="rotate(168.75)"/>
+    </g>
+    <!-- Stars -->
+    <polygon points="200,20 205,35 220,35 208,44 213,59 200,50 187,59 192,44 180,35 195,35" fill="#FBCB77" opacity="0.4"/>
+    <polygon points="200,370 204,382 216,382 206,389 210,402 200,395 190,402 194,389 184,382 196,382" fill="#FBCB77" opacity="0.35"/>
+    <polygon points="20,200 32,196 35,184 39,196 52,200 39,204 35,216 32,204" fill="#9E122C" opacity="0.25"/>
+    <polygon points="380,200 368,196 365,184 361,196 348,200 361,204 365,216 368,204" fill="#9E122C" opacity="0.25"/>
+  </svg>
+
+  <svg class="mandala-bottom-left" aria-hidden="true" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="150" r="140" stroke="#EE6A43" stroke-width="1"/>
+    <circle cx="150" cy="150" r="110" stroke="#FBCB77" stroke-width="0.8"/>
+    <circle cx="150" cy="150" r="80" stroke="#EE6A43" stroke-width="1"/>
+    <circle cx="150" cy="150" r="50" stroke="#FBCB77" stroke-width="0.8"/>
+    <g transform="translate(150,150)">
+      <ellipse rx="10" ry="70" fill="#EE6A43" opacity="0.12" transform="rotate(0)"/>
+      <ellipse rx="10" ry="70" fill="#EE6A43" opacity="0.12" transform="rotate(30)"/>
+      <ellipse rx="10" ry="70" fill="#EE6A43" opacity="0.12" transform="rotate(60)"/>
+      <ellipse rx="10" ry="70" fill="#EE6A43" opacity="0.12" transform="rotate(90)"/>
+      <ellipse rx="10" ry="70" fill="#EE6A43" opacity="0.12" transform="rotate(120)"/>
+      <ellipse rx="10" ry="70" fill="#EE6A43" opacity="0.12" transform="rotate(150)"/>
+    </g>
+  </svg>
+
+  <!-- Diya decorations -->
+  <div class="diya-scatter" aria-hidden="true">
+    <span class="diya" style="left:6%;top:72%;animation-delay:0s;font-size:1.8rem">🪔</span>
+    <span class="diya" style="left:12%;top:55%;animation-delay:1.2s;font-size:1.1rem">✨</span>
+    <span class="diya" style="left:88%;top:68%;animation-delay:0.4s;font-size:1.6rem">🪔</span>
+    <span class="diya" style="left:82%;top:82%;animation-delay:1.8s;font-size:1rem">🌸</span>
+    <span class="diya" style="left:4%;top:38%;animation-delay:2.5s;font-size:0.9rem">💫</span>
+    <span class="diya" style="left:94%;top:35%;animation-delay:0.8s;font-size:1.4rem">🌺</span>
+    <span class="diya" style="left:50%;top:88%;animation-delay:1.5s;font-size:1rem">🪷</span>
+    <span class="diya" style="left:35%;top:82%;animation-delay:3s;font-size:0.8rem">✨</span>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-script-top" aria-hidden="true">Mangalam</div>
+    <div class="hero-eyebrow" role="text">
+      🪔 Premium Digital Wedding Invitations
+    </div>
+
+    <h1 class="hero-h1">
+      Your Sacred Union,<br>
+      <em>Digitally Divine</em>
+    </h1>
+
+    <div class="ornament-line" aria-hidden="true">
+      <span class="ornament-diamond">❖</span>
+    </div>
+
+    <p class="hero-sub">
+      Breathtaking digital invitations for Hindu weddings. Honor every ritual, embrace modern elegance. One timeless payment. Zero subscriptions.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-hero-primary" onclick="triggerConfetti()" aria-label="Create your invitation starting at ₹999">
+        ✦ Create Your Invitation — ₹999
+      </a>
+      <a href="#features" class="btn-hero-secondary" aria-label="View wedding invitation templates">
+        🎨 View Templates
+      </a>
+    </div>
+
+    <div class="trust-row" role="list" aria-label="Trust indicators">
+      <span class="trust-chip" role="listitem"><span class="tick">✓</span> WhatsApp Ready</span>
+      <span class="trust-chip" role="listitem"><span class="tick">✓</span> RSVP Tracking</span>
+      <span class="trust-chip" role="listitem"><span class="tick">✓</span> 100% Customisable</span>
+      <span class="trust-chip" role="listitem"><span class="tick">✓</span> 7-Day Guarantee</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ COMPARE ══════════════ -->
+<section id="compare" class="section-wrap" aria-labelledby="compare-title">
+  <div class="container">
+    <div class="compare-header">
+      <p class="section-eyebrow reveal">The Difference</p>
+      <h2 class="section-title reveal" id="compare-title">Why 10,000+ couples are making<br><em>the switch</em></h2>
+      <p class="section-sub reveal" style="margin:0 auto">Traditional invitations were designed for a world before WhatsApp. Shubh was built for yours.</p>
+    </div>
+
+    <div class="compare-table-wrap">
+      <div class="compare-card old reveal" aria-label="Traditional invitations comparison">
+        <div class="compare-card-header">
+          <div class="compare-icon-badge">📜</div>
+          <h3 class="compare-card-title">Traditional Invitations</h3>
+        </div>
+        <ul class="compare-list" role="list">
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">❌</span>₹50–500 per card in printing costs</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">❌</span>Zero RSVP tracking or management</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">❌</span>Errors cannot be fixed after printing</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">❌</span>Wasteful — paper, ink, packaging</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">❌</span>Weeks of lead time required</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">❌</span>Cannot share updates or changes</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">❌</span>Only one language per print run</li>
+        </ul>
+      </div>
+
+      <div class="compare-card new reveal" aria-label="Shubh digital invitations comparison">
+        <div class="compare-card-header">
+          <div class="compare-icon-badge">🪔</div>
+          <h3 class="compare-card-title">Shubh Digital</h3>
+        </div>
+        <ul class="compare-list" role="list">
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">✓</span>One-time ₹999 payment, forever yours</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">✓</span>Real-time RSVP dashboard & reminders</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">✓</span>Edit anytime — changes go live instantly</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">✓</span>100% eco-friendly, share on WhatsApp</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">✓</span>Live & shareable in 15 minutes</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">✓</span>Push updates & event reminders to guests</li>
+          <li class="compare-item"><span class="ci-mark" aria-hidden="true">✓</span>Hindi, English, Tamil, Gujarati & more</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ HOW IT WORKS ══════════════ -->
+<section id="how" class="section-wrap" aria-labelledby="how-title">
+  <div class="container">
+    <div class="how-header">
+      <p class="section-eyebrow reveal">Simple Process</p>
+      <h2 class="section-title reveal" id="how-title">Your Invitation in<br><em>4 Sacred Steps</em></h2>
+    </div>
+
+    <div class="steps-row" role="list">
+      <article class="step-item reveal" role="listitem">
+        <div class="step-orb" aria-hidden="true">
+          <div class="step-orb-inner">🎨</div>
+          <div class="step-num-badge">1</div>
+        </div>
+        <div class="step-label">Step One</div>
+        <h3 class="step-title">Choose</h3>
+        <p class="step-desc">Pick from 100+ temple-inspired, royal, and contemporary Indian wedding templates.</p>
+      </article>
+
+      <article class="step-item reveal" role="listitem" style="transition-delay:0.1s">
+        <div class="step-orb" aria-hidden="true">
+          <div class="step-orb-inner">✏️</div>
+          <div class="step-num-badge">2</div>
+        </div>
+        <div class="step-label">Step Two</div>
+        <h3 class="step-title">Customise</h3>
+        <p class="step-desc">Add your story, photos, and all events — from Haldi and Mehendi to the grand Reception.</p>
+      </article>
+
+      <article class="step-item reveal" role="listitem" style="transition-delay:0.2s">
+        <div class="step-orb" aria-hidden="true">
+          <div class="step-orb-inner">📲</div>
+          <div class="step-num-badge">3</div>
+        </div>
+        <div class="step-label">Step Three</div>
+        <h3 class="step-title">Share</h3>
+        <p class="step-desc">Send instantly via WhatsApp, email, or SMS. One link carries your entire celebration.</p>
+      </article>
+
+      <article class="step-item reveal" role="listitem" style="transition-delay:0.3s">
+        <div class="step-orb" aria-hidden="true">
+          <div class="step-orb-inner">💌</div>
+          <div class="step-num-badge">4</div>
+        </div>
+        <div class="step-label">Step Four</div>
+        <h3 class="step-title">Track</h3>
+        <p class="step-desc">Watch RSVPs pour in. Manage guests, send reminders, and enjoy the countdown.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FEATURES ══════════════ -->
+<section id="features" class="section-wrap" aria-labelledby="features-title">
+  <div class="container">
+    <div class="features-header">
+      <p class="section-eyebrow reveal">What You Get</p>
+      <h2 class="section-title reveal" id="features-title">Designed for<br><em>Indian Weddings</em></h2>
+      <p class="section-sub reveal">Every feature crafted to honour your traditions and delight your guests.</p>
+    </div>
+
+    <div class="features-grid">
+      <article class="feature-card reveal" aria-labelledby="feat1">
+        <div class="feature-icon-wrap" aria-hidden="true">📅</div>
+        <h3 class="feature-title" id="feat1">Multi-Event Support</h3>
+        <p class="feature-desc">Haldi, Mehendi, Sangeet, Wedding, Reception — all beautifully arranged in a single, scrollable invitation your guests will adore.</p>
+      </article>
+
+      <article class="feature-card reveal" aria-labelledby="feat2" style="transition-delay:0.1s">
+        <div class="feature-icon-wrap" aria-hidden="true">💌</div>
+        <h3 class="feature-title" id="feat2">Smart RSVP System</h3>
+        <p class="feature-desc">Track confirmations in real-time, send automated reminders, and manage plus-ones effortlessly — all from a clean dashboard.</p>
+      </article>
+
+      <article class="feature-card reveal" aria-labelledby="feat3" style="transition-delay:0.2s">
+        <div class="feature-icon-wrap" aria-hidden="true">🗣️</div>
+        <h3 class="feature-title" id="feat3">Multilingual</h3>
+        <p class="feature-desc">Hindi, English, Gujarati, Tamil, Telugu & more. Every guest reads your invitation in the language closest to their heart.</p>
+      </article>
+
+      <article class="feature-card reveal" aria-labelledby="feat4" style="transition-delay:0.05s">
+        <div class="feature-icon-wrap" aria-hidden="true">🖼️</div>
+        <h3 class="feature-title" id="feat4">Photo & Video Gallery</h3>
+        <p class="feature-desc">Showcase your pre-wedding story with a stunning gallery and optional video invitation embedded right in the link.</p>
+      </article>
+
+      <article class="feature-card reveal" aria-labelledby="feat5" style="transition-delay:0.15s">
+        <div class="feature-icon-wrap" aria-hidden="true">🗺️</div>
+        <h3 class="feature-title" id="feat5">Venue Maps & Directions</h3>
+        <p class="feature-desc">Interactive maps for every venue, parking details, and travel tips. No guest gets lost on your most important day.</p>
+      </article>
+
+      <article class="feature-card reveal" aria-labelledby="feat6" style="transition-delay:0.25s">
+        <div class="feature-icon-wrap" aria-hidden="true">🎵</div>
+        <h3 class="feature-title" id="feat6">Background Music</h3>
+        <p class="feature-desc">Set the perfect mood with your favourite shaadi song playing as guests open your invitation. Pure magic on first scroll.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PRICING ══════════════ -->
+<section id="pricing" class="section-wrap" aria-labelledby="pricing-title">
+  <div class="container">
+    <div class="pricing-header">
+      <p class="section-eyebrow reveal">Transparent Costs</p>
+      <h2 class="section-title reveal" id="pricing-title">Simple Pricing.<br><em>No Hidden Costs.</em></h2>
+      <p class="section-sub reveal" style="margin:0 auto">One payment. Your invitation lives forever. No renewals, no surprises.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- BASIC -->
+      <div class="pricing-card reveal" aria-labelledby="plan-basic">
+        <div class="pricing-tier">Basic</div>
+        <div class="pricing-name" id="plan-basic">Auspicious</div>
+        <div class="pricing-price">
+          <span class="pricing-price-sym">₹</span>999
+        </div>
+        <p class="pricing-price-note">One-time payment · No subscription</p>
+        <ul class="pricing-features" aria-label="Basic plan features">
+          <li>1 Event (e.g. Wedding)</li>
+          <li>Up to 50 Guests</li>
+          <li>RSVP Tracking</li>
+          <li>WhatsApp & Email Sharing</li>
+          <li>6-Month Hosting</li>
+          <li>50+ Templates</li>
+        </ul>
+        <a href="#" class="btn-pricing outline" aria-label="Get started with Basic plan at ₹999">Get Started</a>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="pricing-card featured reveal" aria-labelledby="plan-premium" style="transition-delay:0.1s">
+        <div class="pricing-badge" aria-label="Most popular plan">✦ Most Loved</div>
+        <div class="pricing-tier">Premium</div>
+        <div class="pricing-name" id="plan-premium">Mangal</div>
+        <div class="pricing-price">
+          <span class="pricing-price-sym">₹</span>1,999
+        </div>
+        <p class="pricing-price-note">One-time payment · 2-Year hosting</p>
+        <ul class="pricing-features" aria-label="Premium plan features">
+          <li>Unlimited Events</li>
+          <li>Unlimited Guests</li>
+          <li>Custom Domain</li>
+          <li>Photo Gallery & Music</li>
+          <li>Priority Support</li>
+          <li>100+ Templates</li>
+        </ul>
+        <a href="#" class="btn-pricing filled-crimson" aria-label="Choose Premium plan at ₹1,999" onclick="triggerConfetti()">Choose Mangal</a>
+      </div>
+
+      <!-- LUXURY -->
+      <div class="pricing-card luxury reveal" aria-labelledby="plan-luxury" style="transition-delay:0.2s">
+        <div class="pricing-tier">Luxury</div>
+        <div class="pricing-name" id="plan-luxury">Maharaja</div>
+        <div class="pricing-price">
+          <span class="pricing-price-sym">₹</span>3,999
+        </div>
+        <p class="pricing-price-note">One-time · Lifetime hosting</p>
+        <ul class="pricing-features" aria-label="Luxury plan features">
+          <li>Everything in Mangal</li>
+          <li>Custom Design Consultation</li>
+          <li>Cinematic Video Invitation</li>
+          <li>Lifetime Hosting</li>
+          <li>Dedicated Wedding Manager</li>
+          <li>Print-Ready PDF Export</li>
+        </ul>
+        <a href="#" class="btn-pricing filled-gold" aria-label="Go Luxury with Maharaja plan at ₹3,999" onclick="triggerConfetti()">Go Maharaja</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TESTIMONIALS ══════════════ -->
+<section id="testimonials" class="section-wrap" aria-labelledby="testi-title">
+  <div class="container">
+    <div class="testi-header">
+      <p class="section-eyebrow reveal">Real Couples</p>
+      <h2 class="section-title reveal" id="testi-title">Loved by<br><em>10,000+ Couples</em></h2>
+    </div>
+
+    <div class="testi-grid">
+      <article class="testi-card reveal" aria-label="Testimonial from Priya and Rahul">
+        <div class="testi-stars" aria-label="5 stars">★★★★★</div>
+        <blockquote class="testi-quote">"We saved ₹50,000 on printing! Our guests were completely blown away by the digital invitation. The RSVP feature meant zero phone call chaos."</blockquote>
+        <div class="testi-author">Priya &amp; Rahul Sharma</div>
+        <div class="testi-location">📍 Mumbai, Maharashtra</div>
+      </article>
+
+      <article class="testi-card reveal" aria-label="Testimonial from Deepika and Arjun" style="transition-delay:0.12s">
+        <div class="testi-stars" aria-label="5 stars">★★★★★</div>
+        <blockquote class="testi-quote">"Finally, a platform that truly understands Indian weddings! All our rituals — Mehendi, Nalangu, Muhurtham — were captured so beautifully."</blockquote>
+        <div class="testi-author">Deepika &amp; Arjun Krishnan</div>
+        <div class="testi-location">📍 Chennai, Tamil Nadu</div>
+      </article>
+
+      <article class="testi-card reveal" aria-label="Testimonial from Anjali and Karan" style="transition-delay:0.24s">
+        <div class="testi-stars" aria-label="5 stars">★★★★★</div>
+        <blockquote class="testi-quote">"The Gujarati language option meant our nani could read everything so clearly. Shubh thought of every generation in our family."</blockquote>
+        <div class="testi-author">Anjali &amp; Karan Patel</div>
+        <div class="testi-location">📍 Goa</div>
+      </article>
+    </div>
+
+    <div class="stats-ribbon reveal" role="list" aria-label="Shubh statistics">
+      <div class="stat-block" role="listitem">
+        <div class="stat-value">10K+</div>
+        <div class="stat-label">Invitations Created</div>
+      </div>
+      <div class="stat-block" role="listitem">
+        <div class="stat-value">500K+</div>
+        <div class="stat-label">Guests Delighted</div>
+      </div>
+      <div class="stat-block" role="listitem">
+        <div class="stat-value">4.9/5</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+      <div class="stat-block" role="listitem">
+        <div class="stat-value">₹2Cr+</div>
+        <div class="stat-label">Saved by Couples</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FINAL CTA ══════════════ -->
+<section id="cta" aria-labelledby="cta-title">
+  <div class="cta-inner">
+    <span class="cta-script" aria-hidden="true">Begin your journey</span>
+    <h2 class="cta-h2 reveal" id="cta-title">Ready to Make It Official?</h2>
+    <p class="cta-sub reveal">Join thousands of happy couples. Your beautiful invitation is 15 minutes away.</p>
+
+    <div class="cta-btns reveal">
+      <a href="#pricing" class="btn-cta-main" onclick="triggerConfetti()" aria-label="Create your invitation now with 50% off">
+        ✦ Create My Invitation Now — 50% OFF
+      </a>
+      <a href="#" class="btn-cta-ghost" aria-label="Schedule a free demo call">
+        📞 Free Demo Call
+      </a>
+    </div>
+
+    <p class="cta-urgency reveal" aria-live="polite">
+      ⚡ Limited Time Offer
+      <span aria-hidden="true">·</span>
+      No Credit Card Required
+      <span aria-hidden="true">·</span>
+      Setup in 15 Minutes
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer aria-label="Site footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo" aria-label="Shubh - शुभ">Shubh · शुभ</div>
+      <p class="footer-brand-tagline">Premium digital wedding invitations for modern Indian weddings. Made with ❤️ in India.</p>
+      <a href="https://wa.me/919999999999" class="footer-whatsapp" aria-label="Chat with us on WhatsApp" target="_blank" rel="noopener">
+        💬 Chat on WhatsApp
+      </a>
+    </div>
+    <nav aria-label="Templates and pricing links">
+      <div class="footer-col-title">Product</div>
+      <ul class="footer-links" role="list">
+        <li><a href="#">Templates</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Support links">
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links" role="list">
+        <li><a href="#">WhatsApp Us</a></li>
+        <li><a href="#">Email Support</a></li>
+        <li><a href="#">Live Chat</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Legal links">
+      <div class="footer-col-title">Legal</div>
+      <ul class="footer-links" role="list">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Shubh. All rights reserved. Made with ❤️ in India.</div>
+    <div class="payment-chips" aria-label="Accepted payment methods">
+      <span class="payment-chip">UPI</span>
+      <span class="payment-chip">Cards</span>
+      <span class="payment-chip">Wallets</span>
+      <span class="payment-chip">EMI</span>
+      <span class="payment-chip">NetBanking</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── SCROLL PROGRESS ─── */
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  progressBar.style.width = Math.min(pct, 100) + '%';
+}, { passive: true });
+
+/* ─── NAV SCROLL ─── */
+const nav = document.getElementById('nav');
+const backTop = document.getElementById('back-top');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+  backTop.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* ─── MOBILE MENU ─── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuClose = document.getElementById('menuClose');
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+});
+menuClose.addEventListener('click', closeMobileMenu);
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+}
+
+/* ─── SCROLL REVEAL ─── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.style.transitionDelay || 0) * 1000;
+      setTimeout(() => entry.target.classList.add('in'), delay);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ─── FLOATING PETALS ─── */
+(function initPetals() {
+  const canvas = document.getElementById('petal-canvas');
+  const ctx = canvas.getContext('2d');
+  let petals = [];
+  const COLORS = ['#FBCB77','#F9B09D','#EE6A43','#9E122C','#FCECDC','#FEE3A0'];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function createPetal() {
+    return {
+      x: Math.random() * canvas.width,
+      y: -20,
+      size: Math.random() * 8 + 4,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      speedY: Math.random() * 1.2 + 0.4,
+      speedX: (Math.random() - 0.5) * 0.8,
+      rot: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.04,
+      opacity: Math.random() * 0.5 + 0.2,
+      shape: Math.random() > 0.5 ? 'petal' : 'dot',
+    };
+  }
+
+  for (let i = 0; i < 28; i++) {
+    const p = createPetal();
+    p.y = Math.random() * window.innerHeight;
+    petals.push(p);
+  }
+
+  function drawPetal(p) {
+    ctx.save();
+    ctx.globalAlpha = p.opacity;
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.fillStyle = p.color;
+    if (p.shape === 'petal') {
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.size * 0.5, p.size, 0, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.beginPath();
+      ctx.arc(0, 0, p.size * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    petals.forEach((p, i) => {
+      p.y += p.speedY;
+      p.x += p.speedX + Math.sin(Date.now() * 0.0006 + i) * 0.3;
+      p.rot += p.rotSpeed;
+      if (p.y > canvas.height + 20) {
+        petals[i] = createPetal();
+      }
+      drawPetal(p);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ─── CONFETTI BURST ─── */
+function triggerConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  canvas.style.display = 'block';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  const pieces = [];
+  const COLORS = ['#FBCB77','#9E122C','#EE6A43','#F9B09D','#7A0E22','#FFF','#FCECDC'];
+
+  for (let i = 0; i < 120; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height * 0.4,
+      vx: (Math.random() - 0.5) * 8,
+      vy: Math.random() * -12 - 2,
+      size: Math.random() * 8 + 4,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      rot: Math.random() * Math.PI * 2,
+      rotV: (Math.random() - 0.5) * 0.2,
+      opacity: 1,
+    });
+  }
+
+  let frame = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.35;
+      p.rot += p.rotV;
+      p.opacity -= 0.008;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.opacity);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2);
+      ctx.restore();
+    });
+    frame++;
+    if (frame < 180) requestAnimationFrame(animate);
+    else { ctx.clearRect(0, 0, canvas.width, canvas.height); canvas.style.display = 'none'; }
+  }
+  animate();
+}
+
+/* ─── COUNTER ANIMATION ─── */
+function animateCounters() {
+  document.querySelectorAll('.stat-value').forEach(el => {
+    const text = el.textContent;
+    const match = text.match(/[\d,.]+/);
+    if (!match) return;
+    const raw = parseFloat(match[0].replace(/,/g, ''));
+    const prefix = text.includes('₹') ? '₹' : '';
+    const suffix = text.replace(/[\d,₹.]/g, '').trim();
+    let start = 0;
+    const duration = 1600;
+    const step = raw / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= raw) { start = raw; clearInterval(timer); }
+      let display;
+      if (raw >= 1000) display = Math.round(start).toLocaleString('en-IN');
+      else display = start.toFixed(start < 10 ? 1 : 0);
+      el.textContent = prefix + display + suffix;
+    }, 16);
+  });
+}
+
+const statsObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    animateCounters();
+    statsObserver.disconnect();
+  }
+}, { threshold: 0.3 });
+const ribbon = document.querySelector('.stats-ribbon');
+if (ribbon) statsObserver.observe(ribbon);
+</script>
+</body>
+</html>
