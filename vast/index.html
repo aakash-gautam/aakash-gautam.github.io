@@ -19,7 +19,8 @@
 --text:#101828;
 --muted:#667085;
 --border:#dfe5ec;
---success:#126b48;
+--success:#12824c;
+--danger:#b42318;
 --radius:12px;
 }
 *{box-sizing:border-box}
@@ -94,10 +95,7 @@ font-size:16px;
 font-weight:600;
 transition:border-color .15s ease;
 }
-.application-input::placeholder{
-color:#98a2b3;
-font-weight:400;
-}
+.application-input::placeholder{color:#98a2b3;font-weight:400}
 .application-input:focus{border-color:var(--navy)}
 .qr-button{
 width:54px;
@@ -113,6 +111,7 @@ border-radius:var(--radius);
 }
 .qr-button:hover{background:var(--soft2)}
 .qr-button svg{width:22px;height:22px}
+
 .actions{
 margin-top:14px;
 display:grid;
@@ -125,21 +124,16 @@ padding:0 18px;
 display:flex;
 align-items:center;
 justify-content:center;
-gap:8px;
 border-radius:var(--radius);
 font-size:13px;
 font-weight:700;
-transition:background .15s ease,border-color .15s ease;
 }
 .button-primary{
 background:var(--navy);
 color:#fff;
 border:1px solid var(--navy);
 }
-.button-primary:hover{
-background:var(--navy-light);
-border-color:var(--navy-light);
-}
+.button-primary:hover{background:var(--navy-light)}
 .button-secondary{
 background:#fff;
 color:var(--navy);
@@ -153,56 +147,15 @@ color:var(--navy);
 border:1px solid var(--border);
 }
 .seat-button:hover{background:var(--soft2)}
-button:disabled{
-opacity:.55;
-cursor:not-allowed;
-}
-.custom-panel,.seat-panel,.scanner{
+button:disabled{opacity:.55;cursor:not-allowed}
+
+.seat-panel,.scanner{
 display:none;
 margin-top:16px;
 border-radius:var(--radius);
 }
-.custom-panel.show,.seat-panel.show,.scanner.show{
-display:block;
-}
-.custom-panel{
-padding:17px;
-background:var(--soft);
-border:1px solid var(--border);
-}
-.panel-title{
-margin:0 0 13px;
-color:var(--navy-dark);
-font-size:14px;
-font-weight:700;
-}
-.custom-row{
-display:grid;
-grid-template-columns:minmax(0,1fr) auto;
-gap:9px;
-}
-.venue-select{
-width:100%;
-min-height:48px;
-padding:0 13px;
-background:#fff;
-color:var(--navy-dark);
-border:1px solid var(--border);
-border-radius:10px;
-outline:none;
-font-size:13px;
-}
-.venue-select:focus{border-color:var(--navy)}
-.confirm-button{
-min-height:48px;
-padding:0 17px;
-background:var(--navy);
-color:#fff;
-border:1px solid var(--navy);
-border-radius:10px;
-font-size:13px;
-font-weight:700;
-}
+.seat-panel.show,.scanner.show{display:block}
+
 .seat-panel{
 padding:17px;
 border:1px solid var(--border);
@@ -212,54 +165,100 @@ margin-bottom:13px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:10px;
 }
 .seat-panel-header strong{
-color:var(--navy-dark);
 font-size:14px;
+color:var(--navy-dark);
 }
 .refresh-link{
+width:34px;
+height:34px;
 padding:0;
-background:transparent;
-color:var(--navy);
-border:0;
-font-size:12px;
-font-weight:700;
-}
-.venue-list{
-display:grid;
-gap:8px;
-}
-.venue-row{
-min-height:55px;
-padding:10px 12px;
 display:flex;
 align-items:center;
-justify-content:space-between;
-gap:12px;
+justify-content:center;
+background:transparent;
+border:0;
+border-radius:8px;
+color:var(--navy);
+}
+.refresh-link:hover{background:var(--soft)}
+.refresh-link svg{width:19px;height:19px}
+
+.venue-list{
+display:grid;
+gap:9px;
+}
+.venue-row{
+padding:13px;
 background:#fff;
 border:1px solid #e7ebf0;
 border-radius:10px;
 }
+.venue-main{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:15px;
+}
 .venue-info{min-width:0}
 .venue-info strong{
 display:block;
+font-size:17px;
+font-weight:700;
 color:var(--navy-dark);
-font-size:13px;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
 }
 .venue-info span{
 display:block;
-margin-top:3px;
+margin-top:4px;
+font-size:12px;
 color:var(--muted);
-font-size:11px;
 }
 .seat-count{
 flex-shrink:0;
+display:flex;
+align-items:baseline;
+gap:4px;
+font-family:"Roboto","Open Sans",sans-serif;
+}
+.seat-count .remaining{
+color:var(--success);
+font-size:22px;
+font-weight:700;
+}
+.seat-count .remaining.full{color:var(--danger)}
+.seat-count .separator{
+color:#111;
+font-size:17px;
+font-weight:600;
+}
+.seat-count .total{
+color:#111;
+font-size:18px;
+font-weight:700;
+}
+.progress{
+width:100%;
+height:5px;
+margin-top:11px;
+overflow:hidden;
+background:#e8edf3;
+border-radius:999px;
+}
+.progress-fill{
+height:100%;
+background:var(--navy);
+border-radius:999px;
+transition:width .3s ease;
+}
+.pwd-tag{
+display:inline-block;
+margin-top:5px;
+padding:2px 6px;
+background:var(--soft);
 color:var(--navy);
-font-size:12px;
+border-radius:5px;
+font-size:10px;
 font-weight:700;
 }
 .empty-message{
@@ -267,6 +266,7 @@ color:var(--muted);
 font-size:13px;
 padding:10px 0;
 }
+
 .scanner{
 padding:12px;
 border:1px solid var(--border);
@@ -279,10 +279,11 @@ border-radius:9px;
 #reader video{border-radius:9px}
 .scanner-text{
 margin:10px 0 0;
-color:var(--muted);
 font-size:11px;
+color:var(--muted);
 text-align:center;
 }
+
 .modal-overlay{
 position:fixed;
 inset:0;
@@ -319,9 +320,7 @@ border-top-color:var(--navy);
 border-radius:50%;
 animation:spin .75s linear infinite;
 }
-@keyframes spin{
-to{transform:rotate(360deg)}
-}
+@keyframes spin{to{transform:rotate(360deg)}}
 .modal-title{
 margin:0;
 font-family:"Roboto","Open Sans",sans-serif;
@@ -344,24 +343,30 @@ align-items:center;
 justify-content:center;
 border-radius:50%;
 background:#effaf4;
-color:#12824c;
+color:var(--success);
 font-size:30px;
 font-weight:700;
 }
 .modal-venue{
 margin:18px 0 5px;
-color:#12824c;
+color:var(--success);
 font-family:"Roboto","Open Sans",sans-serif;
 font-size:32px;
-line-height:1.2;
 font-weight:700;
-overflow-wrap:anywhere;
 }
 .modal-applicant{
+margin-top:11px;
+color:#111;
+font-family:"Roboto","Open Sans",sans-serif;
+font-size:21px;
+font-weight:700;
+}
+.modal-application-id{
 margin-top:7px;
-color:#667085;
-font-size:14px;
-font-weight:600;
+color:var(--navy);
+font-family:"Roboto","Open Sans",sans-serif;
+font-size:18px;
+font-weight:700;
 }
 .modal-error-icon{
 width:56px;
@@ -389,7 +394,6 @@ color:var(--navy);
 font-family:"Roboto","Open Sans",sans-serif;
 font-size:20px;
 font-weight:700;
-overflow-wrap:anywhere;
 }
 .modal-close{
 width:100%;
@@ -402,10 +406,51 @@ border-radius:10px;
 font-size:13px;
 font-weight:700;
 }
-.modal-close:hover{
-background:var(--navy-light);
-border-color:var(--navy-light);
+
+.custom-modal-label{
+display:block;
+margin:22px 0 8px;
+text-align:left;
+font-size:13px;
+font-weight:600;
+color:#344054;
 }
+.custom-modal-select{
+width:100%;
+height:50px;
+padding:0 13px;
+background:#fff;
+color:var(--navy-dark);
+border:1px solid var(--border);
+border-radius:10px;
+outline:none;
+}
+.custom-modal-select:focus{border-color:var(--navy)}
+.custom-modal-actions{
+margin-top:14px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+}
+.custom-cancel{
+min-height:46px;
+background:#fff;
+color:var(--navy);
+border:1px solid var(--border);
+border-radius:10px;
+font-size:13px;
+font-weight:700;
+}
+.custom-confirm{
+min-height:46px;
+background:var(--navy);
+color:#fff;
+border:1px solid var(--navy);
+border-radius:10px;
+font-size:13px;
+font-weight:700;
+}
+
 @media(max-width:520px){
 .page{
 min-height:100dvh;
@@ -419,8 +464,6 @@ justify-content:center;
 .header p{font-size:13px}
 .actions{grid-template-columns:1fr}
 .seat-button{grid-column:auto}
-.custom-row{grid-template-columns:1fr}
-.confirm-button{width:100%}
 .modal-box{
 max-width:350px;
 padding:28px 22px;
@@ -454,14 +497,8 @@ autocapitalize="characters"
 spellcheck="false"
 >
 
-<button
-id="qrButton"
-class="qr-button"
-type="button"
-aria-label="Scan QR Code"
-title="Scan QR Code"
->
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<button id="qrButton" class="qr-button" type="button" title="Scan QR Code">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 <path d="M3 8V5a2 2 0 0 1 2-2h3"/>
 <path d="M16 3h3a2 2 0 0 1 2 2v3"/>
 <path d="M21 16v3a2 2 0 0 1-2 2h-3"/>
@@ -475,7 +512,6 @@ title="Scan QR Code"
 </div>
 
 <div class="actions">
-
 <button id="assignButton" type="button" class="button button-primary">
 Assign Venue
 </button>
@@ -487,41 +523,25 @@ Custom Assign Venue
 <button id="seatMatrixButton" type="button" class="button seat-button">
 Seat Matrix
 </button>
-
 </div>
 
 <section id="scannerPanel" class="scanner">
 <div id="reader"></div>
-<p class="scanner-text">
-Position the applicant QR code inside the camera area.
-</p>
-</section>
-
-<section id="customPanel" class="custom-panel">
-
-<h3 class="panel-title">Select Available Venue</h3>
-
-<div class="custom-row">
-
-<select id="venueSelect" class="venue-select">
-<option value="">Select available venue</option>
-</select>
-
-<button id="confirmCustomButton" class="confirm-button" type="button">
-Assign
-</button>
-
-</div>
+<p class="scanner-text">Position the applicant QR code inside the camera area.</p>
 </section>
 
 <section id="seatPanel" class="seat-panel">
-
 <div class="seat-panel-header">
 
 <strong>Seat Matrix</strong>
 
-<button id="refreshButton" class="refresh-link" type="button">
-Refresh
+<button id="refreshButton" class="refresh-link" type="button" title="Refresh">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+<path d="M20 6v6h-6"/>
+<path d="M4 18v-6h6"/>
+<path d="M6.5 9a7 7 0 0 1 11.7-2.6L20 8"/>
+<path d="M17.5 15a7 7 0 0 1-11.7 2.6L4 16"/>
+</svg>
 </button>
 
 </div>
@@ -540,9 +560,7 @@ Loading...
 </div>
 
 <script>
-
-/* Apps Script Web App deployment URL */
-const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzS2tOPIut6TgrxK68n2rBZHOF5aJBdI6DboxkP_r9W7IipaCt7p_UrbOOQr8v73CM23A/exec";
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbxmStXxFpsmZ4H4VWFqSuP1efTiZv9JtXGc-IDP2Yf8sgWmQRS5a52UjpKjN6v3fn8acQ/exec";
 
 const applicationInput=document.getElementById("applicationId");
 const assignButton=document.getElementById("assignButton");
@@ -550,12 +568,9 @@ const customButton=document.getElementById("customButton");
 const qrButton=document.getElementById("qrButton");
 const seatMatrixButton=document.getElementById("seatMatrixButton");
 const refreshButton=document.getElementById("refreshButton");
-const customPanel=document.getElementById("customPanel");
 const seatPanel=document.getElementById("seatPanel");
 const scannerPanel=document.getElementById("scannerPanel");
-const venueSelect=document.getElementById("venueSelect");
 const venueList=document.getElementById("venueList");
-const confirmCustomButton=document.getElementById("confirmCustomButton");
 const modalOverlay=document.getElementById("modalOverlay");
 const modalBox=document.getElementById("modalBox");
 
@@ -564,8 +579,8 @@ let qrScanner=null;
 let scannerRunning=false;
 let scanLocked=false;
 let activeScripts={};
+let availableVenues=[];
 
-/* Automatic venue assignment */
 assignButton.addEventListener("click",function(){
 const applicationId=normalizeApplicationId(applicationInput.value);
 
@@ -574,58 +589,33 @@ showErrorModal(
 "Application ID required",
 "Please enter or scan the applicant's Application ID."
 );
-applicationInput.focus();
 return;
 }
 
 applicationInput.value=applicationId;
-
 assignVenue(applicationId,"autoAssign","");
 });
 
-/* Opens Custom Assign Venue */
 customButton.addEventListener("click",function(){
-customPanel.classList.toggle("show");
-seatPanel.classList.remove("show");
-stopScanner();
-
-if(customPanel.classList.contains("show")){
-loadVenueData();
-}
-});
-
-/* Custom venue assignment */
-confirmCustomButton.addEventListener("click",function(){
 const applicationId=normalizeApplicationId(applicationInput.value);
-const venueId=venueSelect.value;
 
 if(!applicationId){
 showErrorModal(
 "Application ID required",
 "Enter the applicant's Application ID first."
 );
-applicationInput.focus();
-return;
-}
-
-if(!venueId){
-showErrorModal(
-"Venue required",
-"Please select an available venue."
-);
-venueSelect.focus();
 return;
 }
 
 applicationInput.value=applicationId;
 
-assignVenue(applicationId,"customAssign",venueId);
+loadVenueData(function(){
+showCustomAssignModal(applicationId);
+});
 });
 
-/* Opens Seat Matrix */
 seatMatrixButton.addEventListener("click",function(){
 seatPanel.classList.toggle("show");
-customPanel.classList.remove("show");
 stopScanner();
 
 if(seatPanel.classList.contains("show")){
@@ -633,9 +623,89 @@ loadVenueData();
 }
 });
 
-refreshButton.addEventListener("click",loadVenueData);
+refreshButton.addEventListener("click",function(){
+loadVenueData();
+});
 
-/* Sends assignment request using JSONP */
+function showCustomAssignModal(applicationId){
+
+if(!availableVenues.length){
+showErrorModal(
+"No venues available",
+"No general venue currently has an available seat."
+);
+return;
+}
+
+const options=availableVenues.map(function(venue){
+return `
+<option value="${escapeHtml(venue.venueId)}">
+${escapeHtml(venue.venueName)} (${escapeHtml(venue.available)} available)
+</option>`;
+}).join("");
+
+modalBox.innerHTML=`
+
+<h2 class="modal-title">
+Custom Assign Venue
+</h2>
+
+<p class="modal-message">
+${escapeHtml(applicationId)}
+</p>
+
+<label class="custom-modal-label">
+Select Venue
+</label>
+
+<select id="customVenueModalSelect" class="custom-modal-select">
+<option value="">Select available venue</option>
+${options}
+</select>
+
+<div class="custom-modal-actions">
+
+<button
+type="button"
+class="custom-cancel"
+onclick="closeModal()"
+>
+Cancel
+</button>
+
+<button
+type="button"
+class="custom-confirm"
+onclick="confirmCustomAssignment()"
+>
+Assign Venue
+</button>
+
+</div>
+`;
+
+modalOverlay.classList.add("show");
+}
+
+function confirmCustomAssignment(){
+
+const select=document.getElementById("customVenueModalSelect");
+
+if(!select||!select.value){
+return;
+}
+
+const applicationId=normalizeApplicationId(applicationInput.value);
+
+modalOverlay.classList.remove("show");
+
+assignVenue(
+applicationId,
+"customAssign",
+select.value
+);
+}
+
 function assignVenue(applicationId,mode,venueId){
 
 const requestId=createRequestId();
@@ -672,8 +742,10 @@ if(result.ok){
 showSuccessModal(result);
 
 applicationInput.value="";
-venueSelect.value="";
-customPanel.classList.remove("show");
+
+if(seatPanel.classList.contains("show")){
+loadVenueData();
+}
 
 return;
 }
@@ -681,7 +753,6 @@ return;
 if(result.code==="DUPLICATE"){
 
 showDuplicateModal(result);
-applicationInput.select();
 
 return;
 }
@@ -711,20 +782,16 @@ setBusy(false);
 
 showErrorModal(
 "No response",
-"The server did not respond. Please check the Web App deployment URL and deployment access."
+"The server did not respond."
 );
 
 },35000);
 }
 
-/* Loads available venues and Seat Matrix using JSONP */
-function loadVenueData(){
+function loadVenueData(done){
 
 const requestId=createRequestId();
 const callbackName="vastVenueData_"+sanitizeCallbackId(requestId);
-
-venueList.innerHTML=
-'<div class="empty-message">Loading venue information...</div>';
 
 window[callbackName]=function(response){
 
@@ -733,25 +800,31 @@ cleanupJsonp(callbackName);
 if(
 !response||
 response.source!=="recruitment-venue-system"||
-response.type!=="venueData"
+response.type!=="venueData"||
+!response.result
 ){
 venueList.innerHTML=
 '<div class="empty-message">Venue information could not be loaded.</div>';
 return;
 }
 
-if(!response.result||response.result.ok===false){
+if(response.result.ok===false){
 venueList.innerHTML=
 '<div class="empty-message">'+
-escapeHtml(
-response.result?.message||
-"Venue information could not be loaded."
-)+
+escapeHtml(response.result.message||"Venue information could not be loaded.")+
 '</div>';
 return;
 }
 
+availableVenues=Array.isArray(response.result.availableVenues)
+?response.result.availableVenues
+:[];
+
 renderVenueData(response.result);
+
+if(typeof done==="function"){
+done();
+}
 };
 
 const url=
@@ -764,7 +837,77 @@ WEB_APP_URL+
 createJsonpScript(url,callbackName);
 }
 
-/* Creates temporary JSONP script */
+function renderVenueData(data){
+
+const venues=Array.isArray(data.venues)
+?data.venues
+:[];
+
+if(!venues.length){
+
+venueList.innerHTML=
+'<div class="empty-message">No venues found.</div>';
+
+return;
+}
+
+venueList.innerHTML=venues.map(function(venue){
+
+const remaining=Number(venue.available||0);
+const total=Number(venue.totalSeats||0);
+const allocated=Number(venue.allocated||0);
+
+const remainingPercent=
+total>0
+?Math.max(0,Math.min(100,(remaining/total)*100))
+:0;
+
+return `
+<div class="venue-row">
+
+<div class="venue-main">
+
+<div class="venue-info">
+
+<strong>
+${escapeHtml(venue.venueName)}
+</strong>
+
+<span>
+${escapeHtml(allocated)} allotted
+</span>
+
+${venue.pwd?'<div class="pwd-tag">PWD</div>':""}
+
+</div>
+
+<div class="seat-count">
+
+<span class="remaining ${remaining===0?"full":""}">
+${escapeHtml(remaining)}
+</span>
+
+<span class="separator">/</span>
+
+<span class="total">
+${escapeHtml(total)}
+</span>
+
+</div>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-fill"
+style="width:${remainingPercent}%"
+></div>
+</div>
+
+</div>`;
+}).join("");
+}
+
 function createJsonpScript(url,callbackName){
 
 const script=document.createElement("script");
@@ -774,8 +917,6 @@ script.async=true;
 script.id="jsonp_"+callbackName;
 
 script.onerror=function(){
-
-if(typeof window[callbackName]==="function"){
 
 if(callbackName.startsWith("vastAssignment_")){
 
@@ -795,7 +936,6 @@ venueList.innerHTML=
 }
 
 cleanupJsonp(callbackName);
-}
 };
 
 activeScripts[callbackName]=script;
@@ -803,10 +943,10 @@ activeScripts[callbackName]=script;
 document.body.appendChild(script);
 }
 
-/* Removes JSONP callback after response */
 function cleanupJsonp(callbackName){
 
-const script=activeScripts[callbackName]||
+const script=
+activeScripts[callbackName]||
 document.getElementById("jsonp_"+callbackName);
 
 if(script&&script.parentNode){
@@ -822,73 +962,6 @@ window[callbackName]=undefined;
 }
 }
 
-/* Displays venue data */
-function renderVenueData(data){
-
-const venues=Array.isArray(data.venues)
-?data.venues
-:[];
-
-venueSelect.innerHTML=
-'<option value="">Select available venue</option>';
-
-venues.forEach(function(venue){
-
-const option=document.createElement("option");
-
-option.value=venue.venueId;
-
-option.textContent=
-venue.venueId+
-" — "+
-venue.venueName+
-" ("+
-venue.available+
-" available)";
-
-venueSelect.appendChild(option);
-});
-
-if(!venues.length){
-
-venueList.innerHTML=
-'<div class="empty-message">No venues currently have available seats.</div>';
-
-return;
-}
-
-venueList.innerHTML=venues.map(function(venue){
-
-return `
-<div class="venue-row">
-
-<div class="venue-info">
-
-<strong>
-${escapeHtml(venue.venueName)}
-</strong>
-
-<span>
-${escapeHtml(venue.venueId)}
- ·
-${escapeHtml(venue.allocated)}
- allocated
-</span>
-
-</div>
-
-<div class="seat-count">
-${escapeHtml(venue.available)}
- /
-${escapeHtml(venue.totalSeats)}
-</div>
-
-</div>`;
-
-}).join("");
-}
-
-/* QR Scanner */
 qrButton.addEventListener("click",async function(){
 
 if(scannerRunning){
@@ -896,7 +969,6 @@ await stopScanner();
 return;
 }
 
-customPanel.classList.remove("show");
 seatPanel.classList.remove("show");
 
 await startScanner();
@@ -928,9 +1000,7 @@ await qrScanner.start(
 fps:10,
 qrbox:function(width,height){
 
-const size=Math.floor(
-Math.min(width,height)*.72
-);
+const size=Math.floor(Math.min(width,height)*.72);
 
 return{
 width:size,
@@ -967,9 +1037,10 @@ applicationInput.value=applicationId;
 
 await stopScanner();
 
+/* QR scan immediately triggers automatic assignment. */
 setTimeout(function(){
 assignButton.click();
-},150);
+},120);
 
 },
 
@@ -986,9 +1057,8 @@ scannerPanel.classList.remove("show");
 
 showErrorModal(
 "Camera unavailable",
-"Camera access could not be started. Enter the Application ID manually."
+"Camera access could not be started."
 );
-
 }
 }
 
@@ -1013,7 +1083,6 @@ scannerPanel.classList.remove("show");
 }
 }
 
-/* Loading modal */
 function showLoadingModal(applicationId){
 
 modalBox.innerHTML=`
@@ -1027,13 +1096,11 @@ Assigning Venue
 <p class="modal-message">
 Processing ${escapeHtml(applicationId)}. Please wait...
 </p>
-
 `;
 
 modalOverlay.classList.add("show");
 }
 
-/* Successful assignment modal */
 function showSuccessModal(result){
 
 modalBox.innerHTML=`
@@ -1054,10 +1121,9 @@ ${escapeHtml(result.venueName||result.venueId)}
 ${escapeHtml(result.applicantName||"")}
 </div>
 
-<p class="modal-message">
-Application ID:
+<div class="modal-application-id">
 ${escapeHtml(result.applicationId||"")}
-</p>
+</div>
 
 <button
 type="button"
@@ -1066,13 +1132,11 @@ onclick="closeModal()"
 >
 Done
 </button>
-
 `;
 
 modalOverlay.classList.add("show");
 }
 
-/* Duplicate assignment modal */
 function showDuplicateModal(result){
 
 modalBox.innerHTML=`
@@ -1089,27 +1153,17 @@ Already Assigned
 This applicant has already been allotted an examination venue.
 </p>
 
-${
-result.venueName||result.venueId
-?
-`<div class="modal-existing-venue">
-${escapeHtml(result.venueName||result.venueId)}
-</div>`
-:""
-}
+${result.venueName||result.venueId
+?`<div class="modal-existing-venue">${escapeHtml(result.venueName||result.venueId)}</div>`
+:""}
 
 <div class="modal-applicant">
 ${escapeHtml(result.applicantName||"")}
 </div>
 
-${
-result.registrationTime
-?
-`<p class="modal-message">
-Assigned: ${escapeHtml(result.registrationTime)}
-</p>`
-:""
-}
+<div class="modal-application-id">
+${escapeHtml(result.applicationId||"")}
+</div>
 
 <button
 type="button"
@@ -1118,13 +1172,11 @@ onclick="closeModal()"
 >
 Close
 </button>
-
 `;
 
 modalOverlay.classList.add("show");
 }
 
-/* General error modal */
 function showErrorModal(title,message){
 
 modalBox.innerHTML=`
@@ -1148,7 +1200,6 @@ onclick="closeModal()"
 >
 Close
 </button>
-
 `;
 
 modalOverlay.classList.add("show");
@@ -1163,57 +1214,32 @@ applicationInput.focus();
 },50);
 }
 
-/* Handles server errors */
 function showServerError(result){
 
 let title="Venue assignment failed";
 
-if(result.code==="NOT_FOUND"){
-title="Applicant not found";
-}
-
-if(result.code==="NO_SEATS"){
-title="No seats available";
-}
-
+if(result.code==="NOT_FOUND")title="Applicant not found";
+if(result.code==="NO_SEATS")title="No seats available";
 if(result.code==="VENUE_FULL"){
 title="Selected venue is full";
 loadVenueData();
 }
-
-if(result.code==="BUSY"){
-title="System busy";
-}
-
-if(result.code==="PWD_VENUE"){
-title="PWD reserved venue";
-}
-
-if(result.code==="INVALID_VENUE"){
-title="Invalid venue";
-}
-
-if(result.code==="CONFIG_ERROR"){
-title="Configuration error";
-}
-
-if(result.code==="INVALID_ID"){
-title="Invalid Application ID";
-}
+if(result.code==="BUSY")title="System busy";
+if(result.code==="PWD_VENUE")title="PWD reserved venue";
+if(result.code==="INVALID_VENUE")title="Invalid venue";
+if(result.code==="CONFIG_ERROR")title="Configuration error";
+if(result.code==="INVALID_ID")title="Invalid Application ID";
 
 showErrorModal(
 title,
-result.message||
-"The venue could not be assigned."
+result.message||"The venue could not be assigned."
 );
 }
 
-/* Disables controls while assigning */
 function setBusy(active){
 
 assignButton.disabled=active;
 customButton.disabled=active;
-confirmCustomButton.disabled=active;
 qrButton.disabled=active;
 seatMatrixButton.disabled=active;
 applicationInput.readOnly=active;
@@ -1224,14 +1250,11 @@ active
 :"Assign Venue";
 }
 
-/* Extracts Application ID from QR text or URL */
 function extractApplicationId(value){
 
 const text=String(value||"").trim();
 
-if(!text){
-return"";
-}
+if(!text)return"";
 
 try{
 
@@ -1264,9 +1287,7 @@ if(
 window.crypto&&
 typeof crypto.randomUUID==="function"
 ){
-
 return crypto.randomUUID();
-
 }
 
 return(
@@ -1292,7 +1313,6 @@ return String(value??"")
 .replaceAll("'","&#039;");
 }
 
-/* Enter key performs automatic assignment */
 applicationInput.addEventListener("keydown",function(event){
 
 if(event.key==="Enter"){
@@ -1309,7 +1329,6 @@ assignButton.click();
 window.addEventListener("load",function(){
 applicationInput.focus();
 });
-
 </script>
 
 </body>
