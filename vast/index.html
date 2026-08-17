@@ -20,11 +20,6 @@
 --muted:#667085;
 --border:#dfe5ec;
 --success:#126b48;
---success-bg:#f1faf6;
---success-border:#bfe4d2;
---error:#b42318;
---error-bg:#fff6f5;
---error-border:#f1cbc7;
 --radius:12px;
 }
 *{box-sizing:border-box}
@@ -53,7 +48,7 @@ margin:auto;
 .header{text-align:center;margin-bottom:30px}
 .logo{
 display:block;
-width:100px;
+width:150px;
 height:150px;
 object-fit:contain;
 margin:0 auto 8px;
@@ -99,7 +94,10 @@ font-size:16px;
 font-weight:600;
 transition:border-color .15s ease;
 }
-.application-input::placeholder{color:#98a2b3;font-weight:400}
+.application-input::placeholder{
+color:#98a2b3;
+font-weight:400;
+}
 .application-input:focus{border-color:var(--navy)}
 .qr-button{
 width:54px;
@@ -138,7 +136,10 @@ background:var(--navy);
 color:#fff;
 border:1px solid var(--navy);
 }
-.button-primary:hover{background:var(--navy-light);border-color:var(--navy-light)}
+.button-primary:hover{
+background:var(--navy-light);
+border-color:var(--navy-light);
+}
 .button-secondary{
 background:#fff;
 color:var(--navy);
@@ -152,51 +153,18 @@ color:var(--navy);
 border:1px solid var(--border);
 }
 .seat-button:hover{background:var(--soft2)}
-button:disabled{opacity:.55;cursor:not-allowed}
-.status{
-display:none;
-margin-top:20px;
-padding:16px;
-border-radius:var(--radius);
-font-size:13px;
-line-height:1.55;
+button:disabled{
+opacity:.55;
+cursor:not-allowed;
 }
-.status.show{display:block}
-.status.success{
-background:var(--success-bg);
-border:1px solid var(--success-border);
-color:var(--success);
-}
-.status.error{
-background:var(--error-bg);
-border:1px solid var(--error-border);
-color:var(--error);
-}
-.status.loading{
-background:var(--soft);
-border:1px solid var(--border);
-color:var(--navy);
-}
-.status-title{margin-bottom:5px;font-size:14px;font-weight:700}
-.result-details{
-margin-top:13px;
-padding-top:11px;
-border-top:1px solid rgba(0,0,0,.08);
-}
-.result-row{
-padding:5px 0;
-display:grid;
-grid-template-columns:120px 1fr;
-gap:10px;
-}
-.result-label{opacity:.7}
-.result-value{font-weight:600;overflow-wrap:anywhere}
 .custom-panel,.seat-panel,.scanner{
 display:none;
 margin-top:16px;
 border-radius:var(--radius);
 }
-.custom-panel.show,.seat-panel.show,.scanner.show{display:block}
+.custom-panel.show,.seat-panel.show,.scanner.show{
+display:block;
+}
 .custom-panel{
 padding:17px;
 background:var(--soft);
@@ -294,6 +262,11 @@ color:var(--navy);
 font-size:12px;
 font-weight:700;
 }
+.empty-message{
+color:var(--muted);
+font-size:13px;
+padding:10px 0;
+}
 .scanner{
 padding:12px;
 border:1px solid var(--border);
@@ -310,16 +283,6 @@ color:var(--muted);
 font-size:11px;
 text-align:center;
 }
-.hidden-frame{
-position:absolute;
-width:1px;
-height:1px;
-opacity:0;
-pointer-events:none;
-border:0;
-}
-
-/* Allocation modal */
 .modal-overlay{
 position:fixed;
 inset:0;
@@ -443,7 +406,6 @@ font-weight:700;
 background:var(--navy-light);
 border-color:var(--navy-light);
 }
-
 @media(max-width:520px){
 .page{
 min-height:100dvh;
@@ -452,11 +414,6 @@ align-items:center;
 justify-content:center;
 }
 .container{margin:auto}
-.logo{
-width:150px;
-height:150px;
-margin-bottom:14px;
-}
 .header{margin-bottom:25px}
 .header h1{font-size:23px}
 .header p{font-size:13px}
@@ -464,7 +421,6 @@ margin-bottom:14px;
 .seat-button{grid-column:auto}
 .custom-row{grid-template-columns:1fr}
 .confirm-button{width:100%}
-.result-row{grid-template-columns:105px 1fr}
 .modal-box{
 max-width:350px;
 padding:28px 22px;
@@ -485,21 +441,17 @@ padding:28px 22px;
 <p>Developed by Aakash Gautam, IIT Mandi</p>
 </header>
 
-<form id="registrationForm" method="POST" target="responseFrame" autocomplete="off">
-
 <label for="applicationId" class="field-label">Application ID</label>
 
 <div class="input-row">
 <input
 id="applicationId"
-name="applicationId"
 class="application-input"
 type="text"
 placeholder="Enter Application ID"
 autocomplete="off"
 autocapitalize="characters"
 spellcheck="false"
-required
 >
 
 <button
@@ -522,12 +474,9 @@ title="Scan QR Code"
 </button>
 </div>
 
-<input type="hidden" id="requestId" name="requestId">
-<input type="hidden" id="actionType" name="action" value="autoAssign">
-<input type="hidden" id="customVenueId" name="venueId">
-
 <div class="actions">
-<button id="assignButton" type="submit" class="button button-primary">
+
+<button id="assignButton" type="button" class="button button-primary">
 Assign Venue
 </button>
 
@@ -538,37 +487,43 @@ Custom Assign Venue
 <button id="seatMatrixButton" type="button" class="button seat-button">
 Seat Matrix
 </button>
-</div>
 
-</form>
+</div>
 
 <section id="scannerPanel" class="scanner">
 <div id="reader"></div>
-<p class="scanner-text">Position the applicant QR code inside the camera area.</p>
+<p class="scanner-text">
+Position the applicant QR code inside the camera area.
+</p>
 </section>
 
 <section id="customPanel" class="custom-panel">
+
 <h3 class="panel-title">Select Available Venue</h3>
 
 <div class="custom-row">
+
 <select id="venueSelect" class="venue-select">
-<option value="">Select venue</option>
+<option value="">Select available venue</option>
 </select>
 
 <button id="confirmCustomButton" class="confirm-button" type="button">
 Assign
 </button>
+
 </div>
 </section>
 
 <section id="seatPanel" class="seat-panel">
 
 <div class="seat-panel-header">
+
 <strong>Seat Matrix</strong>
 
-<button class="refresh-link" type="button" onclick="loadVenueData()">
+<button id="refreshButton" class="refresh-link" type="button">
 Refresh
 </button>
+
 </div>
 
 <div id="venueList" class="venue-list">
@@ -577,8 +532,6 @@ Loading...
 
 </section>
 
-<section id="status" class="status" aria-live="polite"></section>
-
 </div>
 </main>
 
@@ -586,50 +539,37 @@ Loading...
 <div id="modalBox" class="modal-box"></div>
 </div>
 
-<iframe
-id="responseFrame"
-name="responseFrame"
-class="hidden-frame"
-title="Server Response"
-></iframe>
-
 <script>
-// Apps Script Web App URL
+
+/* Apps Script Web App deployment URL */
 const WEB_APP_URL="https://script.google.com/macros/s/AKfycbznthUsb2xhaQmb1xJRy2XV5JiAJQSLNFtJ5KlXeVUIg7JLFEUATpVdD8Fa7NmWfEUYgw/exec";
 
-const form=document.getElementById("registrationForm");
 const applicationInput=document.getElementById("applicationId");
-const requestIdInput=document.getElementById("requestId");
-const actionTypeInput=document.getElementById("actionType");
-const customVenueIdInput=document.getElementById("customVenueId");
 const assignButton=document.getElementById("assignButton");
 const customButton=document.getElementById("customButton");
 const qrButton=document.getElementById("qrButton");
 const seatMatrixButton=document.getElementById("seatMatrixButton");
+const refreshButton=document.getElementById("refreshButton");
 const customPanel=document.getElementById("customPanel");
 const seatPanel=document.getElementById("seatPanel");
 const scannerPanel=document.getElementById("scannerPanel");
 const venueSelect=document.getElementById("venueSelect");
 const venueList=document.getElementById("venueList");
 const confirmCustomButton=document.getElementById("confirmCustomButton");
-const statusBox=document.getElementById("status");
-const responseFrame=document.getElementById("responseFrame");
 const modalOverlay=document.getElementById("modalOverlay");
 const modalBox=document.getElementById("modalBox");
 
-form.action=WEB_APP_URL;
-
-let currentRequestId="";
 let requestTimeout=null;
 let qrScanner=null;
 let scannerRunning=false;
 let scanLocked=false;
+let activeScripts={};
 
-form.addEventListener("submit",function(event){
+/* Automatic venue assignment */
+assignButton.addEventListener("click",function(){
 const applicationId=normalizeApplicationId(applicationInput.value);
 
 if(!applicationId){
-event.preventDefault();
 showErrorModal(
 "Application ID required",
 "Please enter or scan the applicant's Application ID."
@@ -639,11 +579,11 @@ return;
 }
 
 applicationInput.value=applicationId;
-actionTypeInput.value="autoAssign";
-customVenueIdInput.value="";
-prepareRequest();
+
+assignVenue(applicationId,"autoAssign","");
 });
 
+/* Opens Custom Assign Venue */
 customButton.addEventListener("click",function(){
 customPanel.classList.toggle("show");
 seatPanel.classList.remove("show");
@@ -654,6 +594,7 @@ loadVenueData();
 }
 });
 
+/* Custom venue assignment */
 confirmCustomButton.addEventListener("click",function(){
 const applicationId=normalizeApplicationId(applicationInput.value);
 const venueId=venueSelect.value;
@@ -677,13 +618,11 @@ return;
 }
 
 applicationInput.value=applicationId;
-actionTypeInput.value="customAssign";
-customVenueIdInput.value=venueId;
 
-prepareRequest();
-form.submit();
+assignVenue(applicationId,"customAssign",venueId);
 });
 
+/* Opens Seat Matrix */
 seatMatrixButton.addEventListener("click",function(){
 seatPanel.classList.toggle("show");
 customPanel.classList.remove("show");
@@ -694,22 +633,211 @@ loadVenueData();
 }
 });
 
-function loadVenueData(){
-responseFrame.src=
-WEB_APP_URL+
-"?action=getVenueData"+
-"&requestId="+encodeURIComponent(createRequestId())+
-"&_="+Date.now();
+refreshButton.addEventListener("click",loadVenueData);
+
+/* Sends assignment request using JSONP */
+function assignVenue(applicationId,mode,venueId){
+
+const requestId=createRequestId();
+const callbackName="vastAssignment_"+sanitizeCallbackId(requestId);
+
+setBusy(true);
+showLoadingModal(applicationId);
+
+clearTimeout(requestTimeout);
+
+window[callbackName]=function(response){
+
+clearTimeout(requestTimeout);
+
+cleanupJsonp(callbackName);
+setBusy(false);
+
+if(
+!response||
+response.source!=="recruitment-venue-system"||
+response.type!=="registration"
+){
+showErrorModal(
+"Invalid response",
+"The server returned an invalid response."
+);
+return;
 }
 
-function renderVenueData(data){
-const venues=Array.isArray(data.venues)?data.venues:[];
+const result=response.result||{};
 
-venueSelect.innerHTML='<option value="">Select available venue</option>';
+if(result.ok){
+
+showSuccessModal(result);
+
+applicationInput.value="";
+venueSelect.value="";
+customPanel.classList.remove("show");
+
+return;
+}
+
+if(result.code==="DUPLICATE"){
+
+showDuplicateModal(result);
+applicationInput.select();
+
+return;
+}
+
+showServerError(result);
+};
+
+let url=
+WEB_APP_URL+
+"?action=assignVenue"+
+"&mode="+encodeURIComponent(mode)+
+"&applicationId="+encodeURIComponent(applicationId)+
+"&requestId="+encodeURIComponent(requestId)+
+"&callback="+encodeURIComponent(callbackName)+
+"&_="+Date.now();
+
+if(venueId){
+url+="&venueId="+encodeURIComponent(venueId);
+}
+
+createJsonpScript(url,callbackName);
+
+requestTimeout=setTimeout(function(){
+
+cleanupJsonp(callbackName);
+setBusy(false);
+
+showErrorModal(
+"No response",
+"The server did not respond. Please check the Web App deployment URL and deployment access."
+);
+
+},35000);
+}
+
+/* Loads available venues and Seat Matrix using JSONP */
+function loadVenueData(){
+
+const requestId=createRequestId();
+const callbackName="vastVenueData_"+sanitizeCallbackId(requestId);
+
+venueList.innerHTML=
+'<div class="empty-message">Loading venue information...</div>';
+
+window[callbackName]=function(response){
+
+cleanupJsonp(callbackName);
+
+if(
+!response||
+response.source!=="recruitment-venue-system"||
+response.type!=="venueData"
+){
+venueList.innerHTML=
+'<div class="empty-message">Venue information could not be loaded.</div>';
+return;
+}
+
+if(!response.result||response.result.ok===false){
+venueList.innerHTML=
+'<div class="empty-message">'+
+escapeHtml(
+response.result?.message||
+"Venue information could not be loaded."
+)+
+'</div>';
+return;
+}
+
+renderVenueData(response.result);
+};
+
+const url=
+WEB_APP_URL+
+"?action=getVenueData"+
+"&requestId="+encodeURIComponent(requestId)+
+"&callback="+encodeURIComponent(callbackName)+
+"&_="+Date.now();
+
+createJsonpScript(url,callbackName);
+}
+
+/* Creates temporary JSONP script */
+function createJsonpScript(url,callbackName){
+
+const script=document.createElement("script");
+
+script.src=url;
+script.async=true;
+script.id="jsonp_"+callbackName;
+
+script.onerror=function(){
+
+if(typeof window[callbackName]==="function"){
+
+if(callbackName.startsWith("vastAssignment_")){
+
+clearTimeout(requestTimeout);
+setBusy(false);
+
+showErrorModal(
+"Connection error",
+"The Apps Script Web App could not be reached."
+);
+
+}else{
+
+venueList.innerHTML=
+'<div class="empty-message">Venue information could not be loaded.</div>';
+
+}
+
+cleanupJsonp(callbackName);
+}
+};
+
+activeScripts[callbackName]=script;
+
+document.body.appendChild(script);
+}
+
+/* Removes JSONP callback after response */
+function cleanupJsonp(callbackName){
+
+const script=activeScripts[callbackName]||
+document.getElementById("jsonp_"+callbackName);
+
+if(script&&script.parentNode){
+script.parentNode.removeChild(script);
+}
+
+delete activeScripts[callbackName];
+
+try{
+delete window[callbackName];
+}catch(error){
+window[callbackName]=undefined;
+}
+}
+
+/* Displays venue data */
+function renderVenueData(data){
+
+const venues=Array.isArray(data.venues)
+?data.venues
+:[];
+
+venueSelect.innerHTML=
+'<option value="">Select available venue</option>';
 
 venues.forEach(function(venue){
+
 const option=document.createElement("option");
+
 option.value=venue.venueId;
+
 option.textContent=
 venue.venueId+
 " — "+
@@ -717,142 +845,327 @@ venue.venueName+
 " ("+
 venue.available+
 " available)";
+
 venueSelect.appendChild(option);
 });
 
 if(!venues.length){
+
 venueList.innerHTML=
-'<div style="color:#667085;font-size:13px;padding:10px 0">No venues currently have available seats.</div>';
+'<div class="empty-message">No venues currently have available seats.</div>';
+
 return;
 }
 
 venueList.innerHTML=venues.map(function(venue){
+
 return `
 <div class="venue-row">
+
 <div class="venue-info">
-<strong>${escapeHtml(venue.venueName)}</strong>
-<span>${escapeHtml(venue.venueId)} · ${escapeHtml(venue.allocated)} allocated</span>
+
+<strong>
+${escapeHtml(venue.venueName)}
+</strong>
+
+<span>
+${escapeHtml(venue.venueId)}
+ ·
+${escapeHtml(venue.allocated)}
+ allocated
+</span>
+
 </div>
+
 <div class="seat-count">
-${escapeHtml(venue.available)} / ${escapeHtml(venue.totalSeats)}
+${escapeHtml(venue.available)}
+ /
+${escapeHtml(venue.totalSeats)}
 </div>
+
 </div>`;
+
 }).join("");
 }
 
-window.addEventListener("message",function(event){
-const message=event.data;
+/* QR Scanner */
+qrButton.addEventListener("click",async function(){
 
-if(!message||message.source!=="recruitment-venue-system"){
+if(scannerRunning){
+await stopScanner();
 return;
 }
 
-if(message.type==="venueData"){
-if(message.result){
-renderVenueData(message.result);
-}
-return;
-}
-
-if(message.type!=="registration"){
-return;
-}
-
-if(currentRequestId&&message.requestId!==currentRequestId){
-return;
-}
-
-clearTimeout(requestTimeout);
-setBusy(false);
-
-const result=message.result||{};
-
-if(result.ok){
-showSuccessModal(result);
-applicationInput.value="";
-customVenueIdInput.value="";
-venueSelect.value="";
 customPanel.classList.remove("show");
-applicationInput.focus();
-return;
-}
+seatPanel.classList.remove("show");
 
-if(result.code==="DUPLICATE"){
-showDuplicateModal(result);
-applicationInput.select();
-return;
-}
-
-showServerError(result);
+await startScanner();
 });
 
+async function startScanner(){
+
+if(typeof Html5Qrcode==="undefined"){
+
+showErrorModal(
+"QR scanner unavailable",
+"The QR scanner library could not be loaded."
+);
+
+return;
+}
+
+scannerPanel.classList.add("show");
+
+try{
+
+qrScanner=qrScanner||new Html5Qrcode("reader");
+
+await qrScanner.start(
+
+{facingMode:"environment"},
+
+{
+fps:10,
+qrbox:function(width,height){
+
+const size=Math.floor(
+Math.min(width,height)*.72
+);
+
+return{
+width:size,
+height:size
+};
+
+}
+},
+
+async function(decodedText){
+
+if(scanLocked){
+return;
+}
+
+scanLocked=true;
+
+const applicationId=
+extractApplicationId(decodedText);
+
+if(!applicationId){
+
+scanLocked=false;
+
+showErrorModal(
+"Invalid QR code",
+"An Application ID could not be detected."
+);
+
+return;
+}
+
+applicationInput.value=applicationId;
+
+await stopScanner();
+
+setTimeout(function(){
+assignButton.click();
+},150);
+
+},
+
+function(){}
+
+);
+
+scannerRunning=true;
+
+}catch(error){
+
+scannerRunning=false;
+scannerPanel.classList.remove("show");
+
+showErrorModal(
+"Camera unavailable",
+"Camera access could not be started. Enter the Application ID manually."
+);
+
+}
+}
+
+async function stopScanner(){
+
+try{
+
+if(qrScanner&&scannerRunning){
+await qrScanner.stop();
+}
+
+}catch(error){
+
+console.warn(error);
+
+}finally{
+
+scannerRunning=false;
+scanLocked=false;
+scannerPanel.classList.remove("show");
+
+}
+}
+
+/* Loading modal */
 function showLoadingModal(applicationId){
+
 modalBox.innerHTML=`
+
 <div class="spinner"></div>
-<h2 class="modal-title">Assigning Venue</h2>
+
+<h2 class="modal-title">
+Assigning Venue
+</h2>
+
 <p class="modal-message">
 Processing ${escapeHtml(applicationId)}. Please wait...
-</p>`;
+</p>
+
+`;
+
 modalOverlay.classList.add("show");
 }
 
+/* Successful assignment modal */
 function showSuccessModal(result){
+
 modalBox.innerHTML=`
-<div class="modal-check">✓</div>
-<h2 class="modal-title">Venue Assigned Successfully</h2>
+
+<div class="modal-check">
+✓
+</div>
+
+<h2 class="modal-title">
+Venue Assigned Successfully
+</h2>
+
 <div class="modal-venue">
 ${escapeHtml(result.venueName||result.venueId)}
 </div>
+
 <div class="modal-applicant">
 ${escapeHtml(result.applicantName||"")}
 </div>
+
 <p class="modal-message">
-Application ID: ${escapeHtml(result.applicationId||"")}
+Application ID:
+${escapeHtml(result.applicationId||"")}
 </p>
-<button type="button" class="modal-close" onclick="closeModal()">
+
+<button
+type="button"
+class="modal-close"
+onclick="closeModal()"
+>
 Done
-</button>`;
+</button>
+
+`;
+
 modalOverlay.classList.add("show");
 }
 
+/* Duplicate assignment modal */
 function showDuplicateModal(result){
+
 modalBox.innerHTML=`
-<div class="modal-error-icon">!</div>
-<div class="modal-error-title">Already Assigned</div>
+
+<div class="modal-error-icon">
+!
+</div>
+
+<div class="modal-error-title">
+Already Assigned
+</div>
+
 <p class="modal-message">
 This applicant has already been allotted an examination venue.
 </p>
-${result.venueName||result.venueId
-?`<div class="modal-existing-venue">${escapeHtml(result.venueName||result.venueId)}</div>`
-:""}
+
+${
+result.venueName||result.venueId
+?
+`<div class="modal-existing-venue">
+${escapeHtml(result.venueName||result.venueId)}
+</div>`
+:""
+}
+
 <div class="modal-applicant">
 ${escapeHtml(result.applicantName||"")}
 </div>
-${result.registrationTime
-?`<p class="modal-message">Assigned: ${escapeHtml(result.registrationTime)}</p>`
-:""}
-<button type="button" class="modal-close" onclick="closeModal()">
+
+${
+result.registrationTime
+?
+`<p class="modal-message">
+Assigned: ${escapeHtml(result.registrationTime)}
+</p>`
+:""
+}
+
+<button
+type="button"
+class="modal-close"
+onclick="closeModal()"
+>
 Close
-</button>`;
+</button>
+
+`;
+
 modalOverlay.classList.add("show");
 }
 
+/* General error modal */
 function showErrorModal(title,message){
+
 modalBox.innerHTML=`
-<div class="modal-error-icon">!</div>
-<h2 class="modal-title">${escapeHtml(title)}</h2>
-<p class="modal-message">${escapeHtml(message)}</p>
-<button type="button" class="modal-close" onclick="closeModal()">
+
+<div class="modal-error-icon">
+!
+</div>
+
+<h2 class="modal-title">
+${escapeHtml(title)}
+</h2>
+
+<p class="modal-message">
+${escapeHtml(message)}
+</p>
+
+<button
+type="button"
+class="modal-close"
+onclick="closeModal()"
+>
 Close
-</button>`;
+</button>
+
+`;
+
 modalOverlay.classList.add("show");
 }
 
 function closeModal(){
+
 modalOverlay.classList.remove("show");
+
+setTimeout(function(){
+applicationInput.focus();
+},50);
 }
 
+/* Handles server errors */
 function showServerError(result){
+
 let title="Venue assignment failed";
 
 if(result.code==="NOT_FOUND"){
@@ -880,130 +1193,24 @@ if(result.code==="INVALID_VENUE"){
 title="Invalid venue";
 }
 
+if(result.code==="CONFIG_ERROR"){
+title="Configuration error";
+}
+
+if(result.code==="INVALID_ID"){
+title="Invalid Application ID";
+}
+
 showErrorModal(
 title,
-result.message||"The venue could not be assigned."
+result.message||
+"The venue could not be assigned."
 );
 }
 
-qrButton.addEventListener("click",async function(){
-if(scannerRunning){
-await stopScanner();
-return;
-}
-
-customPanel.classList.remove("show");
-seatPanel.classList.remove("show");
-
-await startScanner();
-});
-
-async function startScanner(){
-if(typeof Html5Qrcode==="undefined"){
-showErrorModal(
-"QR scanner unavailable",
-"The QR scanner library could not be loaded."
-);
-return;
-}
-
-scannerPanel.classList.add("show");
-
-try{
-qrScanner=qrScanner||new Html5Qrcode("reader");
-
-await qrScanner.start(
-{facingMode:"environment"},
-{
-fps:10,
-qrbox:function(width,height){
-const size=Math.floor(Math.min(width,height)*.72);
-return{
-width:size,
-height:size
-};
-}
-},
-async function(decodedText){
-if(scanLocked){
-return;
-}
-
-scanLocked=true;
-
-const applicationId=extractApplicationId(decodedText);
-
-if(!applicationId){
-scanLocked=false;
-showErrorModal(
-"Invalid QR code",
-"An Application ID could not be detected."
-);
-return;
-}
-
-applicationInput.value=applicationId;
-
-await stopScanner();
-
-setTimeout(function(){
-if(typeof form.requestSubmit==="function"){
-form.requestSubmit();
-}else{
-assignButton.click();
-}
-},150);
-},
-function(){}
-);
-
-scannerRunning=true;
-
-}catch(error){
-scannerRunning=false;
-scannerPanel.classList.remove("show");
-
-showErrorModal(
-"Camera unavailable",
-"Camera access could not be started. Enter the Application ID manually."
-);
-}
-}
-
-async function stopScanner(){
-try{
-if(qrScanner&&scannerRunning){
-await qrScanner.stop();
-}
-}catch(error){
-console.warn(error);
-}finally{
-scannerRunning=false;
-scanLocked=false;
-scannerPanel.classList.remove("show");
-}
-}
-
-function prepareRequest(){
-currentRequestId=createRequestId();
-requestIdInput.value=currentRequestId;
-
-setBusy(true);
-showLoadingModal(applicationInput.value);
-
-clearTimeout(requestTimeout);
-
-requestTimeout=setTimeout(function(){
-setBusy(false);
-
-showErrorModal(
-"No response",
-"The server did not respond. Please try again."
-);
-},35000);
-}
-
+/* Disables controls while assigning */
 function setBusy(active){
+
 assignButton.disabled=active;
 customButton.disabled=active;
 confirmCustomButton.disabled=active;
@@ -1017,19 +1224,9 @@ active
 :"Assign Venue";
 }
 
-function resultRow(label,value){
-if(value===undefined||value===null||value===""){
-return"";
-}
-
-return `
-<div class="result-row">
-<div class="result-label">${escapeHtml(label)}</div>
-<div class="result-value">${escapeHtml(value)}</div>
-</div>`;
-}
-
+/* Extracts Application ID from QR text or URL */
 function extractApplicationId(value){
+
 const text=String(value||"").trim();
 
 if(!text){
@@ -1037,6 +1234,7 @@ return"";
 }
 
 try{
+
 const url=new URL(text);
 
 const id=
@@ -1047,33 +1245,45 @@ url.searchParams.get("id");
 if(id){
 return normalizeApplicationId(id);
 }
+
 }catch(error){}
 
 return normalizeApplicationId(text);
 }
 
 function normalizeApplicationId(value){
+
 return String(value||"")
 .trim()
 .toUpperCase();
 }
 
 function createRequestId(){
+
 if(
 window.crypto&&
 typeof crypto.randomUUID==="function"
 ){
+
 return crypto.randomUUID();
+
 }
 
-return (
+return(
 Date.now().toString(36)+
 "-"+
 Math.random().toString(36).substring(2,11)
 );
 }
 
+function sanitizeCallbackId(value){
+
+return String(value)
+.replace(/[^A-Za-z0-9_$]/g,"_");
+}
+
 function escapeHtml(value){
+
 return String(value??"")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
@@ -1082,9 +1292,24 @@ return String(value??"")
 .replaceAll("'","&#039;");
 }
 
+/* Enter key performs automatic assignment */
+applicationInput.addEventListener("keydown",function(event){
+
+if(event.key==="Enter"){
+
+event.preventDefault();
+
+if(!assignButton.disabled){
+assignButton.click();
+}
+
+}
+});
+
 window.addEventListener("load",function(){
 applicationInput.focus();
 });
+
 </script>
 
 </body>
