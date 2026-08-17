@@ -247,7 +247,7 @@ border-radius:999px;
 }
 .progress-fill{
 height:100%;
-background:var(--navy);
+background:#12824c;
 border-radius:999px;
 transition:width .3s ease;
 }
@@ -857,9 +857,9 @@ const remaining=Number(venue.available||0);
 const total=Number(venue.totalSeats||0);
 const allocated=Number(venue.allocated||0);
 
-const remainingPercent=
+const allottedPercent=
 total>0
-?Math.max(0,Math.min(100,(remaining/total)*100))
+?Math.max(0,Math.min(100,(allocated/total)*100))
 :0;
 
 return `
@@ -900,7 +900,7 @@ ${escapeHtml(total)}
 <div class="progress">
 <div
 class="progress-fill"
-style="width:${remainingPercent}%"
+style="width:${allottedPercent}%"
 ></div>
 </div>
 
