@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shift Assigned Venue | VAST</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--navy:#0b2545;
+--navy-dark:#061a31;
+--navy-light:#173f6d;
+--soft:#f4f7fb;
+--soft2:#eaf0f7;
+--text:#101828;
+--muted:#667085;
+--border:#dfe5ec;
+--success:#12824c;
+--danger:#b42318;
+--radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;background:#fff}
+body{
+min-height:100vh;
+font-family:"Open Sans","Roboto",Arial,sans-serif;
+color:var(--text);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.page{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:24px 18px;
+}
+.container{
+width:100%;
+max-width:620px;
+}
+.header{
+text-align:center;
+margin-bottom:30px;
+}
+.logo{
+width:120px;
+height:120px;
+object-fit:contain;
+display:block;
+margin:0 auto 10px;
+}
+.header h1{
+margin:0;
+font-family:"Roboto","Open Sans",sans-serif;
+font-size:24px;
+color:var(--navy-dark);
+}
+.header p{
+margin:8px 0 0;
+font-size:13px;
+color:var(--muted);
+}
+.field{
+margin-bottom:14px;
+}
+label{
+display:block;
+margin-bottom:8px;
+font-size:13px;
+font-weight:600;
+color:#344054;
+}
+input,select{
+width:100%;
+height:52px;
+padding:0 14px;
+background:#fff;
+border:1px solid var(--border);
+border-radius:var(--radius);
+outline:none;
+color:var(--navy-dark);
+}
+input:focus,select:focus{
+border-color:var(--navy);
+}
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:14px;
+}
+.button{
+min-height:50px;
+border-radius:var(--radius);
+font-size:13px;
+font-weight:700;
+}
+.primary{
+background:var(--navy);
+color:#fff;
+border:1px solid var(--navy);
+}
+.primary:hover{background:var(--navy-light)}
+.secondary{
+background:#fff;
+color:var(--navy);
+border:1px solid #bcc8d6;
+}
+.secondary:hover{background:var(--soft)}
+.details{
+display:none;
+margin-top:18px;
+padding:16px;
+background:var(--soft);
+border:1px solid var(--border);
+border-radius:var(--radius);
+}
+.details.show{display:block}
+.details-row{
+display:grid;
+grid-template-columns:130px 1fr;
+gap:10px;
+padding:6px 0;
+font-size:13px;
+}
+.details-label{color:var(--muted)}
+.details-value{font-weight:700;color:var(--navy-dark)}
+.shift-section{
+display:none;
+margin-top:18px;
+}
+.shift-section.show{display:block}
+.modal-overlay{
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+background:rgba(255,255,255,.76);
+backdrop-filter:blur(3px);
+z-index:9999;
+}
+.modal-overlay.show{display:flex}
+.modal-box{
+width:100%;
+max-width:390px;
+padding:30px 25px;
+background:#fff;
+border:1px solid var(--border);
+border-radius:16px;
+text-align:center;
+}
+.spinner{
+width:46px;
+height:46px;
+margin:0 auto 18px;
+border:4px solid #e7ebf0;
+border-top-color:var(--navy);
+border-radius:50%;
+animation:spin .75s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal-title{
+margin:0;
+font-size:21px;
+font-weight:700;
+color:var(--navy-dark);
+}
+.modal-message{
+margin:8px 0 0;
+font-size:13px;
+color:var(--muted);
+line-height:1.5;
+}
+.success{
+margin-top:15px;
+font-size:25px;
+font-weight:700;
+color:var(--success);
+}
+.error{
+margin-top:15px;
+font-size:23px;
+font-weight:700;
+color:#111;
+}
+.modal-close{
+width:100%;
+height:46px;
+margin-top:20px;
+background:var(--navy);
+color:#fff;
+border:0;
+border-radius:10px;
+font-weight:700;
+}
+.back{
+display:block;
+margin-top:20px;
+text-align:center;
+color:var(--navy);
+font-size:13px;
+font-weight:600;
+text-decoration:none;
+}
+@media(max-width:520px){
+.page{
+min-height:100dvh;
+align-items:center;
+}
+.actions{
+grid-template-columns:1fr;
+}
+.details-row{
+grid-template-columns:110px 1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+<div class="container">
+
+<header class="header">
+<img src="iitmdlogo.png" class="logo" alt="IIT Mandi Logo">
+<h1>Shift Assigned Venue</h1>
+<p>VAST System · Recruitment Cell, IIT Mandi</p>
+</header>
+
+<div class="field">
+<label for="applicationId">Application ID</label>
+<input id="applicationId" type="text" placeholder="Enter Application ID" autocomplete="off">
+</div>
+
+<div class="actions">
+<button id="findButton" class="button primary" type="button">
+Find Applicant
+</button>
+
+<button class="button secondary" type="button" onclick="window.location.href='index.html'">
+Back to VAST
+</button>
+</div>
+
+<section id="details" class="details"></section>
+
+<section id="shiftSection" class="shift-section">
+
+<div class="field">
+<label for="venueSelect">Shift to Venue</label>
+<select id="venueSelect">
+<option value="">Select available venue</option>
+</select>
+</div>
+
+<button id="shiftButton" class="button primary" style="width:100%" type="button">
+Confirm Venue Shift
+</button>
+
+</section>
+
+<a href="index.html" class="back">← Return to Main Page</a>
+
+</div>
+</main>
+
+<div id="modalOverlay" class="modal-overlay">
+<div id="modalBox" class="modal-box"></div>
+</div>
+
+<script>
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbznthUsb2xhaQmb1xJRy2XV5JiAJQSLNFtJ5KlXeVUIg7JLFEUATpVdD8Fa7NmWfEUYgw/exec";
+
+const applicationInput=document.getElementById("applicationId");
+const findButton=document.getElementById("findButton");
+const shiftButton=document.getElementById("shiftButton");
+const details=document.getElementById("details");
+const shiftSection=document.getElementById("shiftSection");
+const venueSelect=document.getElementById("venueSelect");
+const modalOverlay=document.getElementById("modalOverlay");
+const modalBox=document.getElementById("modalBox");
+
+let currentApplicant=null;
+let activeScripts={};
+
+findButton.addEventListener("click",function(){
+const id=normalize(applicationInput.value);
+
+if(!id){
+showError("Application ID required","Enter an Application ID.");
+return;
+}
+
+applicationInput.value=id;
+findApplicant(id);
+});
+
+applicationInput.addEventListener("keydown",function(e){
+if(e.key==="Enter"){
+e.preventDefault();
+findButton.click();
+}
+});
+
+shiftButton.addEventListener("click",function(){
+if(!currentApplicant)return;
+
+const venueId=venueSelect.value;
+
+if(!venueId){
+showError("Venue required","Select the new venue.");
+return;
+}
+
+if(venueId===currentApplicant.venueId){
+showError("Same venue","The applicant is already assigned to this venue.");
+return;
+}
+
+shiftApplicant(currentApplicant.applicationId,venueId);
+});
+
+function findApplicant(applicationId){
+showLoading("Finding applicant...");
+
+jsonp({
+action:"getAssignedApplicant",
+applicationId:applicationId
+},function(response){
+
+if(!response||!response.result){
+showError("Invalid response","Applicant information could not be loaded.");
+return;
+}
+
+const result=response.result;
+
+if(!result.ok){
+showError("Applicant not found",result.message||"Applicant could not be found.");
+return;
+}
+
+currentApplicant=result;
+
+details.innerHTML=`
+<div class="details-row">
+<div class="details-label">Applicant</div>
+<div class="details-value">${escapeHtml(result.applicantName)}</div>
+</div>
+
+<div class="details-row">
+<div class="details-label">Application ID</div>
+<div class="details-value">${escapeHtml(result.applicationId)}</div>
+</div>
+
+<div class="details-row">
+<div class="details-label">Current Venue</div>
+<div class="details-value">${escapeHtml(result.venueName||result.venueId)}</div>
+</div>
+`;
+
+details.classList.add("show");
+
+loadAvailableVenues(result.venueId);
+
+closeModal();
+
+},function(){
+showError("Connection error","The Apps Script Web App could not be reached.");
+});
+}
+
+function loadAvailableVenues(currentVenue){
+jsonp({
+action:"getVenueData"
+},function(response){
+
+const result=response&&response.result?response.result:null;
+
+if(!result||!result.ok){
+showError("Venue error","Available venues could not be loaded.");
+return;
+}
+
+const venues=Array.isArray(result.availableVenues)
+?result.availableVenues
+:[];
+
+venueSelect.innerHTML='<option value="">Select available venue</option>';
+
+venues.forEach(function(venue){
+if(venue.venueId===currentVenue)return;
+
+const option=document.createElement("option");
+option.value=venue.venueId;
+option.textContent=
+venue.venueName+
+" ("+
+venue.available+
+" available)";
+
+venueSelect.appendChild(option);
+});
+
+shiftSection.classList.add("show");
+
+});
+}
+
+function shiftApplicant(applicationId,newVenueId){
+showLoading("Shifting venue...");
+
+jsonp({
+action:"shiftVenue",
+applicationId:applicationId,
+venueId:newVenueId
+},function(response){
+
+const result=response&&response.result?response.result:{};
+
+if(!result.ok){
+showError(
+"Shift failed",
+result.message||"Venue could not be shifted."
+);
+return;
+}
+
+modalBox.innerHTML=`
+<h2 class="modal-title">Venue Shifted Successfully</h2>
+<div class="success">${escapeHtml(result.newVenueName)}</div>
+<p class="modal-message">
+${escapeHtml(result.applicantName)}<br>
+${escapeHtml(result.applicationId)}
+</p>
+<button class="modal-close" onclick="finishShift()">Done</button>
+`;
+
+modalOverlay.classList.add("show");
+
+},function(){
+showError("Connection error","The Apps Script Web App could not be reached.");
+});
+}
+
+function finishShift(){
+closeModal();
+currentApplicant=null;
+applicationInput.value="";
+details.classList.remove("show");
+shiftSection.classList.remove("show");
+venueSelect.innerHTML='<option value="">Select available venue</option>';
+applicationInput.focus();
+}
+
+function jsonp(params,success,error){
+const callback="vast_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+const script=document.createElement("script");
+
+window[callback]=function(data){
+cleanup(callback);
+success(data);
+};
+
+params.callback=callback;
+params._=Date.now();
+
+script.src=WEB_APP_URL+"?"+new URLSearchParams(params).toString();
+script.async=true;
+
+script.onerror=function(){
+cleanup(callback);
+if(error)error();
+};
+
+activeScripts[callback]=script;
+document.body.appendChild(script);
+}
+
+function cleanup(callback){
+const script=activeScripts[callback];
+if(script&&script.parentNode)script.parentNode.removeChild(script);
+delete activeScripts[callback];
+try{delete window[callback]}catch(e){}
+}
+
+function showLoading(message){
+modalBox.innerHTML=`
+<div class="spinner"></div>
+<h2 class="modal-title">${escapeHtml(message)}</h2>
+`;
+modalOverlay.classList.add("show");
+}
+
+function showError(title,message){
+modalBox.innerHTML=`
+<div class="error">${escapeHtml(title)}</div>
+<p class="modal-message">${escapeHtml(message)}</p>
+<button class="modal-close" onclick="closeModal()">Close</button>
+`;
+modalOverlay.classList.add("show");
+}
+
+function closeModal(){
+modalOverlay.classList.remove("show");
+}
+
+function normalize(value){
+return String(value||"").trim().toUpperCase();
+}
+
+function escapeHtml(value){
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+}
+
+window.addEventListener("load",function(){
+applicationInput.focus();
+});
+</script>
+
+</body>
+</html>
