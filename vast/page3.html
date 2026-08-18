@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Venue-wise Applicant List | VAST</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--navy:#0b2545;
+--navy-dark:#061a31;
+--navy-light:#173f6d;
+--soft:#f4f7fb;
+--soft2:#eaf0f7;
+--text:#101828;
+--muted:#667085;
+--border:#dfe5ec;
+--success:#12824c;
+--radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#fff}
+body{
+font-family:"Open Sans","Roboto",Arial,sans-serif;
+color:var(--text);
+}
+.page{
+min-height:100vh;
+padding:30px 18px;
+}
+.container{
+width:100%;
+max-width:900px;
+margin:0 auto;
+}
+.header{
+text-align:center;
+margin-bottom:28px;
+}
+.logo{
+width:110px;
+height:110px;
+display:block;
+object-fit:contain;
+margin:0 auto 10px;
+}
+.header h1{
+margin:0;
+font-size:25px;
+font-family:"Roboto","Open Sans",sans-serif;
+color:var(--navy-dark);
+}
+.header p{
+margin:8px 0 0;
+font-size:13px;
+color:var(--muted);
+}
+.top-actions{
+display:flex;
+justify-content:flex-end;
+gap:8px;
+margin-bottom:16px;
+}
+.icon-button{
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#fff;
+color:var(--navy);
+border:1px solid var(--border);
+border-radius:10px;
+cursor:pointer;
+}
+.icon-button:hover{background:var(--soft)}
+.icon-button svg{width:18px;height:18px}
+.venue-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:12px;
+}
+.venue-card{
+padding:18px;
+background:#fff;
+border:1px solid var(--border);
+border-radius:var(--radius);
+cursor:pointer;
+transition:border-color .15s ease,background .15s ease;
+}
+.venue-card:hover{
+border-color:var(--navy);
+background:var(--soft);
+}
+.venue-name{
+font-size:17px;
+font-weight:700;
+color:var(--navy-dark);
+}
+.venue-count{
+margin-top:11px;
+font-family:"Roboto","Open Sans",sans-serif;
+font-size:28px;
+font-weight:700;
+color:var(--navy);
+}
+.venue-count-label{
+margin-top:2px;
+font-size:11px;
+color:var(--muted);
+}
+.pwd{
+display:inline-block;
+margin-top:8px;
+padding:3px 7px;
+background:var(--soft);
+border-radius:5px;
+font-size:10px;
+font-weight:700;
+color:var(--navy);
+}
+.list-section{
+display:none;
+margin-top:24px;
+}
+.list-section.show{display:block}
+.list-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+.list-header h2{
+margin:0;
+font-size:19px;
+color:var(--navy-dark);
+}
+.list-header span{
+font-size:12px;
+color:var(--muted);
+}
+.applicant-list{
+border:1px solid var(--border);
+border-radius:var(--radius);
+overflow:hidden;
+}
+.applicant-row{
+display:grid;
+grid-template-columns:70px 1fr 170px;
+gap:12px;
+align-items:center;
+padding:13px 15px;
+border-bottom:1px solid #edf0f4;
+}
+.applicant-row:last-child{border-bottom:0}
+.serial{
+font-size:12px;
+color:var(--muted);
+}
+.applicant-name{
+font-size:14px;
+font-weight:700;
+color:var(--navy-dark);
+}
+.application-id{
+font-size:13px;
+font-weight:600;
+color:var(--navy);
+text-align:right;
+}
+.empty{
+padding:25px;
+text-align:center;
+font-size:13px;
+color:var(--muted);
+}
+.loading{
+padding:35px;
+text-align:center;
+color:var(--muted);
+font-size:13px;
+}
+.back{
+display:block;
+margin-top:22px;
+text-align:center;
+text-decoration:none;
+color:var(--navy);
+font-size:13px;
+font-weight:600;
+}
+@media(max-width:700px){
+.venue-grid{
+grid-template-columns:1fr 1fr;
+}
+}
+@media(max-width:500px){
+.page{padding:24px 15px}
+.venue-grid{
+grid-template-columns:1fr;
+}
+.applicant-row{
+grid-template-columns:35px 1fr;
+}
+.application-id{
+grid-column:2;
+text-align:left;
+font-size:12px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+<div class="container">
+
+<header class="header">
+<img src="iitmdlogo.png" class="logo" alt="IIT Mandi Logo">
+<h1>Venue-wise Applicant List</h1>
+<p>VAST System · Recruitment Cell, IIT Mandi</p>
+</header>
+
+<div class="top-actions">
+
+<button id="refreshButton" class="icon-button" title="Refresh">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M20 6v6h-6"/>
+<path d="M4 18v-6h6"/>
+<path d="M6.5 9a7 7 0 0 1 11.7-2.6L20 8"/>
+<path d="M17.5 15a7 7 0 0 1-11.7 2.6L4 16"/>
+</svg>
+</button>
+
+</div>
+
+<div id="venueGrid" class="venue-grid">
+<div class="loading">Loading venue information...</div>
+</div>
+
+<section id="listSection" class="list-section">
+
+<div class="list-header">
+<h2 id="selectedVenueName"></h2>
+<span id="selectedVenueCount"></span>
+</div>
+
+<div id="applicantList" class="applicant-list"></div>
+
+</section>
+
+<a class="back" href="index.html">← Return to Main Page</a>
+
+</div>
+</main>
+
+<script>
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbznthUsb2xhaQmb1xJRy2XV5JiAJQSLNFtJ5KlXeVUIg7JLFEUATpVdD8Fa7NmWfEUYgw/exec";
+
+const venueGrid=document.getElementById("venueGrid");
+const listSection=document.getElementById("listSection");
+const applicantList=document.getElementById("applicantList");
+const selectedVenueName=document.getElementById("selectedVenueName");
+const selectedVenueCount=document.getElementById("selectedVenueCount");
+const refreshButton=document.getElementById("refreshButton");
+
+let activeScripts={};
+
+refreshButton.addEventListener("click",loadVenueWiseData);
+
+function loadVenueWiseData(){
+
+venueGrid.innerHTML=
+'<div class="loading">Loading venue information...</div>';
+
+listSection.classList.remove("show");
+
+jsonp({
+action:"getVenueApplicants"
+},function(response){
+
+const result=response&&response.result?response.result:null;
+
+if(!result||!result.ok){
+venueGrid.innerHTML=
+'<div class="empty">Venue information could not be loaded.</div>';
+return;
+}
+
+renderVenues(result.venues||[]);
+
+},function(){
+
+venueGrid.innerHTML=
+'<div class="empty">The Apps Script Web App could not be reached.</div>';
+
+});
+}
+
+function renderVenues(venues){
+
+if(!venues.length){
+venueGrid.innerHTML=
+'<div class="empty">No venues found.</div>';
+return;
+}
+
+venueGrid.innerHTML=venues.map(function(venue,index){
+
+return `
+<div class="venue-card" onclick="showApplicants(${index})">
+
+<div class="venue-name">
+${escapeHtml(venue.venueName)}
+</div>
+
+<div class="venue-count">
+${escapeHtml(venue.allocated)}
+</div>
+
+<div class="venue-count-label">
+Applicants Allotted
+</div>
+
+${venue.pwd?'<div class="pwd">PWD</div>':""}
+
+</div>
+`;
+
+}).join("");
+
+window.vastVenueData=venues;
+}
+
+function showApplicants(index){
+
+const venue=window.vastVenueData[index];
+
+selectedVenueName.textContent=venue.venueName;
+
+selectedVenueCount.textContent=
+venue.applicants.length+
+" applicant"+
+(venue.applicants.length===1?"":"s");
+
+if(!venue.applicants.length){
+
+applicantList.innerHTML=
+'<div class="empty">No applicants are currently assigned to this venue.</div>';
+
+}else{
+
+applicantList.innerHTML=
+venue.applicants.map(function(applicant,index){
+
+return `
+<div class="applicant-row">
+
+<div class="serial">
+${index+1}
+</div>
+
+<div class="applicant-name">
+${escapeHtml(applicant.name)}
+</div>
+
+<div class="application-id">
+${escapeHtml(applicant.applicationId)}
+</div>
+
+</div>
+`;
+
+}).join("");
+
+}
+
+listSection.classList.add("show");
+
+listSection.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+}
+
+function jsonp(params,success,error){
+
+const callback=
+"vast_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+
+const script=document.createElement("script");
+
+window[callback]=function(data){
+cleanup(callback);
+success(data);
+};
+
+params.callback=callback;
+params._=Date.now();
+
+script.src=
+WEB_APP_URL+"?"+new URLSearchParams(params).toString();
+
+script.async=true;
+
+script.onerror=function(){
+cleanup(callback);
+if(error)error();
+};
+
+activeScripts[callback]=script;
+
+document.body.appendChild(script);
+}
+
+function cleanup(callback){
+
+const script=activeScripts[callback];
+
+if(script&&script.parentNode){
+script.parentNode.removeChild(script);
+}
+
+delete activeScripts[callback];
+
+try{
+delete window[callback];
+}catch(e){}
+}
+
+function escapeHtml(value){
+
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+}
+
+window.addEventListener("load",loadVenueWiseData);
+</script>
+
+</body>
+</html>
